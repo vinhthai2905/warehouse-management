@@ -13,20 +13,21 @@
 </head>
 <body>
     <aside id="side-bar">
-        {% include 'products/side-bar.html' %}
+        {% include 'includes/side-bar.html' %}
     </aside>
     
     <main>
         
         <header>
             <section id="login-bar">
-              {% include 'products/login-bar.html' %}
+              {% include 'includes/login-bar.html' %}
          </section>
         </header>
+
         <section class="content">
             {% block main-content %}
-            {% endblock main-content %}
 
+            {% endblock main-content %}
         </section>
         
     </main>
