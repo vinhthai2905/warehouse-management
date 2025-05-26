@@ -12,17 +12,16 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <aside id="side-bar">
-        {% include 'includes/side-bar.html' %}
-    </aside>
-    
+    <header>
+        <section id="login-bar">
+          {% include 'includes/login-bar.html' %}
+        </section>
+    </header>
+
     <main>
-        
-        <header>
-            <section id="login-bar">
-              {% include 'includes/login-bar.html' %}
-         </section>
-        </header>
+        <aside id="side-bar">
+            {% include 'includes/side-bar.html' %}
+        </aside>
 
         <section class="content">
             {% block main-content %}

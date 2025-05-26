@@ -9,7 +9,7 @@ body {
     box-sizing: border-box;
 }
 
-/*login-bar.html section*/
+/*login-bar section*/
 
 #login-bar {
     position: fixed; /* Đặt cố định ở đầu trang */
@@ -100,6 +100,8 @@ body {
     border-radius: 5px; /* Bo góc */
     transition: background-color 0.3s ease; /* Hiệu ứng chuyển đổi mượt */
 }
+
+
 /*side-bar.html section*/
 #side-bar {
     position: fixed; /* Đặt cố định để luôn nằm ở bên trái */
@@ -207,6 +209,9 @@ a:hover {
 .has-submenu.open .sub-menu {
     display: block;
 }
+
+/*main-content*/
+
 
 
 .main-content {
