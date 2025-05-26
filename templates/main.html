@@ -8,28 +8,25 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="{% static 'css/products/main.css' %}">
-
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <section id="login-bar">
-          {% include 'includes/login-bar.html' %}
-        </section>
-    </header>
+        <header>
+            <section id="login-bar">
+                {% include 'includes/login-bar.html' %}
+            </section>
+        </header>
 
-    <main>
-        <aside id="side-bar">
-            {% include 'includes/side-bar.html' %}
-        </aside>
+        <main>
+            <aside id="side-bar">
+                {% include 'includes/side-bar.html' %}
+            </aside>
 
-        <section class="content">
-            {% block main-content %}
+            <section class="main-content">
+                {% block main-content %}{% endblock %}
+            </section>
+        </main>
 
-            {% endblock main-content %}
-        </section>
-        
-    </main>
-    <script src="{% static 'js/script.js' %}"></script>
+        <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>
