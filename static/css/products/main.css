@@ -1,0 +1,242 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+/*login-bar.html section*/
+
+#login-bar {
+    position: fixed; /* Đặt cố định ở đầu trang */
+    top: 0;
+    left: 250px; /* Đẩy sang phải để không che sidebar */
+    width: calc(100% - 250px); /* Chiều rộng trừ đi sidebar */
+    height: 60px; /* Chiều cao cố định */
+    background-color: #383F369C; /* Màu nền */
+    display: flex;
+    align-items: center;
+    padding: 0 20px; /* Khoảng cách bên trong */
+    z-index: 0; /* Đảm bảo luôn nằm trên các phần tử khác */
+    color: white; /* Màu chữ */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng */
+}
+.navigation {
+    display: flex; /* Sử dụng flexbox để sắp xếp các phần tử theo chiều ngang */
+    justify-content: flex-end; /* Căn các phần tử về phía bên phải */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    gap: 20px; /* Khoảng cách giữa các phần tử */
+    width: 100%; /* Đảm bảo chiếm toàn bộ chiều ngang của login-bar */
+}
+.navigation a {
+    text-decoration: none; /* Loại bỏ gạch chân */
+    color: white; /* Màu chữ */
+    padding: 10px 15px; /* Khoảng cách bên trong */
+    border-radius: 5px; /* Bo góc */
+    transition: background-color 0.3s; /* Hiệu ứng khi hover */
+}
+
+.navigation a:hover {
+    background-color: #444; /* Màu nền khi hover */
+}
+
+
+.user-menu .drop-down {
+    display: none; /* Ẩn menu mặc định */
+    position: absolute;
+    top: 210%; /* Hiển thị ngay bên dưới user-menu */
+    right: 0;
+    background: #ffffff; /* Màu nền menu */
+    color: rgb(0, 0, 0);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(24, 23, 23, 0.2); /* Hiệu ứng đổ bóng */
+    z-index: 1001; /* Đảm bảo nằm trên các phần tử khác */
+    width: 250px;
+}
+
+.user-menu .drop-down.show {
+    display: block; /* Hiển thị menu khi có class 'show' */
+}
+
+.user-menu .drop-down .profile-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.user-menu .drop-down .avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.user-menu .drop-down a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    display: block;
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+
+.user-menu .drop-down a:hover {
+    background: #107191; /* Màu nền khi hover */
+}
+.user-menu {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.user-menu:hover {
+    
+    color: yellow; /* Màu chữ khi hover */
+    border-radius: 5px; /* Bo góc */
+    transition: background-color 0.3s ease; /* Hiệu ứng chuyển đổi mượt */
+}
+/*side-bar.html section*/
+#side-bar {
+    position: fixed; /* Đặt cố định để luôn nằm ở bên trái */
+    top: 0;
+    left: 0;
+    height: 100vh; /* Chiều cao chiếm toàn bộ màn hình */
+    width: 300px; /* Chiều rộng cố định */
+    background: linear-gradient(180deg, #0F87AF, #0C417C, #0A0D55); /* Màu nền gradient */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1000; /* Đảm bảo luôn nằm trên các phần tử khác */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng */
+}
+
+#navbar-logo {
+    display: flex;
+    width: 90%;
+    height: 40px; /* Chiều cao cố định */
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    background-color: #FEFDFD75;
+    color: #D30909;
+    margin: 10px 0; /* Khoảng cách trên và dưới */
+    border: 2px solid #0C417C;
+    border-radius: 2rem;
+}
+
+ul {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+    margin-top: 30px;
+}
+
+li {
+    list-style: none;
+    margin-bottom: 15px;
+    padding-left: 40px;
+    text-align: justify;
+}
+
+a {
+    color: white;
+    font-size: 1.2em;
+    text-decoration: none;
+    display: block;
+    padding: 10px 0;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: yellow;
+}
+/* Định dạng danh sách con */
+.sub-menu {
+    display: none; 
+    list-style: none; 
+    padding-left: 10px; 
+}
+
+.sub-menu li {
+    margin: 5px 0; 
+}
+
+.sub-menu li a {
+    color: #ffffff; 
+    text-decoration: none;
+    font-size: 1.2rem; 
+}
+
+.sub-menu li a:hover {
+    color: #00bcd4; 
+}
+
+ .submenu-toggle {
+        color: white; 
+        cursor: pointer; 
+        font-size: 1.2rem; 
+        padding: 10px 0;
+    }
+
+    .submenu-toggle:hover {
+        color: yellow;
+    }
+/* Định dạng biểu tượng caret */
+.caret {
+    margin-left: 10px;
+    font-size: 12px;
+    transition: transform 0.3s ease; /* Hiệu ứng xoay */
+}
+
+/* Xoay caret khi mở menu */
+.has-submenu.open .caret {
+    transform: rotate(180deg);
+}
+
+
+.has-submenu .sub-menu {
+    display: none;
+}
+
+.has-submenu.open .sub-menu {
+    display: block;
+}
+
+
+.main-content {
+    margin-left: 300px; /* Đẩy nội dung sang phải, bằng chiều rộng của sidebar */
+    margin-top: 60px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: calc(100% - 250px); /* Chiều rộng trừ đi sidebar */
+    height: calc(100vh - 60px); /* Chiều cao trừ đi login-bar */
+    overflow: auto; /* Thêm thanh cuộn nếu nội dung tràn */
+}
+
+
+/* noi dung của export-management */
+
+.bt_yeucau {
+    background-color: #125394;
+    color: white;
+    border: none;
+    padding: 6px 18px;
+    border-radius: 8px; /* Chỉ cần 1 border-radius */
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 12px;
+    transition: background 0.2s;
+}
+
+.bt_yeucau:hover {
+    background-color: #aec82d;
+}
