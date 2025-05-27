@@ -3,8 +3,8 @@
 </div>
     
 <ul>
-    <li><a href="?section=product-info"><i class="fas fa-info-circle icon"></i> Thông tin sản phẩm</a></li>
-    <li><a href="?section=inventory-management"><i class="fas fa-box icon"></i> Quản lý nhập hàng</a></li>
+    <li><a href="{% url 'product_info' %}"><i class="fas fa-info-circle icon"></i> Thông tin sản phẩm</a></li>
+    <li><a href="{% url 'inventory-management' %}"><i class="fas fa-box icon"></i> Quản lý nhập hàng</a></li>
     <li class="has-submenu">
     <div class="submenu-toggle">
         <i class="fas fa-truck icon"></i> Quản lý xuất hàng
@@ -12,12 +12,12 @@
     </div>
     <ul class="sub-menu">
         <li>
-            <a href="?section=export-management">
+            <a href="{% url 'export' %}">
                 <i class="fas fa-file-export icon"></i> Yêu cầu xuất hàng
             </a>
         </li>
         <li>
-            <a href="?section=request-status">
+            <a href="{% url 'request-status' %}">
                 <i class="fas fa-tasks icon"></i> Trạng thái yêu cầu
             </a>
         </li>
