@@ -160,12 +160,15 @@ a:hover {
 /* SUBMENUS */
 .sub-menu {
   display: none;
+  width: 90%;
+  margin-top: 5px;
   list-style: none;
-  padding-left: 10px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.5);
 }
 
 .sub-menu li {
-  margin: 5px 0;
+  margin-block: auto;
+  padding-left: 10px;
 }
 
 .sub-menu li a {
