@@ -18,6 +18,9 @@ def home(request):
 def export_management(request):
     return render(request, 'products/export-management.html')
 
+def request_status(request):
+    return render(request, 'products/status-management.html')
+
 def inventory_management(request):
     return render(request, 'products/inventory-management.html')
 

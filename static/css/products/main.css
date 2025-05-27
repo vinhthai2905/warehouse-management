@@ -223,7 +223,7 @@ a:hover {
   z-index: 0;
 }
 
-.bt_yeucau {
+.export-request {
   background-color: #125394;
   color: white;
   border: none;
@@ -236,6 +236,6 @@ a:hover {
   transition: background 0.2s;
 }
 
-.bt_yeucau:hover {
+.export-request:hover {
   background-color: #aec82d;
 }
