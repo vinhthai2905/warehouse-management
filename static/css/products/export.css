@@ -70,7 +70,13 @@ table{
     border-collapse: collapse;
 }
 
+th{
+    background-color: #b5deff;
+}
+
 td, th{
+    text-align: center;
+    padding: 0.5em 1em;
     border-bottom: 1px solid black;
 }
 
