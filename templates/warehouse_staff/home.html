@@ -1,13 +1,13 @@
-{% extends 'products/../main.html' %}
+{% extends 'warehouse_staff/../main.html' %}
 
 {% block main-content %}
 <div class="main-content">
 {% if show_export_management %}
-    {% include 'products/export-management.html' %}
+    {% include 'warehouse_staff/export-management.html' %}
 {% elif show_inventory_management %}
-    {% include 'products/inventory-management.html' %}
+    {% include 'warehouse_staff/inventory-management.html' %}
 {% elif show_product_info %}
-    {% include 'products/product-info.html' %}
+    {% include 'warehouse_staff/pro_location.html' %}
 {% else %}
     <!-- Nội dung mặc định -->
 {% endif %}

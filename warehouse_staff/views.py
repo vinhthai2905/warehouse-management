@@ -13,16 +13,15 @@ def home(request):
     #     context['show_inventory_management'] = True
     # elif section == 'product-info':
     #     context['show_product_info'] = True
-    return render(request, 'products/home.html')
+    return render(request, 'warehouse_staff/home.html')
 
 def export_management(request):
-    return render(request, 'products/export-management.html')
+    return render(request, 'warehouse_staff/export-management.html')
 
-def request_status(request):
-    return render(request, 'products/status-management.html')
+
 
 def inventory_management(request):
-    return render(request, 'products/inventory-management.html')
+    return render(request, 'warehouse_staff/inventory-management.html')
 
-def product_info(request):
-    return render(request, 'products/product-info.html')
+def pro_location(request):
+    return render(request, 'warehouse_staff/pro_location.html')
