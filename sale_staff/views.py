@@ -22,7 +22,7 @@ def inventory_management(request):
 def export_request(request):
     return render(request, 'sale_staff/export-request.html')
 def request_status(request):
-    return render(request, 'sale_staff/status-management.html')
+    return render(request, 'sale_staff/export-detail.html')
 
 
 
