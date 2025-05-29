@@ -1,0 +1,16 @@
+{% extends 'sale_staff/../main.html' %}
+
+{% block main-content %}
+<div class="main-content">
+{% if show_export_management %}
+    {% include 'sale_staff/export-request.html' %}
+{% elif show_inventory_management %}
+    {% include 'sale_staff/inventory-management.html' %}
+{% elif show_product_info %}
+    {% include 'sale_staff/product-info.html' %}
+{% else %}
+    <!-- Nội dung mặc định -->
+{% endif %}
+</div>
+{% endblock main-content %}
+

@@ -1,0 +1,60 @@
+{% extends 'main.html' %}
+{% load static %}
+
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'css/sale_staff/export-detail.css' %}">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css'>
+{% endblock link %}
+
+{% block main-content %}
+    <h2 id="title">Chi tiết yêu cầu xuất hàng bán</h2>
+
+    <div id="export-receipt">
+        <section>
+            <dl id="export-detail">
+                <dt>Thời gian yêu cầu</dt>
+                <dt>Nhân viên yêu cầu</dt>
+                <dt>Nhân viên xuất hàng</dt>
+                <dt>Trạng thái</dt>
+            </dl>
+        </section>
+
+        <section>
+            <table id="table-content">
+                <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên mặt hàng</th>
+                    <th>Số lượng</th>
+                    <th>Ghi chú</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+    </div>
+
+    <section>
+        <div id="button-row">
+            <button id="previous-button">Quay lại</button>
+            <button id="confirmation-button">Xác nhận đã nhận đủ</button>
+        </div>
+    </section>
+
+{% endblock main-content %}

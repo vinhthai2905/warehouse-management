@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'warehouse.apps.WarehouseConfig'
+    'sale_staff.apps.SaleStaffConfig'
 ]
 
 STATICFILES_DIRS = [

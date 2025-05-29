@@ -1,0 +1,59 @@
+{% extends 'main.html' %}
+{% load static %}
+
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'css/sale_staff/export-request.css' %}">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css'>
+{% endblock link %}
+
+{% block main-content %}
+    <h2 id="title">Lịch sử yêu cầu xuất hàng bán</h2>
+    <section id="manage-content">
+        <div id="export-create">
+            <button class="export-request btn">+ Tạo mới yêu cầu</button>
+        </div>
+        <div id="export-search">
+            <div class='search-input-wrapper'>
+                <label for='search-bar-input'></label>
+                <input type='text' id='search-bar-input' placeholder='Tìm kiếm.....'>
+                <button type='submit' class='search-btn'>
+                    <span class='icon'>
+                        <i class='fas fa-search'></i>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="table-content">
+        <table>
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Mã yêu cầu</th>
+                    <th>Thời gian yêu cầu</th>
+                    <th>Nhân viên yêu cầu</th>
+                    <th>Trạng thái</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+{% endblock main-content %}
