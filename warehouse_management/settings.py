@@ -82,12 +82,12 @@ WSGI_APPLICATION = 'warehouse_management.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        # 'NAME': 'warehouse_management',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'electronics_warehouse',
         'USER': 'postgres',
-        'PASSWORD': 'buiVinhthai2952003',
+        'PASSWORD': 'root',
         'HOST': 'localhost',
-        'PORT': '5434',
+        'PORT': '5433',
     }
 }
 
