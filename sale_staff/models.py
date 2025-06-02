@@ -75,7 +75,6 @@ class DSYeuCauXuatKho(models.Model):
 
 class ChiTietYeuCauXuat(models.Model):
     idYeuCauXuat = models.CharField(
-        primary_key=True,
         max_length=5,
         db_column='id_yeu_cau_xuat'
     )
@@ -90,5 +89,11 @@ class ChiTietYeuCauXuat(models.Model):
 
     class Meta:
         db_table = 'chi_tiet_yeu_cau_xuat'
+        constraints = [
+            models.UniqueConstraint(
+                fields=['idYeuCauXuat', 'idSanPham'],
+                name='pk_ctycx_composite'
+            )
+        ]
 
 
