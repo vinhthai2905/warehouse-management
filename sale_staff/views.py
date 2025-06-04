@@ -6,10 +6,8 @@ from .models import SanPham
 
 
 def home(request):
-
     products = list(SanPham.objects.all())
     product_dict = list()
-    test = dict()
 
     for i, product in enumerate(products):
         product: SanPham
