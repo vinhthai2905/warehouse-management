@@ -38,20 +38,15 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>2</td>
-                    <td>2</td>
-                    <td>2</td>
-                    <td>2</td>
-                </tr>
+                {% for e_request in export_request_dict %}
+                    <tr onclick="window.location.href='{% url 'export-detail' %}?request_id={{ e_request.id }}&status={{ e_request.status}}'" >
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ e_request.id }}</td>
+                        <td>{{ e_request.date|date:"F j, Y, g:i A" }}</td>
+                        <td>{{ e_request.employee }}</td>
+                        <td>{{ e_request.status }}</td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
     </section>

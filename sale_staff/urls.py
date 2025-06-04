@@ -6,8 +6,8 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('product/', views.product_info, name='product-info'),
     path('inventory/', views.inventory_management, name='inventory-management'),
-    path('export/', views.export_request, name='export-request'),
-    path('request-status/', views.request_status, name='request-status')
+    path('exports/', views.export_request, name='export-request'),
+    path('export/details', views.export_detail, name='export-detail')
 
 
 ]

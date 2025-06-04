@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from .models import SanPham
+from .models import SanPham, DSYeuCauXuatKho
 
 # Create your views here.
 
@@ -30,8 +30,23 @@ def product_info(request):
 def inventory_management(request):
     return render(request, 'sale_staff/inventory-management.html')
 def export_request(request):
-    return render(request, 'sale_staff/export-request.html')
-def request_status(request):
+    export_request_dict = list()
+    export_requests = DSYeuCauXuatKho.objects.all()
+
+    for i, e_request in enumerate(export_requests):
+        e_request: DSYeuCauXuatKho
+
+        export_request_dict.append({
+            'id': e_request.idYeuCauXuat,
+            'date': e_request.thoiGian,
+            'employee': 'Vinh Thai',
+            'status': e_request.trangThai
+        })
+
+    return render(request, 'sale_staff/export-request.html', context={
+        'export_request_dict': export_request_dict
+    })
+def export_detail(request):
     return render(request, 'sale_staff/export-detail.html')
 
 
