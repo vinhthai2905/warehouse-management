@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-
+from .models import SanPham
 # Create your views here.
 
 
@@ -13,7 +13,7 @@ def home(request):
     #     context['show_inventory_management'] = True
     # elif section == 'product-info':
     #     context['show_product_info'] = True
-    return render(request, 'warehouse_staff/home.html')
+    return render(request, 'warehouse_staff/home.html', )
 
 def export_management(request):
     return render(request, 'warehouse_staff/export-management.html')

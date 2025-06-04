@@ -1,16 +1,56 @@
 {% extends 'sale_staff/../main.html' %}
 
+{% load static %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'css/sale_staff/home.css' %}">
+{% endblock link %}
+
 {% block main-content %}
-<div class="main-content">
-{% if show_export_management %}
-    {% include 'sale_staff/export-request.html' %}
-{% elif show_inventory_management %}
-    {% include 'sale_staff/inventory-management.html' %}
-{% elif show_product_info %}
-    {% include 'sale_staff/product-info.html' %}
-{% else %}
-    <!-- Nội dung mặc định -->
-{% endif %}
-</div>
+    <h2 id="product-title">Danh sách sản phẩm</h2>
+
+    <section id="product-manage-content">
+        <div id="product-create">
+            <button class="product-add btn">+ Thêm sản phẩm mới</button>
+        </div>
+        <div id="product-search">
+            <div class='search-input-wrapper'>
+                <label for='search-bar-input'></label>
+                <input type='text' id='search-bar-input' placeholder='Tìm kiếm sản phẩm...'>
+                <button type='submit' class='search-btn'>
+                    <span class='icon'>
+                        <i class='fas fa-search'></i>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="product-table-content">
+        <table>
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Mã sản phẩm</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Số lượng</th>
+                    <th>Đơn vị tính</th>
+                    <th>Trạng thái</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in product_dict%}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ product.id }}</td>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.quantity }}</td>
+                        <td>{{ product.unit }}</td>
+                        <td>{{ product.status }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
 {% endblock main-content %}
 
