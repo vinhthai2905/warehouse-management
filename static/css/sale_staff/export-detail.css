@@ -1,4 +1,4 @@
-#export-receipt{
+#export-receipt {
     width: 80%;
     margin: 1.5em auto;
     padding-block: 1.2em;
@@ -107,18 +107,30 @@ th {
     justify-content: space-around;
 }
 
-button{
+button {
     padding: 0.5em;
 }
 
-#previous-button{
+#previous-button {
     background: yellow;
     color: black;
+    transition: background 0.3s ease;
 }
 
-#confirmation-button{
+#previous-button:hover {
+    background: #ffd700;
+    cursor: pointer;
+}
+
+#confirmation-button {
     background: #007aff;
     color: white;
+    transition: background 0.3s ease;
+}
+
+#confirmation-button:hover {
+    background: #005ecb;
+    cursor: pointer;
 }
 
 

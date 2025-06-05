@@ -48,9 +48,7 @@ def export_request(request):
     })
 def export_detail(request):
     request_id = request.GET.get('request_id')
-    # date_request = request.GET.get('date')
     export_product_dict = list()
-    export_info = dict()
 
     export_bills = ChiTietYeuCauXuat.objects.filter(id_yeu_cau_xuat=request_id).select_related('id_san_pham')
 

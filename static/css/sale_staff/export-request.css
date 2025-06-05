@@ -80,4 +80,10 @@ td, th{
     border-bottom: 1px solid black;
 }
 
+table tbody tr:hover {
+    background-color: #e6f4ff; 
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
 
