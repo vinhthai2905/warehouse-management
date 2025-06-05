@@ -1,6 +1,9 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.views.decorators.http import require_POST
+
 from .models import SanPham, DSYeuCauXuatKho, ChiTietYeuCauXuat
+
 
 # Create your views here.
 
@@ -25,10 +28,15 @@ def home(request):
         'product_dict': product_dict
     })
 
+
 def product_info(request):
     return render(request, 'sale_staff/product-info.html')
+
+
 def inventory_management(request):
     return render(request, 'sale_staff/inventory-management.html')
+
+
 def export_request(request):
     export_request_dict = list()
     export_requests = DSYeuCauXuatKho.objects.all()
@@ -46,6 +54,9 @@ def export_request(request):
     return render(request, 'sale_staff/export-request.html', context={
         'export_request_dict': export_request_dict
     })
+
+
+# export_detail section
 def export_detail(request):
     request_id = request.GET.get('request_id')
     export_product_dict = list()
@@ -73,5 +84,18 @@ def export_detail(request):
 
     })
 
+@require_POST
+def confirm_export(request):
+    request_id = request.POST.get('request_id')
+    export_items = ChiTietYeuCauXuat.objects.filter(id_yeu_cau_xuat=request_id)
 
+    for item in export_items:
+        product = item.id_san_pham
+        product.so_luong -= item.so_luong
+        product.save()
 
+    request_record = DSYeuCauXuatKho.objects.get(id_yeu_cau_xuat=request_id)
+    request_record.trang_thai = 'Đã nhập kho'
+    request_record.save()
+
+    return redirect('export-request')

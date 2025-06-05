@@ -51,9 +51,12 @@
             <a href="{% url 'export-request' %}">
                 <button id="previous-button">Quay lại</button>
             </a>
-            <a href="{% url 'export-request' %}">
-                <button id="confirmation-button" onclick="confirmProceed()">Xác nhận đã nhận đủ</button>
-            </a>
+            <form action="{% url 'confirm-export' %}" method="post"
+                  onsubmit="return confirm('Bạn có chắc chắn muốn xác nhận đã nhận đủ?');">
+                {% csrf_token %}
+                <input type="hidden" name="request_id" value="{{ request.GET.request_id }}">
+                <button id="confirmation-button" type="submit">Xác nhận đã nhận đủ</button>
+            </form>
         </div>
     </section>
 
