@@ -6,63 +6,63 @@ from django.views.decorators.http import condition
 # Create your models here.
 
 class SanPham(models.Model):
-    idSanPham = models.CharField(
+    id_san_pham = models.CharField(
         primary_key=True,
         max_length=5,
         db_column='id_san_pham'
     )
-    idDanhMuc = models.TextField(db_column='id_danh_muc')
-    tenSanPham = models.TextField(db_column='ten_san_pham')
-    soLuong = models.BigIntegerField(db_column='so_luong')
-    moTa = models.TextField(db_column='mo_ta')
-    trangThai = models.TextField(default='Không hỏng', db_column='trang_thai')
-    hinhAnh = models.TextField(db_column='hinh_anh')
-    donViTinh = models.TextField(default='Cái', db_column='don_vi_tinh')
+    id_danh_muc = models.TextField(db_column='id_danh_muc')
+    ten_san_pham = models.TextField(db_column='ten_san_pham')
+    so_luong = models.BigIntegerField(db_column='so_luong')
+    mo_ta = models.TextField(db_column='mo_ta')
+    trang_thai = models.TextField(default='Không hỏng', db_column='trang_thai')
+    hinh_anh = models.TextField(db_column='hinh_anh')
+    don_vi_tinh = models.TextField(default='Cái', db_column='don_vi_tinh')
 
     class Meta:
         db_table = 'san_pham'
         constraints = [
             models.CheckConstraint(
-                check=models.Q(soLuong__gt=0),
+                check=models.Q(so_luong__gt=0),
                 name='so_luong_lon_hon_0'
             )
         ]
 
 class HangXuatKho(models.Model):
-    idYeuCauXuat = models.CharField(
+    id_yeu_cau_xuat = models.CharField(
         primary_key=True,
         max_length=5,
         db_column='id_yeu_cau_xuat'
     )
-    idSanPham = models.ForeignKey(
+    id_san_pham = models.ForeignKey(
         SanPham,
-        to_field='idSanPham',
+        to_field='id_san_pham',
         db_column='id_san_pham',
         on_delete=models.CASCADE
     )
-    soLuong = models.IntegerField(db_column='so_luong')
-    ghiChu = models.TextField(db_column='ghi_chu')
-    thoiGianXuat = models.DateTimeField(db_column='thoi_gian_xuat')
+    so_luong = models.IntegerField(db_column='so_luong')
+    ghi_chu = models.TextField(db_column='ghi_chu')
+    thoi_gian_xuat = models.DateTimeField(db_column='thoi_gian_xuat')
 
     class Meta:
         db_table = 'hang_xuat_kho'
 
 class DSYeuCauXuatKho(models.Model):
-    idYeuCauXuat = models.CharField(
+    id_yeu_cau_xuat = models.CharField(
         primary_key=True,
         max_length=5,
         db_column='id_yeu_cau_xuat'
     )
-    thoiGian = models.DateTimeField(db_column='thoi_gian')
-    ghiChu = models.TextField(db_column='ghi_chu')
-    trangThai = models.TextField(db_column='trang_thai')
+    thoi_gian = models.DateTimeField(db_column='thoi_gian')
+    ghi_chu = models.TextField(db_column='ghi_chu')
+    trang_thai = models.TextField(db_column='trang_thai')
     loai = models.TextField(db_column='loai')
 
     class Meta:
         db_table = 'ds_yeu_cau_xuat_kho'
         constraints = [
             models.CheckConstraint(
-                check=models.Q(trangThai__in=[
+                check=models.Q(trang_thai__in=[
                     'Chờ duyệt', 'Đã duyệt', 'Đã nhập kho', 'Từ chối'
                 ]),
                 name='trang_thai_hop_le'
@@ -74,24 +74,24 @@ class DSYeuCauXuatKho(models.Model):
         ]
 
 class ChiTietYeuCauXuat(models.Model):
-    idYeuCauXuat = models.CharField(
+    id_yeu_cau_xuat = models.CharField(
         max_length=5,
         db_column='id_yeu_cau_xuat'
     )
-    idSanPham = models.ForeignKey(
+    id_san_pham = models.ForeignKey(
         SanPham,
-        to_field='idSanPham',
+        to_field='id_san_pham',
         db_column='id_san_pham',
         on_delete=models.CASCADE
     )
-    soLuong = models.IntegerField(db_column='so_luong')
-    ghiChu = models.TextField(db_column='ghi_chu')
+    so_luong = models.IntegerField(db_column='so_luong')
+    ghi_chu = models.TextField(db_column='ghi_chu')
 
     class Meta:
         db_table = 'chi_tiet_yeu_cau_xuat'
         constraints = [
             models.UniqueConstraint(
-                fields=['idYeuCauXuat', 'idSanPham'],
+                fields=['id_yeu_cau_xuat', 'id_san_pham'],
                 name='pk_ctycx_composite'
             )
         ]
