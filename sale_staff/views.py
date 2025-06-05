@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from .models import SanPham, DSYeuCauXuatKho
+from .models import SanPham, DSYeuCauXuatKho, ChiTietYeuCauXuat
 
 # Create your views here.
 
@@ -12,13 +12,13 @@ def home(request):
     for i, product in enumerate(products):
         product: SanPham
         product_dict.append({
-            'id': product.idSanPham,
-            'name': product.tenSanPham,
-            'category_id': product.idDanhMuc,
-            'description': product.moTa,
-            'status': product.trangThai,
-            'quantity': product.soLuong,
-            'unit': product.donViTinh
+            'id': product.id_san_pham,
+            'name': product.ten_san_pham,
+            'category_id': product.id_danh_muc,
+            'description': product.mo_ta,
+            'status': product.trang_thai,
+            'quantity': product.so_luong,
+            'unit': product.don_vi_tinh
         })
 
     return render(request, 'sale_staff/home.html', {
@@ -37,17 +37,43 @@ def export_request(request):
         e_request: DSYeuCauXuatKho
 
         export_request_dict.append({
-            'id': e_request.idYeuCauXuat,
-            'date': e_request.thoiGian,
+            'id': e_request.id_yeu_cau_xuat,
+            'date': e_request.thoi_gian,
             'employee': 'Vinh Thai',
-            'status': e_request.trangThai
+            'status': e_request.trang_thai
         })
 
     return render(request, 'sale_staff/export-request.html', context={
         'export_request_dict': export_request_dict
     })
 def export_detail(request):
-    return render(request, 'sale_staff/export-detail.html')
+    request_id = request.GET.get('request_id')
+    # date_request = request.GET.get('date')
+    export_product_dict = list()
+    export_info = dict()
+
+    export_bills = ChiTietYeuCauXuat.objects.filter(id_yeu_cau_xuat=request_id).select_related('id_san_pham')
+
+    export_info = {
+        'date_request': request.GET.get('date'),
+        'request_employee': 'Vinh Thai',
+        'export_employee': 'Huyen Trang',
+        'status': request.GET.get('status')
+    }
+    for i, export_bill in enumerate(export_bills):
+        export_bill: ChiTietYeuCauXuat
+
+        export_product_dict.append({
+            'name': export_bill.id_san_pham.ten_san_pham,
+            'quantity': export_bill.so_luong,
+            'note': export_bill.ghi_chu,
+        })
+
+    return render(request, 'sale_staff/export-detail.html', context={
+        'export_info': export_info,
+        'export_product_dict': export_product_dict
+
+    })
 
 
 
