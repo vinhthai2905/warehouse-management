@@ -6,21 +6,21 @@
     
     <div class="user-menu">
         <i class="fas fa-user-check"></i>
-        <span id="username">Nguyễn Văn C</span>
+        <span id="username">{{ user_name }}</span>
         <i class="fas fa-caret-down"></i>
         <div class="drop-down">
             <div class="profile-header">
                 <img src="{% static 'images/Avatar.png' %}" alt="User Avatar" class="avatar">
                 <div>
-                    <strong>Nguyễn Văn C</strong>
+                    <strong>{{ user_name }}</strong>
                     <p>Bộ phận</p>
-                    <p>Nhân viên bán hàng</p>
+                    <p>{{ user_role }}</p>
                 </div>
             </div>
             <hr>
             <a href="#">Tùy chỉnh hồ sơ</a>
             <a href="#">Quản lý tài khoản</a>
-            <a href="#">Đăng xuất</a>
+            <a href="{% url 'log-out' %}">Đăng xuất</a>
         </div>
     </div>
 </div>

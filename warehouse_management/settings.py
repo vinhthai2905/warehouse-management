@@ -37,8 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'grappelli',
 
-    'sale_staff.apps.SaleStaffConfig'
+    'sale_staff.apps.SaleStaffConfig',
+    'accounts.apps.AccountsConfig',
 ]
 
 STATICFILES_DIRS = [
@@ -69,6 +71,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'sale_staff.context_processors.user_info'
             ],
         },
     },

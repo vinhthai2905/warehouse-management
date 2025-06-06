@@ -1,3 +1,4 @@
+from django.shortcuts import render, redirect
 """
 URL configuration for warehouse_management project.
 
@@ -19,5 +20,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('accounts.urls')),
+    path('', lambda request: redirect('log-in'), name='home-redirect'),
     path('product-management/', include('sale_staff.urls'))
 ]

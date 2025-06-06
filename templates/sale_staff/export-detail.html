@@ -55,6 +55,7 @@
                   onsubmit="return confirm('Bạn có chắc chắn muốn xác nhận đã nhận đủ?');">
                 {% csrf_token %}
                 <input type="hidden" name="request_id" value="{{ request.GET.request_id }}">
+                <input type="hidden" id="confirmed_at" name="confirmed_at">
                 <button id="confirmation-button" type="submit">Xác nhận đã nhận đủ</button>
             </form>
         </div>
@@ -64,9 +65,12 @@
         function confirmProceed() {
             const proceed = confirm('Bạn có chắc chắn muốn xác nhận đã nhận đủ?');
             if (proceed) {
-                alert('Đã xác nhận thành công!');
+                const now = new Date().toISOString();
+                document.getElementById('confirmed_at').value = now;
+                return true; // allow form submit
             } else {
                 console.log('User cancelled confirmation.');
+                return false; // prevent form submit
             }
         }
     </script>

@@ -1,6 +1,7 @@
 from django.db import models
-from django.db.models import ForeignKey
+from django.db.models import ForeignKey, CASCADE
 from django.views.decorators.http import condition
+from accounts.models import TaiKhoan
 
 
 # Create your models here.
@@ -30,9 +31,14 @@ class SanPham(models.Model):
 
 class HangXuatKho(models.Model):
     id_yeu_cau_xuat = models.CharField(
-        primary_key=True,
         max_length=5,
         db_column='id_yeu_cau_xuat'
+    )
+    id_nhan_vien_xuat = models.ForeignKey(
+        TaiKhoan,
+        to_field='id_nhan_vien',
+        db_column='id_nhan_vien_xuat',
+        on_delete=models.CASCADE
     )
     id_san_pham = models.ForeignKey(
         SanPham,
@@ -46,12 +52,24 @@ class HangXuatKho(models.Model):
 
     class Meta:
         db_table = 'hang_xuat_kho'
+        constraints = [
+            models.UniqueConstraint(
+                fields=['id_yeu_cau_xuat', 'id_san_pham'],
+                name='primary_key_id_yc_id_san_pham'
+            )
+        ]
 
 class DSYeuCauXuatKho(models.Model):
     id_yeu_cau_xuat = models.CharField(
         primary_key=True,
         max_length=5,
         db_column='id_yeu_cau_xuat'
+    )
+    id_nhan_vien_yc = models.ForeignKey(
+        TaiKhoan,
+        to_field='id_nhan_vien',
+        db_column='id_nhan_vien_yc',
+        on_delete=CASCADE
     )
     thoi_gian = models.DateTimeField(db_column='thoi_gian')
     ghi_chu = models.TextField(db_column='ghi_chu')
@@ -63,7 +81,7 @@ class DSYeuCauXuatKho(models.Model):
         constraints = [
             models.CheckConstraint(
                 check=models.Q(trang_thai__in=[
-                    'Chờ duyệt', 'Đã duyệt', 'Đã nhập kho', 'Từ chối'
+                    'Chờ duyệt', 'Đã duyệt', 'Đã xuất', 'Từ chối'
                 ]),
                 name='trang_thai_hop_le'
             ),

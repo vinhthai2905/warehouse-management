@@ -59,23 +59,25 @@ def export_request(request):
 # export_detail section
 def export_detail(request):
     request_id = request.GET.get('request_id')
+    export_employee = DSYeuCauXuatKho.objects.filter(id_yeu_cau_xuat=request_id).select_related('id_nhan_vien_yc').first()
     export_product_dict = list()
 
-    export_bills = ChiTietYeuCauXuat.objects.filter(id_yeu_cau_xuat=request_id).select_related('id_san_pham')
+    export_products = ChiTietYeuCauXuat.objects.filter(id_yeu_cau_xuat=request_id).select_related('id_san_pham')
+
 
     export_info = {
         'date_request': request.GET.get('date'),
         'request_employee': 'Vinh Thai',
-        'export_employee': 'Huyen Trang',
+        'export_employee': export_employee.id_nhan_vien_yc.ten_nhan_vien,
         'status': request.GET.get('status')
     }
-    for i, export_bill in enumerate(export_bills):
-        export_bill: ChiTietYeuCauXuat
+    for i, product in enumerate(export_products):
+        product: ChiTietYeuCauXuat
 
         export_product_dict.append({
-            'name': export_bill.id_san_pham.ten_san_pham,
-            'quantity': export_bill.so_luong,
-            'note': export_bill.ghi_chu,
+            'name': product.id_san_pham.ten_san_pham,
+            'quantity': product.so_luong,
+            'note': product.ghi_chu,
         })
 
     return render(request, 'sale_staff/export-detail.html', context={
