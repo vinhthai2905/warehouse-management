@@ -1,6 +1,4 @@
-import requests
 from django.shortcuts import render, redirect
-from django.views.decorators.http import require_POST
 from .models import TaiKhoan
 
 # Create your views here.
@@ -16,9 +14,9 @@ def log_in(request):
             request.session['chuc_vu'] = user.chuc_vu
 
             if user.chuc_vu == 'Sale Staff':
-                return render(request, 'sale_staff/home.html', context={
-                    'user_name': user.ten_nhan_vien
-                })
+                return redirect('sale-staff-home')
+            if user.chuc_vu == 'Warehouse Staff':
+                return redirect('warehouse-staff-home')
 
         except TaiKhoan.DoesNotExist:
             return render(request, 'accounts/login.html', context={
