@@ -13,10 +13,10 @@
     <div id="export-receipt">
         <section>
             <dl id="export-detail">
-                <dt>Thời gian yêu cầu</dt>
-                <dt>Nhân viên yêu cầu</dt>
-                <dt>Nhân viên xuất hàng</dt>
-                <dt>Trạng thái</dt>
+                <dt>Thời gian yêu cầu: {{ export_info.date_request }}</dt>
+                <dt>Nhân viên yêu cầu: {{ export_info.request_employee }}</dt>
+                <dt>Nhân viên xuất hàng: {{ export_info.export_employee }}</dt>
+                <dt>Trạng thái: {{ export_info.status }}</dt>
             </dl>
         </section>
 
@@ -31,18 +31,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>2</td>
-                    <td>2</td>
-                    <td>2</td>
-                </tr>
+                {% for product in export_product_dict %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.quantity }}</td>
+                        <td>{{ product.note }}</td>
+                    </tr>
+                {% endfor %}
                 </tbody>
             </table>
         </section>
@@ -52,9 +48,30 @@
 
     <section>
         <div id="button-row">
-            <button id="previous-button">Quay lại</button>
-            <button id="confirmation-button">Xác nhận đã nhận đủ</button>
+            <a href="{% url 'export-request' %}">
+                <button id="previous-button">Quay lại</button>
+            </a>
+            <form action="{% url 'confirm-export' %}" method="post"
+                  onsubmit="return confirm('Bạn có chắc chắn muốn xác nhận đã nhận đủ?');">
+                {% csrf_token %}
+                <input type="hidden" name="request_id" value="{{ request.GET.request_id }}">
+                <input type="hidden" id="confirmed_at" name="confirmed_at">
+                <button id="confirmation-button" type="submit">Xác nhận đã nhận đủ</button>
+            </form>
         </div>
     </section>
 
+    <script>
+        function confirmProceed() {
+            const proceed = confirm('Bạn có chắc chắn muốn xác nhận đã nhận đủ?');
+            if (proceed) {
+                const now = new Date().toISOString();
+                document.getElementById('confirmed_at').value = now;
+                return true; // allow form submit
+            } else {
+                console.log('User cancelled confirmation.');
+                return false; // prevent form submit
+            }
+        }
+    </script>
 {% endblock main-content %}

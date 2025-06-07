@@ -37,8 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'grappelli',
 
-    'sale_staff.apps.SaleStaffConfig'
+    'sale_staff.apps.SaleStaffConfig',
+    'accounts.apps.AccountsConfig',
 ]
 
 STATICFILES_DIRS = [
@@ -69,6 +71,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'sale_staff.context_processors.user_info'
             ],
         },
     },
@@ -82,12 +85,12 @@ WSGI_APPLICATION = 'warehouse_management.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        # 'NAME': 'warehouse_management',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'electronics_warehouse',
         'USER': 'postgres',
-        'PASSWORD': 'buiVinhthai2952003',
+        'PASSWORD': 'root',
         'HOST': 'localhost',
-        'PORT': '5434',
+        'PORT': '5433',
     }
 }
 
@@ -115,6 +118,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
+
+LOGIN_URL = '/login/'
 
 TIME_ZONE = 'UTC'
 

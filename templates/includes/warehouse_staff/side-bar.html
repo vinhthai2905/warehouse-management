@@ -1,10 +1,10 @@
-<a href='{% url 'sale-staff-home' %}' id="navbar-logo" class="logo">
+<a href='{% url 'warehouse-staff-home' %}' id="navbar-logo" class="logo">
     Phi Long
 </a>
 
 <ul>
     <li><a href="{% url 'product-info' %}"><i class="fas fa-info-circle icon"></i> Thông tin sản phẩm</a></li>
-    <li><a href=""><i class="fas fa-box icon"></i> Quản lý nhập hàng</a></li>
+    <li><a href="{% url 'inventory-management' %}"><i class="fas fa-box icon"></i> Quản lý nhập hàng</a></li>
     <li class="has-submenu">
         <div class="submenu-toggle">
             <i class="fas fa-truck icon"></i> Quản lý xuất hàng

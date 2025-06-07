@@ -1,15 +1,15 @@
-#title {
+#product-title {
     text-align: center;
 }
 
-#export-create {
+#product-create {
     position: absolute;
     top: 1em;
     right: 1em;
 }
 
 
-#export-search{
+#product-search {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -63,27 +63,21 @@
 
 /*table-content section*/
 
-table{
+table {
     margin-top: 20px;
     margin-inline: auto;
     border: 1px solid black;
     border-collapse: collapse;
 }
 
-th{
+th {
     background-color: #b5deff;
 }
 
-td, th{
+td, th {
     text-align: center;
     padding: 0.5em 1em;
     border-bottom: 1px solid black;
-}
-
-table tbody tr:hover {
-    background-color: #e6f4ff; 
-    transition: background-color 0.3s ease;
-    cursor: pointer;
 }
 
 
