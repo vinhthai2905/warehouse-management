@@ -8,6 +8,6 @@ urlpatterns = [
     path('inventory/', views.inventory_management, name='inventory-management'),
     path('exports/', views.export_request, name='export-request'),
     path('export/details', views.export_detail, name='export-detail'),
-    path('export/confirm', views.confirm_export, name='confirm-export'),
+    path('export/confirm', views.export_confirm, name='export-confirm'),
 
 ]
