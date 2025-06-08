@@ -1,4 +1,9 @@
 {% extends 'warehouse_staff/../main.html' %}
+{% load static %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'css/warehouse_staff/home.css' %}">
+{% endblock link %}
 
 {% block main-content %}
     <p>test</p>

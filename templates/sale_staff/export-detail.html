@@ -13,7 +13,9 @@
     <div id="export-receipt">
         <section>
             <dl id="export-detail">
-                <dt>Thời gian yêu cầu: {{ export_info.date_request }}</dt>
+                <dt>Thời gian yêu cầu: {{ export_info.request_date }}</dt>
+                <dt>Thời gian duyệt: {{ export_info.review_date }}</dt>
+                <dt>Thời gian xuất: {{ export_info.export_date }}</dt>
                 <dt>Nhân viên yêu cầu: {{ export_info.request_employee }}</dt>
                 <dt>Nhân viên xuất hàng: {{ export_info.export_employee }}</dt>
                 <dt>Trạng thái: {{ export_info.status }}</dt>
@@ -51,13 +53,20 @@
             <a href="{% url 'export-request' %}">
                 <button id="previous-button">Quay lại</button>
             </a>
-            <form action="{% url 'confirm-export' %}" method="post"
-                  onsubmit="return confirm('Bạn có chắc chắn muốn xác nhận đã nhận đủ?');">
-                {% csrf_token %}
-                <input type="hidden" name="request_id" value="{{ request.GET.request_id }}">
-                <input type="hidden" id="confirmed_at" name="confirmed_at">
-                <button id="confirmation-button" type="submit">Xác nhận đã nhận đủ</button>
-            </form>
+            {% if export_info.status != 'Đã xuất' %}
+                <form action="{% url 'export-confirm' %}" method="post"
+                      onsubmit="return confirm('Bạn có chắc chắn muốn xác nhận đã nhận đủ?');">
+                    {% csrf_token %}
+                    <input type="hidden" name="request_id" value="{{ request.GET.request_id }}">
+                    <input type="hidden" id="confirmed_at" name="confirmed_at">
+                    <input type="hidden" id="export_employee" name="export_employee" value="{{ request.session.user_id }}">
+                    <button id="confirmation-button" type="submit">Xác nhận đã nhận đủ</button>
+                </form>
+            {% else %}
+                <button id="confirmation-button" disabled style="cursor: not-allowed; opacity: 0.5;">
+                    Đã xác nhận
+                </button>
+            {% endif %}
         </div>
     </section>
 

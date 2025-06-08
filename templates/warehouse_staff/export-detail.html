@@ -1,4 +1,71 @@
 {% extends 'main.html' %}
+{% load static %}
+{% block link %}
+    <link rel="stylesheet" href="{% static 'css/warehouse_staff/export-detail.css' %}">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css'>
+{% endblock link %}
 
 {% block main-content %}
-{% endblock %}
+    <h2 id="title">Chi tiết yêu cầu xuất hàng bán</h2>
+
+    <div id="export-receipt">
+        <section>
+            <dl id="export-detail">
+                <dt>Mã đơn hàng: {{ export_info.request_id }}</dt>
+                <dt>Thời gian yêu cầu: {{ export_info.request_date | date:"F j, Y, h:i:s A"}}</dt>
+                <dt>Thời gian duyệt:
+                    {% if export_info.review_date %}
+                        {{ export_info.review_date | date:"F j, Y, h:i:s A" }}
+                    {% else %}
+                        Chưa xác định
+                    {% endif %}
+                </dt>
+                <dt>Nhân viên yêu cầu: {{ export_info.request_employee }}</dt>
+                <dt>Nhân viên duyệt: {{ export_info.review_employee }}</dt>
+                <dt>Trạng thái: {{ export_info.status }}</dt>
+            </dl>
+        </section>
+
+        <section>
+            <table id="table-content">
+                <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên mặt hàng</th>
+                    <th>Số lượng</th>
+                    <th>Ghi chú</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for product in export_product_dict %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.quantity }}</td>
+                        <td>{{ product.note }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </section>
+
+
+    </div>
+
+    <section>
+        <div id="button-row">
+            <a href="{% url 'warehouse-staff/export-request' %}">
+                <button id="previous-button">Quay lại</button>
+            </a>
+            <form action="{% url 'warehouse-staff/export-review' %}" method="post"
+                  onsubmit="return confirm('Bạn có chắc chắn muốn duyệt hoá đơn này?');">
+                {% csrf_token %}
+                <input type="hidden" name="request_id" value="{{ request.GET.request_id }}">
+                <input type="hidden" id="confirmed_at" name="confirmed_at">
+                <button id="confirmation-button" type="submit">Duyệt hoá đơn</button>
+            </form>
+        </div>
+    </section>
+
+
+{% endblock main-content %}
