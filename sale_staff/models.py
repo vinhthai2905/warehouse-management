@@ -69,9 +69,26 @@ class DSYeuCauXuatKho(models.Model):
         TaiKhoan,
         to_field='id_nhan_vien',
         db_column='id_nhan_vien_yc',
+        related_name='yeu_cau_xuat_yc',
+        on_delete=CASCADE,
+    )
+    id_nhan_vien_duyet = models.ForeignKey(
+        TaiKhoan,
+        to_field='id_nhan_vien',
+        db_column='id_nhan_vien_duyet',
+        related_name='yeu_cau_xuat_duyet',
+        null=True,
         on_delete=CASCADE
     )
+    # id_nhan_vien_xuat = models.ForeignKey(
+    #     TaiKhoan,
+    #     to_field='id_nhan_vien',
+    #     db_column='id_nhan_vien_xuat',
+    #     on_delete=CASCADE
+    # )
     thoi_gian = models.DateTimeField(db_column='thoi_gian')
+    thoi_gian_xuat = models.DateTimeField(null=True)
+    thoi_gian_duyet = models.DateTimeField(null=True)
     ghi_chu = models.TextField(db_column='ghi_chu')
     trang_thai = models.TextField(db_column='trang_thai')
     loai = models.TextField(db_column='loai')
