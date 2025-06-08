@@ -7,29 +7,79 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="{% static 'css/sale_staff/main.css' %}">
-    {% block link%}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    {% block link %}
 
     {% endblock %}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-        <header>
-            <section id="login-bar">
-                {% include 'includes/sale_staff/login-bar.html' %}
-            </section>
-        </header>
+<header>
+    {% if user_role == 'Sale Staff' %}
+        <section id="login-bar">
+            {% include 'includes/sale_staff/login-bar.html' %}
+        </section>
 
-        <main>
-            <aside id="side-bar">
-                {% include 'includes/sale_staff/side-bar.html' %}
-            </aside>
+    {% else %}
+        <section id="login-bar">
+            {% include 'includes/warehouse_staff/login-bar.html' %}
+        </section>
+    {% endif %}
+</header>
 
-            <section class="main-content">
-                {% block main-content %}{% endblock %}
-            </section>
-        </main>
+<main>
+    {% if user_role == 'Sale Staff' %}
+        <aside id="side-bar">
+            {% include 'includes/sale_staff/side-bar.html' %}
+        </aside>
 
-        <script src="{% static 'js/script.js' %}"></script>
+    {% else %}
+        <aside id="side-bar">
+            {% include 'includes/warehouse_staff/side-bar.html' %}
+        </aside>
+    {% endif %}
+
+    <section class="main-content">
+        {% block main-content %}{% endblock %}
+    </section>
+</main>
+
+<script src="{% static 'js/script.js' %}"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const submenuToggle = document.querySelector('.submenu-toggle');
+        const submenu = document.querySelector('.has-submenu .sub-menu');
+        const parentLi = document.querySelector('.has-submenu');
+
+        submenu.style.display = 'none';  // ensure hidden at start
+
+        submenuToggle.addEventListener('click', function () {
+            if (submenu.style.display === 'none' || submenu.style.display === '') {
+                submenu.style.opacity = 0;
+                submenu.style.display = 'block';
+                parentLi.classList.add('open');
+
+                let opacity = 0;
+                const fadeIn = setInterval(() => {
+                    opacity += 0.05;
+                    submenu.style.opacity = opacity;
+                    if (opacity >= 1) clearInterval(fadeIn);
+                }, 20);
+            } else {
+                let opacity = 1;
+                const fadeOut = setInterval(() => {
+                    opacity -= 0.05;
+                    submenu.style.opacity = opacity;
+                    if (opacity <= 0) {
+                        clearInterval(fadeOut);
+                        submenu.style.display = 'none';
+                        parentLi.classList.remove('open');
+                    }
+                }, 20);
+            }
+        });
+    });
+</script>
 </body>
 </html>

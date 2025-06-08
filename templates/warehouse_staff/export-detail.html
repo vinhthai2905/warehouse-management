@@ -13,8 +13,15 @@
             <dl id="export-detail">
                 <dt>Mã đơn hàng: {{ export_info.request_id }}</dt>
                 <dt>Thời gian yêu cầu: {{ export_info.request_date | date:"F j, Y, h:i:s A"}}</dt>
-                <dt>Thời gian duyệt: {{ export_info.export_date | date:"F j, Y, h:i:s A" }}</dt>
+                <dt>Thời gian duyệt:
+                    {% if export_info.review_date %}
+                        {{ export_info.review_date | date:"F j, Y, h:i:s A" }}
+                    {% else %}
+                        Chưa xác định
+                    {% endif %}
+                </dt>
                 <dt>Nhân viên yêu cầu: {{ export_info.request_employee }}</dt>
+                <dt>Nhân viên duyệt: {{ export_info.review_employee }}</dt>
                 <dt>Trạng thái: {{ export_info.status }}</dt>
             </dl>
         </section>
