@@ -38,14 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'grappelli',
-
-<<<<<<< Updated upstream
-    'sale_staff.apps.SaleStaffConfig'
-=======
+    
     'sale_staff.apps.SaleStaffConfig',
     'warehouse_staff.apps.WarehouseStaffConfig',
     'accounts.apps.AccountsConfig',
->>>>>>> Stashed changes
 ]
 
 STATICFILES_DIRS = [
