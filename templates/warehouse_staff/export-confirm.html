@@ -35,6 +35,7 @@
             </tr>
             </thead>
             <tbody>
+            {% comment %} # type: e_request is DSYeuCauXuatKho {% endcomment %}
             {% for e_request in export_request_dict %}
                 <tr onclick="window.location.href='{% url 'warehouse-staff/export-detail' %}?request_id={{ e_request.id }}&status={{ e_request.status }}&date={{ e_request.request_date | date:'H:i d/m/Y' }}}}'">
                     <td>{{ e_request.request_date | date:'H:i d/m/Y' }}</td>
