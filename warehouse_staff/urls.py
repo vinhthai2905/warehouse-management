@@ -5,10 +5,10 @@ from . import views
 urlpatterns = [
     path('', views.home, name='warehouse-staff-home'),
     path('location/', views.pro_location, name='pro_location'),
-    path('inventory/', views.inventory_management, name='inventory-management'),
-    path('export/', views.export_management, name='export')
-    # path ('export/test/', views.export_product, name='export-product'),
-    # path('request-status/', views.request_status, name='request-status')
+    path('inventory/', views.inventory, name='warehouse-staff/inventory'),
+    path('exports/', views.export_request, name='warehouse-staff/export-request'),
+    path('export/details', views.export_detail, name='warehouse-staff/export-detail'),
+    path('export/review', views.export_review, name='warehouse-staff/export-review')
 
 
 ]

@@ -3,9 +3,9 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_POST
 
+
 from accounts.models import TaiKhoan
 from .models import SanPham, DSYeuCauXuatKho, ChiTietYeuCauXuat, HangXuatKho
-
 
 
 # Create your views here.

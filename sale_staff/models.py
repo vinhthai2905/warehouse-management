@@ -65,6 +65,7 @@ class DSYeuCauXuatKho(models.Model):
         max_length=5,
         db_column='id_yeu_cau_xuat'
     )
+
     id_nhan_vien_yc = models.ForeignKey(
         TaiKhoan,
         to_field='id_nhan_vien',
