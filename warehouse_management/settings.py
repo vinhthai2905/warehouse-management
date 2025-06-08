@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'sale_staff.apps.SaleStaffConfig',
     'warehouse_staff.apps.WarehouseStaffConfig',
     'accounts.apps.AccountsConfig',
+    'warehouse_manager.apps.WarehouseManagerConfig',
 ]
 
 STATICFILES_DIRS = [

@@ -1,0 +1,44 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/warehouse_manager/category.css' %}">
+{% endblock link %}
+
+{% block main-content %}
+<div class="category-container">
+  <div class="header">
+    <h2 class="title">Danh sách danh mục sản phẩm</h2>
+    <div class="add-button-wrapper">
+        <button class="add-button"> + Thêm danh mục mới</button>
+    </div>
+</div>
+
+    <div class="search-bar">
+        <label for="search">Tìm kiếm</label>
+        <input type="text" id="search" placeholder="Nhập tên danh mục" />
+        <i class="fas fa-search search-icon"></i>
+    </div>
+
+    <table class="category-table">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Mã danh mục</th>
+                <th>Tên danh mục</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>01</td><td>001</td><td>Màn hình</td></tr>
+            <tr><td>02</td><td>002</td><td>Chuột</td></tr>
+            <tr><td>03</td><td>003</td><td>Bàn phím</td></tr>
+            <tr><td>04</td><td>004</td><td>RAM</td></tr>
+            <tr><td>05</td><td>005</td><td>CPU</td></tr>
+            <tr><td>06</td><td>006</td><td>Ổ cứng</td></tr>
+            <tr><td>07</td><td>007</td><td>Vỏ máy tính</td></tr>
+            <tr><td>08</td><td>008</td><td>Sạc</td></tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}
