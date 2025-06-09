@@ -113,6 +113,25 @@ th {
     background-color: #b5deff;
 }
 
+.note-wrapper {
+    width: 90%;
+    margin: 1em auto 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+}
+
+#ghi-chu-input {
+    flex: 1;
+    padding: 6px 10px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+/*Button-section*/
+
 #button-row {
     display: flex;
     justify-content: space-around;
@@ -127,7 +146,7 @@ button {
     border-radius: 4px;
 }
 
-button:hover{
+button:hover {
     cursor: pointer;
 }
 
@@ -139,6 +158,17 @@ button:hover{
 
 #previous-button:hover {
     background: #ffd700;
+}
+
+#save-button {
+    background-color: #f0f0f0;
+    color: black;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#save-button:hover {
+    background-color: #28a745; /* green */
+    color: white;
 }
 
 #confirmation-button {

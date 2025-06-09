@@ -32,7 +32,6 @@
                         <th>Tên mặt hàng</th>
                         <th>Số lượng</th>
                         <th>Số lượng thực</th>
-                        <th>Ghi chú</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -45,11 +44,15 @@
                                 <input type="number" name="real_quantity_{{ product.id }}"
                                        value="{{ product.real_quantity }}" min="0"/>
                             </td>
-                            <td>{{ product.note }}</td>
                         </tr>
-                    {% endfor %}
+
                     </tbody>
-                </table>
+                        </table>
+                        <div class="note-wrapper">
+                            <label for="ghi-chu-input">Ghi chú:</label>
+                            <input type="text" name="ghi_chu" id="ghi-chu-input" value="{{ product.note }}">
+                        </div>
+                    {% endfor %}
             </form>
         </section>
     </div>
@@ -59,7 +62,7 @@
             <form action="{% url 'export-request' %}" method="get">
                 <button id="previous-button" type="submit">Quay lại</button>
             </form>
-            <button type="button" onclick="document.getElementById('real-quantity-form').submit();">
+            <button id="save-button" type="button" onclick="document.getElementById('real-quantity-form').submit();">
                 Lưu số lượng thực
             </button>
             {% if export_info.status != 'Đã xuất' %}
