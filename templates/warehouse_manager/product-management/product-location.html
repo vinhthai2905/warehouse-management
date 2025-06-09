@@ -1,0 +1,114 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block link %}
+  <link rel="stylesheet" href="{% static 'css/warehouse_manager/product-location.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+{% endblock %}
+
+{% block main-content %}
+<div class="position-container">
+
+  <div class="position-tabs">
+    <button class="tab active">Phòng</button>
+    <button class="tab">Kệ</button>
+  </div>
+
+
+<div class="header-location">
+    <div class="header">
+        <h2 class="title">Danh sách vị trí kệ để hàng</h2>
+        <div class="add-button-wrapper">
+            <button class="add-button"> + Thêm vị trí mới</button>
+        </div>
+    </div>
+</div>
+
+ <div class="position-search">
+    <div class="search-box">
+      <input type="text" placeholder="Nhập mã kệ / mã phòng cần tìm...." />
+      <button class="search-btn"><i class="fas fa-search"></i></button>
+    </div>
+  </div>
+  <!-- Bảng dữ liệu hard-code -->
+  <table class="position-table">
+    <thead>
+      <tr>
+        <th>STT</th>
+        <th>Mã vị trí</th>
+        <th>Số phòng</th>
+        <th>Mã kệ</th>
+        <th>Tên sản phẩm chứa</th>
+        <th>Số lượng</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>01</td>
+        <td>A202K0101</td>
+        <td>202</td>
+        <td>01</td>
+        <td>Màn hình Oled 21 inch</td>
+        <td>20</td>
+      </tr>
+      <tr>
+        <td>02</td>
+        <td>A202K0101</td>
+        <td>202</td>
+        <td>02</td>
+        <td>Màn hình K6 Pro</td>
+        <td>17</td>
+      </tr>
+      <tr>
+        <td>03</td>
+        <td>A201K0101</td>
+        <td>201</td>
+        <td>01</td>
+        <td>RAM KingDom 8Gb</td>
+        <td>30</td>
+      </tr>
+      <tr>
+        <td>04</td>
+        <td>A201K0102</td>
+        <td>201</td>
+        <td>02</td>
+        <td>RAM KingDom 16Gb</td>
+        <td>32</td>
+      </tr>
+      <tr>
+        <td>05</td>
+        <td>A201K0103</td>
+        <td>201</td>
+        <td>03</td>
+        <td>Chuột XM23</td>
+        <td>24</td>
+      </tr>
+      <tr>
+        <td>06</td>
+        <td>A201K0104</td>
+        <td>201</td>
+        <td>04</td>
+        <td>Chuột Logitech L1</td>
+        <td>20</td>
+      </tr>
+      <tr>
+        <td>07</td>
+        <td>A201K0105</td>
+        <td>201</td>
+        <td>05</td>
+        <td>Bàn phím cơ XA3</td>
+        <td>14</td>
+      </tr>
+      <tr>
+        <td>08</td>
+        <td>A201K0106</td>
+        <td>201</td>
+        <td>06</td>
+        <td>Bàn phím K7</td>
+        <td>15</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+{% endblock %}

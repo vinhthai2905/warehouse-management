@@ -9,4 +9,6 @@ urlpatterns = [
     path('products/', views.products_management, name='warehouse-manager/products'),
     path('product-details/', views.products_detail, name='warehouse-manager/product-details'),
     path('product-location/', views.product_location_management, name='warehouse-manager/product-location'),
+
+    path('imports/', views.import_management, name='warehouse-manager/import'),
 ]

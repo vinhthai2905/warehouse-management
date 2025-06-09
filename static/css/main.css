@@ -157,6 +157,32 @@ a {
 a:hover {
   color: yellow;
 }
+/* PROFILE */
+/* Container profile */
+.sidebar-profile {
+  text-align: center;
+  margin: 20px 40px 20px 20px;
+
+}
+
+/* Avatar */
+.sidebar-profile .profile-img {
+  width: 40px;             /* đổi thành kích thước bạn muốn */
+  height: 40px;
+  border-radius: 50%;      /* bo tròn thành circle */
+  object-fit: cover;       /* cắt vừa khung nếu tỉ lệ khác */
+  display: block;
+  margin: 0 auto;          /* căn giữa */
+}
+
+/* Tên */
+.sidebar-profile .profile-name {
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+}
+
 
 /* SUBMENUS */
 .sub-menu {

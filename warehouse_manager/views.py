@@ -31,4 +31,6 @@ def product_location_management(request):
 
 def products_detail(request):
     return render(request, 'warehouse_manager/product-management/product-detail.html')
+def import_management(request):
+    return render(request, 'warehouse_manager/product-management/import-management.html')
 
