@@ -1,7 +1,6 @@
 {% extends 'main.html' %}
 {% load static %}
 
-
 {% block link %}
     <link rel="stylesheet" href="{% static 'css/sale_staff/export-detail.css' %}">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css'>
@@ -23,43 +22,54 @@
         </section>
 
         <section>
-            <table id="table-content">
-                <thead>
-                <tr>
-                    <th>STT</th>
-                    <th>Tên mặt hàng</th>
-                    <th>Số lượng</th>
-                    <th>Ghi chú</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for product in export_product_dict %}
+            <form id="real-quantity-form" method="post" action="">
+                {% csrf_token %}
+                <input type="hidden" name="request_id" value="{{ request.GET.request_id }}">
+                <table id="table-content">
+                    <thead>
                     <tr>
-                        <td>{{ forloop.counter }}</td>
-                        <td>{{ product.name }}</td>
-                        <td>{{ product.quantity }}</td>
-                        <td>{{ product.note }}</td>
+                        <th>STT</th>
+                        <th>Tên mặt hàng</th>
+                        <th>Số lượng</th>
+                        <th>Số lượng thực</th>
+                        <th>Ghi chú</th>
                     </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    {% for product in export_product_dict %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ product.name }}</td>
+                            <td>{{ product.quantity }}</td>
+                            <td>
+                                <input type="number" name="real_quantity_{{ product.id }}"
+                                       value="{{ product.real_quantity }}" min="0"/>
+                            </td>
+                            <td>{{ product.note }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </form>
         </section>
-
-
     </div>
 
     <section>
         <div id="button-row">
-            <a href="{% url 'export-request' %}">
-                <button id="previous-button">Quay lại</button>
-            </a>
+            <form action="{% url 'export-request' %}" method="get">
+                <button id="previous-button" type="submit">Quay lại</button>
+            </form>
+            <button type="button" onclick="document.getElementById('real-quantity-form').submit();">
+                Lưu số lượng thực
+            </button>
             {% if export_info.status != 'Đã xuất' %}
                 <form action="{% url 'export-confirm' %}" method="post"
                       onsubmit="return confirm('Bạn có chắc chắn muốn xác nhận đã nhận đủ?');">
                     {% csrf_token %}
                     <input type="hidden" name="request_id" value="{{ request.GET.request_id }}">
                     <input type="hidden" id="confirmed_at" name="confirmed_at">
-                    <input type="hidden" id="export_employee" name="export_employee" value="{{ request.session.user_id }}">
+                    <input type="hidden" id="export_employee" name="export_employee"
+                           value="{{ request.session.user_id }}">
                     <button id="confirmation-button" type="submit">Xác nhận đã nhận đủ</button>
                 </form>
             {% else %}

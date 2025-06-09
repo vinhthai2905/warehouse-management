@@ -121,6 +121,7 @@ class ChiTietYeuCauXuat(models.Model):
         on_delete=models.CASCADE
     )
     so_luong = models.IntegerField(db_column='so_luong')
+    so_luong_thuc = models.IntegerField(db_column='so_luong_thuc', null=True)
     ghi_chu = models.TextField(db_column='ghi_chu')
 
     class Meta:
@@ -129,7 +130,8 @@ class ChiTietYeuCauXuat(models.Model):
             models.UniqueConstraint(
                 fields=['id_yeu_cau_xuat', 'id_san_pham'],
                 name='pk_ctycx_composite'
-            )
+            ),
+
         ]
 
 

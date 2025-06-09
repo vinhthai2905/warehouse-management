@@ -58,6 +58,9 @@ def export_request(request):
         'export_request_dict': export_request_dict
     })
 
+def export_request_status(request):
+    return render(request, 'sale_staff/export_request_status.html')
+
 # export_detail section
 def export_detail(request):
     request_id = request.GET.get('request_id')
@@ -70,7 +73,9 @@ def export_detail(request):
     export_info = {
         'request_date': request.GET.get('request_date'),
         'review_date': request.GET.get('review_date'),
-        'export_date':  request.GET.get('export_date') if request.GET.get('export_date') is None else 'Chưa xác định',
+        'export_date':  request.GET.get('export_date')
+            if request.GET.get('export_date') and request.GET.get('export_date') != 'None'
+            else 'Chưa xác định',
         'request_employee': request_employee.id_nhan_vien_yc.ten_nhan_vien,
         'export_employee': export_employee.id_nhan_vien_xuat.ten_nhan_vien if export_employee else 'Chưa xác định',
         'status': request.GET.get('status')
@@ -81,6 +86,7 @@ def export_detail(request):
         export_product_dict.append({
             'name': product.id_san_pham.ten_san_pham,
             'quantity': product.so_luong,
+            'real_quantity': product.so_luong_thuc,
             'note': product.ghi_chu,
         })
 
