@@ -1,6 +1,57 @@
+#title{
+    text-align: center;
+}
+
 .export-manager {
     padding: 20px;
     font-family: Arial, sans-serif;
+}
+
+#export-search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+}
+
+.search-input-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 50vw;
+    min-width: 300px;
+}
+
+.search-input-wrapper input[type='text'] {
+    width: 100%;
+    padding: 8px 44px 8px 14px;
+    border: 1.5px solid #ccc;
+    border-radius: 25px;
+    font-size: 16px;
+    transition: border-color 0.2s;
+}
+
+.search-btn {
+    position: absolute;
+    right: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.search-btn .icon {
+    font-size: 18px;
+    color: #333;
+}
+
+.search-btn:active .icon,
+.search-btn:focus .icon {
+    color: #0071e3;
 }
 
 .status-tabs {
@@ -95,6 +146,11 @@
 .status.approved {
     color: #2DB94D;
     border: 1px solid #2DB94D;
+}
+
+.status.error {
+    color: #ff4d4d;
+    border: 1px solid #ff4d4d;
 }
 
 .status.exported {

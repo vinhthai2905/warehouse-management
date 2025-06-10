@@ -1,15 +1,11 @@
+/* Title */
 #title {
     text-align: center;
+    margin-bottom: 1em;
 }
 
-#export-create {
-    position: absolute;
-    top: 1em;
-    right: 1em;
-}
-
-
-#export-search{
+/* Search Bar */
+#export-search {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -61,29 +57,116 @@
     color: #0071e3;
 }
 
-/*table-content section*/
+/* Table Styling */
 
-table{
-    margin-top: 20px;
-    margin-inline: auto;
-    border: 1px solid black;
+.status-tabs {
+    display: flex;
+    position: relative;
+    gap: 30px;
+    margin: 1.5em auto 0;
+    justify-content: center;
+}
+
+.status-tab {
+    font-size: 14px;
+    padding: 6px 20px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: #555;
+    transition: color 0.2s;
+    position: relative;
+}
+
+.status-tab:hover {
+    color: #297ac1;
+}
+
+.status-tab.active {
+    color: #172a8e;
+    font-weight: bold;
+}
+
+.status-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #4a90d1;
+}
+
+.req-table {
+    width: 100%;
     border-collapse: collapse;
+    margin-top: 20px;
 }
 
-th{
-    background-color: #b5deff;
+.req-table thead {
+    background: #E6F0FF;
 }
 
-td, th{
+.req-table th,
+.req-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
     text-align: center;
-    padding: 0.5em 1em;
-    border-bottom: 1px solid black;
+    font-size: 14px;
 }
 
-table tbody tr:hover {
+.req-table tr:nth-child(even) {
+    background: #F9F9F9;
+}
+
+.req-table tbody tr:hover {
     background-color: #e6f4ff;
     transition: background-color 0.3s ease;
     cursor: pointer;
 }
 
+/* Status badge styling */
+.status {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1;
+    padding: 6px 12px;
+    border-radius: 20px;
+    background: #fff;
+    vertical-align: middle;
+}
+
+.status.pending {
+    color: #D85C35;
+    border: 1px solid #D85C35;
+}
+
+.status.approved {
+    color: #2DB94D;
+    border: 1px solid #2DB94D;
+}
+
+.status.error {
+    color: #ff4d4d;
+    border: 1px solid #ff4d4d;
+}
+
+/* Detail link styling */
+.detail-link {
+    color: #3C7BE4;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 6px 12px;
+    border: 1px solid #3C7BE4;
+    border-radius: 20px;
+    transition: all 0.2s ease;
+    display: inline-block;
+}
+
+.detail-link:hover {
+    background-color: #3C7BE4;
+    color: white;
+    text-decoration: none;
+}
 
