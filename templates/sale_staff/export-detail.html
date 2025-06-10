@@ -1,7 +1,6 @@
 {% extends 'main.html' %}
 {% load static %}
 
-
 {% block link %}
     <link rel="stylesheet" href="{% static 'css/sale_staff/export-detail.css' %}">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css'>
@@ -10,25 +9,34 @@
 {% block main-content %}
     <h2 id="title">Chi tiết yêu cầu xuất hàng bán</h2>
 
-    <div id="export-receipt">
-        <section>
-            <dl id="export-detail">
-                <dt>Thời gian yêu cầu: {{ export_info.request_date }}</dt>
-                <dt>Thời gian duyệt: {{ export_info.review_date }}</dt>
-                <dt>Thời gian xuất: {{ export_info.export_date }}</dt>
-                <dt>Nhân viên yêu cầu: {{ export_info.request_employee }}</dt>
-                <dt>Nhân viên xuất hàng: {{ export_info.export_employee }}</dt>
-                <dt>Trạng thái: {{ export_info.status }}</dt>
-            </dl>
-        </section>
+    <div class="export-receipt">
+        <!-- Info Card -->
+        <div class="info-card">
+            <div class="info-row"><strong>Thời gian yêu cầu:</strong> {{ export_info.request_date }}</div>
+            <div class="info-row"><strong>Thời gian duyệt:</strong> {{ export_info.review_date }}</div>
+            <div class="info-row"><strong>Thời gian xuất:</strong> {{ export_info.export_date }}</div>
+            <div class="info-row"><strong>Nhân viên yêu cầu:</strong> {{ export_info.request_employee }}</div>
+            <div class="info-row"><strong>Nhân viên xuất hàng:</strong> {{ export_info.export_employee }}</div>
+            <div class="info-row">
+                <strong>Trạng thái:</strong>
+                <span class="status {% if export_info.status == 'Chưa duyệt' %}pending{% elif export_info.status == 'Đã duyệt' %}approved{% elif export_info.status == 'Đã xuất' %}exported{% endif %}">
+                {{ export_info.status }}
+            </span>
+            </div>
+        </div>
 
-        <section>
-            <table id="table-content">
+        <!-- Table Section -->
+        <form id="real-quantity-form" method="post"
+              action="{% url 'resend-export-request' %}?request_id={{ request.GET.request_id }}">
+            {% csrf_token %}
+            <input type="hidden" name="request_id" value="{{ request.GET.request_id }}">
+            <table class="req-table">
                 <thead>
                 <tr>
                     <th>STT</th>
                     <th>Tên mặt hàng</th>
                     <th>Số lượng</th>
+                    <th>Số lượng thực</th>
                     <th>Ghi chú</th>
                 </tr>
                 </thead>
@@ -37,37 +45,47 @@
                     <tr>
                         <td>{{ forloop.counter }}</td>
                         <td>{{ product.name }}</td>
-                        <td>{{ product.quantity }}</td>
+                        <td class="quantity">{{ product.quantity }}</td>
+                        <td>
+                            {% if export_info.status != 'Đã xuất' %}
+                                <input type="number" class="real-quantity" name="real_quantity"
+                                       value="{{ product.real_quantity }}" min="0"/>
+                            {% else %}
+                                <span class="real-quantity">{{ product.real_quantity }}</span>
+                            {% endif %}
+                        </td>
                         <td>{{ product.note }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
-        </section>
-
-
+        </form>
     </div>
 
-    <section>
-        <div id="button-row">
-            <a href="{% url 'export-request' %}">
-                <button id="previous-button">Quay lại</button>
-            </a>
-            {% if export_info.status != 'Đã xuất' %}
-                <form action="{% url 'export-confirm' %}" method="post"
-                      onsubmit="return confirm('Bạn có chắc chắn muốn xác nhận đã nhận đủ?');">
-                    {% csrf_token %}
-                    <input type="hidden" name="request_id" value="{{ request.GET.request_id }}">
-                    <input type="hidden" id="confirmed_at" name="confirmed_at">
-                    <input type="hidden" id="export_employee" name="export_employee" value="{{ request.session.user_id }}">
-                    <button id="confirmation-button" type="submit">Xác nhận đã nhận đủ</button>
-                </form>
-            {% else %}
-                <button id="confirmation-button" disabled style="cursor: not-allowed; opacity: 0.5;">
-                    Đã xác nhận
-                </button>
-            {% endif %}
-        </div>
+    <section class="button-group">
+        <form action="{% url 'export-request' %}" method="get">
+            <button type="submit" class="btn btn-back">Quay lại</button>
+        </form>
+
+        {% if export_info.status != 'Đã xuất' %}
+            <form action="{% url 'export-confirm' %}" method="post"
+                  onsubmit="return confirm('Bạn có chắc chắn muốn xác nhận đã nhận đủ?');">
+                {% csrf_token %}
+                <input type="hidden" name="request_id" value="{{ request.GET.request_id }}">
+                <input type="hidden" id="confirmed_at" name="confirmed_at">
+                <input type="hidden" id="export_employee" name="export_employee"
+                       value="{{ request.session.user_id }}">
+                <button type="submit" class="btn btn-confirm">Xác nhận đã nhận đủ</button>
+            </form>
+
+            <button type="submit" form="real-quantity-form" class="btn btn-resend" id="resend-request-button">
+                Gửi lại yêu cầu
+            </button>
+        {% else %}
+            <button class="btn btn-confirm" disabled style="cursor: not-allowed; opacity: 0.5;">
+                Đã xác nhận
+            </button>
+        {% endif %}
     </section>
 
     <script>
@@ -83,4 +101,42 @@
             }
         }
     </script>
+
+    <script>
+        function checkMismatch() {
+            const quantities = document.querySelectorAll('.quantity');
+            const realQuantities = document.querySelectorAll('.real-quantity');
+            const resendButton = document.getElementById('resend-request-button');
+
+            if (!resendButton || quantities.length !== realQuantities.length) return;
+
+            let mismatchFound = false;
+
+            for (let i = 0; i < quantities.length; i++) {
+                const expected = parseInt(quantities[i].innerText.trim(), 10);
+                const actual = parseInt(realQuantities[i].value.trim(), 10);
+
+                if (expected !== actual) {
+                    mismatchFound = true;
+                    break;
+                }
+            }
+
+            resendButton.disabled = !mismatchFound;
+            resendButton.style.cursor = mismatchFound ? 'pointer' : 'not-allowed';
+            resendButton.style.opacity = mismatchFound ? '1' : '0.5';
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            checkMismatch();
+
+            document.querySelectorAll('.real-quantity').forEach(input => {
+                input.addEventListener('input', checkMismatch);
+            });
+        });
+    </script>
+
+
+
 {% endblock main-content %}
+

@@ -17,6 +17,8 @@ def log_in(request):
                 return redirect('sale-staff-home')
             if user.chuc_vu == 'Warehouse Staff':
                 return redirect('warehouse-staff-home')
+            if user.chuc_vu == 'Warehouse Manager':
+                return redirect('warehouse-manager-home')
 
         except TaiKhoan.DoesNotExist:
             return render(request, 'accounts/login.html', context={

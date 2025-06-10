@@ -1,0 +1,57 @@
+<a href='{% url 'warehouse-manager-home' %}' id="navbar-logo" class="logo">
+    Phi Long
+</a>
+{% load static %}
+<!-- PROFILE SECTION -->
+<div class="sidebar-profile">
+  <img
+  src="{% static 'images/avatar-vo-tri-7.jpg' %}" alt="Andrew Bennet" class="profile-img" style="width:140px; height:140px;margin: 25px 20px 20px 20px; border-radius:50%; object-fit:cover;"
+/>
+
+  <div class="profile-name" style="color: #ffffff; font-size: 18px; text-align: center; margin-bottom: 10px">Lê Thị Huyền Trang</div>
+    <div class="status" style="color: #2DB94D; font-size: 18px; text-align: center">Online</div>
+</div>
+
+<ul>
+    <li class="has-submenu">
+        <div class="submenu-toggle">
+            <i class="fas fa-home icon"></i> Quản lý sản phẩm
+            <i class="fas fa-caret-down caret"></i>
+        </div>
+        <ul class="sub-menu">
+            <li><a href="{% url 'warehouse-manager/categories' %}"><i class="fas fa-list icon"></i> Danh mục</a></li>
+            <li><a href="{% url 'warehouse-manager/products' %}"><i class="fas fa-box-open icon"></i> Sản phẩm</a></li>
+            <li><a href="{% url 'warehouse-manager/product-location' %}"><i class="fas fa-map-marker-alt icon"></i> Vị
+                trí sản phẩm</a></li>
+        </ul>
+
+
+    <li><a href="{% url 'warehouse-manager/import' %}"><i class="fas fa-box icon"></i> Quản lý nhập hàng</a></li>
+    <li class="has-submenu">
+        <div class="submenu-toggle">
+            <i class="fas fa-truck icon"></i> Quản lý xuất hàng
+            <i class="fas fa-caret-down caret"></i>
+        </div>
+        <ul class="sub-menu">
+            <li>
+                <a href="{% url 'export-request' %}">
+                    <i class="fas fa-file-export icon"></i> Yêu cầu xuất hàng
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'export-request' %}">
+                    <i class="fas fa-tasks icon"></i> Trạng thái yêu cầu
+                </a>
+            </li>
+        </ul>
+    </li>
+
+
+</ul>
+
+<style>
+    .icon {
+        font-size: 16px;
+        margin-right: 10px;
+    }
+</style>

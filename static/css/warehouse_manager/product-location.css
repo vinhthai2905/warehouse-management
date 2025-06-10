@@ -1,0 +1,139 @@
+.header-location {
+    padding: 30px;
+    font-family: Arial, sans-serif;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 32px;
+    font-weight: bold;
+    margin: 0 auto;
+}
+
+.add-button-wrapper {
+    margin-left: auto;
+}
+
+.add-button {
+    background-color: #428bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.add-button:hover {
+  background: #144b7b; /* sắc xanh đậm hơn */
+}
+
+/* Tabs */
+.position-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+.position-tabs .tab {
+  padding: 8px 20px;
+  border: 1px solid #8965FF;
+  border-radius: 4px;
+  background: #fff;
+  color: #8965FF;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s, color 0.2s;
+}
+.position-tabs .tab.active,
+.position-tabs .tab:hover {
+  background: #8965FF;
+  color: #fff;
+}
+
+/* Search (tuỳ chọn) */
+.position-search {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.search-box {
+  position: relative;
+}
+.search-box input {
+  width: 440px;
+  padding: 8px 12px;
+  padding-right: 38px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+}
+.search-box .search-btn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #666;
+}
+
+/* Tiêu đề bảng, canh giữa */
+.table-title {
+  text-align: center;
+  font-size: 1.2rem;
+  margin: 10px 0;
+}
+
+/* Nút Thêm, canh giữa & hover đổi màu */
+.add-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.btn-add {
+  display: inline-block;
+  padding: 10px 24px;
+  background: #00138f;
+  color: #fff;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+
+
+/* Bảng dữ liệu */
+.position-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.position-table thead {
+  background: #4a90d1;
+}
+.position-table th,
+.position-table td {
+  padding: 12px;
+  border-bottom: 1px solid #ccc;
+  text-align: left;
+  font-size: 0.95rem;
+}
+.position-table tr:nth-child(even) {
+  background: #F9F9F9;
+}
+.position-table .text-center {
+  text-align: center;
+  color: #777;
+}
+.position-table tbody tr:hover {
+    background-color: #e0f0ff;
+    transition: background-color 0.2s ease-in-out;
+    cursor: pointer;
+}

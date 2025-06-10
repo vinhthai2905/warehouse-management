@@ -1,4 +1,6 @@
 from datetime import datetime
+from urllib.parse import urlencode
+
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_POST
@@ -50,13 +52,16 @@ def export_request(request):
             'date': e_request.thoi_gian,
             'review_date': e_request.thoi_gian_duyet,
             'export_date': e_request.thoi_gian_xuat,
-            'employee': e_request.id_nhan_vien_yc.ten_nhan_vien,
+            'request_employee': e_request.id_nhan_vien_yc.ten_nhan_vien,
             'status': e_request.trang_thai
         })
 
     return render(request, 'sale_staff/export-request.html', context={
         'export_request_dict': export_request_dict
     })
+
+def export_request_status(request):
+    return render(request, 'sale_staff/export_request_status.html')
 
 # export_detail section
 def export_detail(request):
@@ -70,7 +75,9 @@ def export_detail(request):
     export_info = {
         'request_date': request.GET.get('request_date'),
         'review_date': request.GET.get('review_date'),
-        'export_date':  request.GET.get('export_date') if request.GET.get('export_date') is None else 'Chưa xác định',
+        'export_date':  request.GET.get('export_date')
+            if request.GET.get('export_date') and request.GET.get('export_date') != 'None'
+            else 'Chưa xác định',
         'request_employee': request_employee.id_nhan_vien_yc.ten_nhan_vien,
         'export_employee': export_employee.id_nhan_vien_xuat.ten_nhan_vien if export_employee else 'Chưa xác định',
         'status': request.GET.get('status')
@@ -81,6 +88,7 @@ def export_detail(request):
         export_product_dict.append({
             'name': product.id_san_pham.ten_san_pham,
             'quantity': product.so_luong,
+            'real_quantity': product.so_luong_thuc,
             'note': product.ghi_chu,
         })
 
@@ -89,6 +97,31 @@ def export_detail(request):
         'export_product_dict': export_product_dict
 
     })
+
+@require_POST
+def resend_export_request(request):
+    request_id = request.POST.get('request_id')
+    resend_export = DSYeuCauXuatKho.objects.get(id_yeu_cau_xuat=request_id)
+    resend_export_products = ChiTietYeuCauXuat.objects.filter(id_yeu_cau_xuat=request_id)
+
+    resend_export.id_nhan_vien_yc = TaiKhoan.objects.get(id_nhan_vien=request.session.get('user_id'))
+    resend_export.trang_thai = 'Hoá đơn lỗi'
+
+    for product in resend_export_products:
+        product.so_luong_thuc = request.POST.get('real_quantity')
+        product.save()
+
+    resend_export.save()
+
+    query_params = urlencode({
+        'request_id': request_id,
+        'status': resend_export.trang_thai,
+        'request_date': resend_export.thoi_gian,
+        'review_date': resend_export.thoi_gian_duyet,
+        'export_date': resend_export.thoi_gian_xuat or 'None',
+    })
+
+    return redirect(f'/product-management/export/details?{query_params}')
 
 @require_POST
 def export_confirm(request):

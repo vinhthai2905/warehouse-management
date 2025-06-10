@@ -1,0 +1,62 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/warehouse_manager/product.css' %}">
+{% endblock link %}
+
+{% block main-content %}
+<div class="category-container">
+  <div class="header">
+    <h2 class="title">Danh sách sản phẩm</h2>
+    <div class="add-button-wrapper">
+        <button class="add-button"> + Thêm sản phẩm mới</button>
+    </div>
+</div>
+
+    <div class="search-bar">
+        <label for="search">Tìm kiếm</label>
+        <input type="text" id="search" placeholder="Nhập tên sản phẩm / mã sản phẩm" />
+        <i class="fas fa-search search-icon"></i>
+    </div>
+<table class="product-table">
+    <thead>
+        <tr>
+            <th>STT</th>
+            <th>Mã sản phẩm</th>
+            <th>Tên sản phẩm</th>
+            <th>Số lượng còn</th>
+            <th>Danh mục</th>
+            <th>Giá</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>01</td><td>001</td><td>Chuột Logitech L1</td><td>37</td><td>Chuột</td><td>230.000</td></tr>
+        <tr><td>02</td><td>002</td><td>Chuột XM23</td><td>20</td><td>Chuột</td><td>149.000</td></tr>
+        <tr><td>03</td><td>003</td><td>Bàn phím K7</td><td>36</td><td>Bàn phím</td><td>529.000</td></tr>
+        <tr><td>04</td><td>004</td><td>Bàn phím cơ XA3</td><td>37</td><td>Bàn phím</td><td>939.000</td></tr>
+        <tr><td>05</td><td>005</td><td>Màn hình Oled 21 inch</td><td>14</td><td>Màn hình</td><td>2.330.000</td></tr>
+        <tr><td>06</td><td>006</td><td>Màn hình K6 Pro</td><td>20</td><td>Màn hình</td><td>1.849.000</td></tr>
+        <tr><td>07</td><td>007</td><td>RAM KingDom 8Gb</td><td>40</td><td>Ram</td><td>589.000</td></tr>
+        <tr><td>08</td><td>008</td><td>RAM KingDom 16Gb</td><td>35</td><td>Ram</td><td>990.000</td></tr>
+    </tbody>
+</table>
+
+</div>
+{% endblock %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const rows = document.querySelectorAll('.product-table tbody tr');
+        rows.forEach(row => {
+            row.style.cursor = 'pointer';
+            row.addEventListener('click', () => {
+                const href = row.getAttribute('data-href');
+                if (href) {
+                    window.location.href = href;
+                }
+            });
+        });
+    });
+</script>
+
