@@ -22,7 +22,8 @@
         </section>
 
         <section>
-            <form id="real-quantity-form" method="post" action="">
+            <form id="real-quantity-form" method="post"
+                  action="{% url 'resend-export-request' %}?request_id={{ request.GET.request_id }}">
                 {% csrf_token %}
                 <input type="hidden" name="request_id" value="{{ request.GET.request_id }}">
                 <table id="table-content">
@@ -32,6 +33,7 @@
                         <th>Tên mặt hàng</th>
                         <th>Số lượng</th>
                         <th>Số lượng thực</th>
+                        <th>Ghi chú</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -39,20 +41,21 @@
                         <tr>
                             <td>{{ forloop.counter }}</td>
                             <td>{{ product.name }}</td>
-                            <td>{{ product.quantity }}</td>
+                            <td class="quantity">{{ product.quantity }}</td>
                             <td>
-                                <input type="number" name="real_quantity_{{ product.id }}"
-                                       value="{{ product.real_quantity }}" min="0"/>
+                                {% if export_info.status != 'Đã xuất' %}
+                                    <input type="number" class="real-quantity" name="real_quantity"
+                                           value="{{ product.real_quantity }}" min="0"/>
+                                {% else %}
+                                    <span class="real-quantity">{{ product.real_quantity }}</span>
+                                {% endif %}
                             </td>
+                            <td>{{ product.note }}</td>
                         </tr>
 
-                    </tbody>
-                        </table>
-                        <div class="note-wrapper">
-                            <label for="ghi-chu-input">Ghi chú:</label>
-                            <input type="text" name="ghi_chu" id="ghi-chu-input" value="{{ product.note }}">
-                        </div>
                     {% endfor %}
+                    </tbody>
+                </table>
             </form>
         </section>
     </div>
@@ -62,9 +65,6 @@
             <form action="{% url 'export-request' %}" method="get">
                 <button id="previous-button" type="submit">Quay lại</button>
             </form>
-            <button id="save-button" type="button" onclick="document.getElementById('real-quantity-form').submit();">
-                Lưu số lượng thực
-            </button>
             {% if export_info.status != 'Đã xuất' %}
                 <form action="{% url 'export-confirm' %}" method="post"
                       onsubmit="return confirm('Bạn có chắc chắn muốn xác nhận đã nhận đủ?');">
@@ -75,7 +75,12 @@
                            value="{{ request.session.user_id }}">
                     <button id="confirmation-button" type="submit">Xác nhận đã nhận đủ</button>
                 </form>
+
+                <button id="resend-request-button" type="submit" form="real-quantity-form">
+                    Gửi lại yêu cầu
+                </button>
             {% else %}
+
                 <button id="confirmation-button" disabled style="cursor: not-allowed; opacity: 0.5;">
                     Đã xác nhận
                 </button>
@@ -96,4 +101,40 @@
             }
         }
     </script>
+
+    <script>
+        function checkMismatch() {
+            const quantities = document.querySelectorAll('.quantity');
+            const realQuantities = document.querySelectorAll('.real-quantity');
+            const resendButton = document.getElementById('resend-request-button');
+
+            if (!resendButton) return;
+
+            let mismatch = false;
+
+            for (let i = 0; i < quantities.length; i++) {
+                const expected = parseInt(quantities[i].innerText);
+                const actual = parseInt(realQuantities[i].value);
+
+                if (expected !== actual) {
+                    mismatch = true;
+                    break;
+                }
+            }
+
+            resendButton.disabled = !mismatch;
+            resendButton.style.cursor = mismatch ? 'pointer' : 'not-allowed';
+            resendButton.style.opacity = mismatch ? '1' : '0.5';
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            checkMismatch();  // Run once when page loads
+
+            // Dynamically re-check on every input change
+            document.querySelectorAll('.real-quantity').forEach(input => {
+                input.addEventListener('input', checkMismatch);
+            });
+        });
+    </script>
+
 {% endblock main-content %}

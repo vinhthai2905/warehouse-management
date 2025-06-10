@@ -99,7 +99,7 @@ class DSYeuCauXuatKho(models.Model):
         constraints = [
             models.CheckConstraint(
                 check=models.Q(trang_thai__in=[
-                    'Chờ duyệt', 'Đã duyệt', 'Đã xuất', 'Từ chối'
+                    'Chờ duyệt', 'Đã duyệt', 'Đã xuất', 'Từ chối', 'Hoá đơn lỗi'
                 ]),
                 name='trang_thai_hop_le'
             ),

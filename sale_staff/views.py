@@ -1,4 +1,6 @@
 from datetime import datetime
+from urllib.parse import urlencode
+
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_POST
@@ -95,6 +97,31 @@ def export_detail(request):
         'export_product_dict': export_product_dict
 
     })
+
+@require_POST
+def resend_export_request(request):
+    request_id = request.POST.get('request_id')
+    resend_export = DSYeuCauXuatKho.objects.get(id_yeu_cau_xuat=request_id)
+    resend_export_products = ChiTietYeuCauXuat.objects.filter(id_yeu_cau_xuat=request_id)
+
+    resend_export.id_nhan_vien_yc = TaiKhoan.objects.get(id_nhan_vien=request.session.get('user_id'))
+    resend_export.trang_thai = 'Hoá đơn lỗi'
+
+    for product in resend_export_products:
+        product.so_luong_thuc = request.POST.get('real_quantity')
+        product.save()
+
+    resend_export.save()
+
+    query_params = urlencode({
+        'request_id': request_id,
+        'status': resend_export.trang_thai,
+        'request_date': resend_export.thoi_gian,
+        'review_date': resend_export.thoi_gian_duyet,
+        'export_date': resend_export.thoi_gian_xuat or 'None',
+    })
+
+    return redirect(f'/product-management/export/details?{query_params}')
 
 @require_POST
 def export_confirm(request):

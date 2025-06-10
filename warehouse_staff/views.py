@@ -34,10 +34,9 @@ def pro_location(request):
 
 def export_request(request):
     export_request_dict = list()
-    export_requests = DSYeuCauXuatKho.objects.filter(trang_thai__in=['Chờ duyệt', 'Đã duyệt'])
+    export_requests = DSYeuCauXuatKho.objects.filter(trang_thai__in=['Chờ duyệt', 'Đã duyệt', 'Hoá đơn lỗi'])
 
     for e_request in export_requests:
-        review_employee = TaiKhoan.objects.filter(id_nhan_vien=e_request.id_nhan_vien_duyet).first()
         export_request_dict.append({
             'id': e_request.id_yeu_cau_xuat,
             'request_date': e_request.thoi_gian,

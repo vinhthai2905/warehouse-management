@@ -160,13 +160,13 @@ button:hover {
     background: #ffd700;
 }
 
-#save-button {
+#resend-request-button {
     background-color: #f0f0f0;
     color: black;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-#save-button:hover {
+#resend-request-button:hover {
     background-color: #28a745; /* green */
     color: white;
 }
