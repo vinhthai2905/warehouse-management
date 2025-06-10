@@ -205,4 +205,30 @@
             });
         });
     </script>
+
+    <script>
+        document.querySelectorAll('.status-tab').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.status-tab').forEach(t => t.classList.remove('active'));
+                btn.classList.add('active');
+
+                document.querySelectorAll('.status-panel').forEach(p => {
+                    p.classList.add('hidden');
+                    p.style.animation = 'none'; // Reset any previous animation
+                });
+
+                // Show the target panel with fadeIn animation
+                const targetPanel = document.getElementById(btn.dataset.target);
+                targetPanel.classList.remove('hidden');
+
+                // Force reflow to restart animation
+                void targetPanel.offsetWidth;
+
+                // Apply fade-in animation
+                targetPanel.style.animation = 'fadeIn 0.4s ease forwards';
+            });
+        });
+    </script>
+
+
 {% endblock main-content %}
