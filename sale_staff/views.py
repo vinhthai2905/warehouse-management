@@ -52,7 +52,7 @@ def export_request(request):
             'date': e_request.thoi_gian,
             'review_date': e_request.thoi_gian_duyet,
             'export_date': e_request.thoi_gian_xuat,
-            'employee': e_request.id_nhan_vien_yc.ten_nhan_vien,
+            'request_employee': e_request.id_nhan_vien_yc.ten_nhan_vien,
             'status': e_request.trang_thai
         })
 

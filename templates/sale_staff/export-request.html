@@ -14,11 +14,12 @@
             <span class="status-tab active" data-target="all">Tất cả</span>
             <span class="status-tab" data-target="pending">Chưa duyệt</span>
             <span class="status-tab" data-target="approved">Đã duyệt</span>
+            <span class="status-tab" data-target="exported">Đã xuất</span>
         </div>
 
         <!-- panel: All -->
         <div id="all" class="status-panel">
-            <table class="req-table">
+            <table class="req-table" id="all">
                 <thead>
                 <tr>
                     <th>STT</th>
@@ -35,11 +36,11 @@
                         <td>{{ forloop.counter }}</td>
                         <td>{{ e_request.id }}</td>
                         <td>{{ e_request.date|date:'H:i d/m/Y' }}</td>
-                        <td>{{ e_request.employee }}</td>
+                        <td>{{ e_request.request_employee }}</td>
                         <td>
-            <span class="status {% if e_request.status == 'Chưa duyệt' %}pending{% elif e_request.status == 'Đã duyệt' %}approved{% endif %}">
-              {{ e_request.status }}
-            </span>
+                            <span class="status {% if e_request.status == 'Chưa duyệt' %}pending{% elif e_request.status == 'Đã duyệt' %}approved{% endif %}">
+                              {{ e_request.status }}
+                            </span>
                         </td>
                         <td>
                             <a href="{% url 'export-detail' %}?request_id={{ e_request.id }}&status={{ e_request.status }}&request_date={{ e_request.date|urlencode }}&review_date={{ e_request.review_date|urlencode }}&export_date={{ e_request.export_date|urlencode }}"
@@ -54,13 +55,143 @@
         </div>
 
         <!-- panel: Pending -->
+        <!-- panel: Pending -->
         <div id="pending" class="status-panel hidden">
-            <p class="empty-note">Hiện không có phiếu nào chờ duyệt.</p>
+            {% with pending_count=0 %}
+                {% for e_request in export_request_dict %}
+                    {% if e_request.status == 'Chưa duyệt' %}
+                        {% widthratio 1 1 1 as dummy %}
+                        {% with pending_count=pending_count|add:"1" %}
+                        {% endwith %}
+                    {% endif %}
+                {% endfor %}
+
+                {% if pending_count == 0 %}
+                    <p class="empty-note">Hiện không có phiếu nào chờ duyệt.</p>
+                {% else %}
+                    <table class="req-table">
+                        <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã yêu cầu</th>
+                            <th>Thời gian yêu cầu</th>
+                            <th>Nhân viên yêu cầu</th>
+                            <th>Trạng thái</th>
+                            <th>Chi tiết yêu cầu</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for e_request in export_request_dict %}
+                            {% if e_request.status == 'Chưa duyệt' %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ e_request.id }}</td>
+                                    <td>{{ e_request.date|date:'H:i d/m/Y' }}</td>
+                                    <td>{{ e_request.request_employee }}</td>
+                                    <td><span class="status pending">Chưa duyệt</span></td>
+                                    <td>
+                                        <a href="{% url 'export-detail' %}?request_id={{ e_request.id }}&status={{ e_request.status }}&request_date={{ e_request.date|urlencode }}&review_date={{ e_request.review_date|urlencode }}&export_date={{ e_request.export_date|urlencode }}"
+                                           class="detail-link">
+                                            Xem chi tiết
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+            {% endwith %}
         </div>
 
         <!-- panel: Approved -->
         <div id="approved" class="status-panel hidden">
-            <p class="empty-note">Hiện không có phiếu đã duyệt.</p>
+            {% with approved_requests=export_request_dict|dictsort:"id" %}
+                {% if approved_requests|length == 0 %}
+                    <p class="empty-note">Hiện không có phiếu đã duyệt.</p>
+                {% else %}
+                    <table class="req-table">
+                        <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã yêu cầu</th>
+                            <th>Thời gian yêu cầu</th>
+                            <th>Nhân viên yêu cầu</th>
+                            <th>Trạng thái</th>
+                            <th>Chi tiết yêu cầu</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for e_request in export_request_dict %}
+                            {% if e_request.status == 'Đã duyệt' %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ e_request.id }}</td>
+                                    <td>{{ e_request.date|date:'H:i d/m/Y' }}</td>
+                                    <td>{{ e_request.request_employee }}</td>
+                                    <td>
+                                        <span class="status approved">Đã duyệt</span>
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'export-detail' %}?request_id={{ e_request.id }}&status={{ e_request.status }}&request_date={{ e_request.date|urlencode }}&review_date={{ e_request.review_date|urlencode }}&export_date={{ e_request.export_date|urlencode }}"
+                                           class="detail-link">
+                                            Xem chi tiết
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+            {% endwith %}
+        </div>
+
+        <!-- panel: Exported -->
+        <div id="exported" class="status-panel hidden">
+            {% with export_done=export_request_dict %}
+                {% if not export_done %}
+                    <p class="empty-note">Hiện không có phiếu đã xuất.</p>
+                {% else %}
+                    {% if not export_request_dict|yesno:"has_exported," %}
+                        <p class="empty-note">Hiện không có phiếu đã xuất.</p>
+                    {% else %}
+                        <table class="req-table">
+                            <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Mã yêu cầu</th>
+                                <th>Thời gian yêu cầu</th>
+                                <th>Nhân viên yêu cầu</th>
+                                <th>Trạng thái</th>
+                                <th>Chi tiết yêu cầu</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for e_request in export_request_dict %}
+                                {% if e_request.status == 'Đã xuất' %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>{{ e_request.id }}</td>
+                                        <td>{{ e_request.date|date:'H:i d/m/Y' }}</td>
+                                        <td>{{ e_request.request_employee }}</td>
+                                        <td>
+                                            <span class="status exported">Đã xuất</span>
+                                        </td>
+                                        <td>
+                                            <a href="{% url 'export-detail' %}?request_id={{ e_request.id }}&status={{ e_request.status }}&request_date={{ e_request.date|urlencode }}&review_date={{ e_request.review_date|urlencode }}&export_date={{ e_request.export_date|urlencode }}"
+                                               class="detail-link">
+                                                Xem chi tiết
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endif %}
+                {% endif %}
+            {% endwith %}
         </div>
     </div>
 
