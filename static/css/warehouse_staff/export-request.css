@@ -138,8 +138,8 @@
 }
 
 .status.pending {
-    color: #D85C35;
-    border: 1px solid #D85C35;
+    color: #c2bd1f;
+    border: 1px solid #c3c608;
 }
 
 .status.approved {
@@ -148,7 +148,7 @@
 }
 
 .status.error {
-    color: #ff4d4d;
+    color: #6f1414;
     border: 1px solid #ff4d4d;
 }
 

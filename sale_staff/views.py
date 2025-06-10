@@ -42,7 +42,7 @@ def inventory_management(request):
 
 def export_request(request):
     export_request_dict = list()
-    export_requests = DSYeuCauXuatKho.objects.filter(trang_thai__in=['Đã duyệt', 'Đã xuất'])
+    export_requests = DSYeuCauXuatKho.objects.filter(trang_thai__in=['Đã duyệt', 'Đã xuất', 'Chờ duyệt'])
 
     for i, e_request in enumerate(export_requests):
         e_request: DSYeuCauXuatKho

@@ -1,7 +1,21 @@
 <a href='{% url 'warehouse-staff-home' %}' id="navbar-logo" class="logo">
     Phi Long
 </a>
+{% load static %}
+<!-- PROFILE SECTION -->
 
+<div class="sidebar-profile">
+  <img   src="{% static 'images/avatar.png' %}" alt="Andrew Bennet" class="profile-img" style="width:140px; height:140px;margin: 0px 20px 20px 20px; border-radius:50%; object-fit:cover;"/>
+  {% if user_name %}
+    <div class="profile-name" style="font-size:20px; text-align:center; color:#ffffff">
+      {{ user_name }}
+    </div>
+        <div class="status" style="color: #2DB94D; font-size: 18px; text-align: center; margin-top:10px">Online</div>
+
+  {% else %}
+    <div class="profile-name" style="…">Khách</div>
+  {% endif %}
+</div>
 <ul>
     <li><a href="{% url 'warehouse-staff/inventory' %}"><i class="fas fa-box icon"></i> Quản lý nhập hàng</a></li>
     <li class="has-submenu">

@@ -127,6 +127,12 @@
     background: #F9F9F9;
 }
 
+.req-table tbody tr:hover {
+    background-color: #e0f0ff; /* màu xanh nhạt khi hover */
+    cursor: pointer; /* đổi con trỏ chuột */
+    transition: background-color 0.2s ease-in-out;
+}
+
 .status {
     display: inline-block;
     font-size: 14px;
@@ -139,8 +145,8 @@
 }
 
 .status.pending {
-    color: #D85C35;
-    border: 1px solid #D85C35;
+  color: #c2bd1f;
+    border: 1px solid #c3c608;
 }
 
 .status.approved {
