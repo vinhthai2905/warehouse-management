@@ -19,9 +19,14 @@
             <div class="info-row"><strong>Nhân viên xuất hàng:</strong> {{ export_info.export_employee }}</div>
             <div class="info-row">
                 <strong>Trạng thái:</strong>
-                <span class="status {% if export_info.status == 'Chưa duyệt' %}pending{% elif export_info.status == 'Đã duyệt' %}approved{% elif export_info.status == 'Đã xuất' %}exported{% endif %}">
-                {{ export_info.status }}
-            </span>
+                <span class="status
+                    {% if export_info.status == 'Chờ duyệt' %}pending
+                    {% elif export_info.status == 'Đã duyệt' %}approved
+                    {% elif export_info.status == 'Hoá đơn lỗi' %}error
+                    {% elif export_info.status == 'Đã xuất' %}exported
+                    {% endif %}">
+                    {{ export_info.status }}
+                </span>
             </div>
         </div>
 
@@ -36,7 +41,9 @@
                     <th>STT</th>
                     <th>Tên mặt hàng</th>
                     <th>Số lượng</th>
-                    <th>Số lượng thực</th>
+                    {% if export_info.status != 'Chờ duyệt' %}
+                        <th>Số lượng thực</th>
+                    {% endif %}
                     <th>Ghi chú</th>
                 </tr>
                 </thead>
@@ -46,18 +53,17 @@
                         <td>{{ forloop.counter }}</td>
                         <td>{{ product.name }}</td>
                         <td class="quantity">{{ product.quantity }}</td>
-                        <td>
-                            {% if export_info.status == 'Đã xuất' %}
-                                <span class="real-quantity">{{ product.real_quantity }}</span>
-                            {% elif export_info.status == 'Chờ duyệt' %}
-                                <input type="number" class="real-quantity" name="real_quantity"
-                                       value="{{ product.real_quantity }}" min="0" disabled/>
-                            {% else %}
-                                <input type="number" class="real-quantity" name="real_quantity"
-                                       value="{{ product.real_quantity }}" min="0"/>
-                            {% endif %}
-                        </td>
-                        <td>{{ product.note }}</td>
+                        {% if export_info.status != 'Chờ duyệt' %}
+                            <td>
+                                {% if export_info.status == 'Đã xuất' %}
+                                    <span class="real-quantity">{{ product.real_quantity }}</span>
+                                {% else %}
+                                    <input type="number" class="real-quantity" name="real_quantity"
+                                           value="{{ product.real_quantity }}" min="0"/>
+                                {% endif %}
+                            </td>
+                        {% endif %}
+                        <td class="note-cell">{{ product.note }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>

@@ -57,7 +57,7 @@
 }
 
 .status.pending {
- color: #c2bd1f;
+    color: #c2bd1f;
     border: 1px solid #c3c608;
 }
 
@@ -71,6 +71,14 @@
     background-color: #2ecc71;
     padding: 2px 8px;
     border-radius: 4px;
+}
+
+.status.error {
+    color: #ff4d4d;
+    border: 1px solid #ff4d4d;
+    background-color: #ffecec;
+    padding: 6px 12px;
+    border-radius: 20px;
 }
 
 .real-quantity {
@@ -135,3 +143,4 @@
     background-color: #28a745;
     color: white;
 }
+

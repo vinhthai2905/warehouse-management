@@ -14,7 +14,7 @@ def log_in(request):
             request.session['chuc_vu'] = user.chuc_vu
 
             if user.chuc_vu == 'Sale Staff':
-                return redirect('sale-staff-home')
+                return redirect('products-info')
             if user.chuc_vu == 'Warehouse Staff':
                 return redirect('warehouse-staff-home')
             if user.chuc_vu == 'Warehouse Manager':

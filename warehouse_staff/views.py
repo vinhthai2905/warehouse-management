@@ -74,6 +74,7 @@ def export_detail(request):
         export_product_dict.append({
             'name': product.id_san_pham.ten_san_pham,
             'quantity': product.so_luong,
+            'real_quantity': product.so_luong_thuc,
             'note': product.ghi_chu,
         })
 
