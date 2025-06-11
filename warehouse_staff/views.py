@@ -70,12 +70,19 @@ def export_detail(request):
         'status': export_request_detail.trang_thai
     }
 
-    for product in products:
+    for export_product in products:
+        if export_product.so_luong > export_product.so_luong_thuc:
+            note = f'Sản phẩm {export_product.id_san_pham.ten_san_pham} thiếu {export_product.so_luong - export_product.so_luong_thuc}'
+        elif export_product.so_luong < export_product.so_luong_thuc:
+            note = f'Sản phẩm {export_product.id_san_pham.ten_san_pham} dư {export_product.so_luong_thuc - export_product.so_luong}'
+        else:
+            note = 'Đã nhận đủ'
+
         export_product_dict.append({
-            'name': product.id_san_pham.ten_san_pham,
-            'quantity': product.so_luong,
-            'real_quantity': product.so_luong_thuc,
-            'note': product.ghi_chu,
+            'name': export_product.id_san_pham.ten_san_pham,
+            'quantity': export_product.so_luong,
+            'real_quantity': export_product.so_luong_thuc,
+            'note': note
         })
 
     return render(request, 'warehouse_staff/export-detail.html', context={

@@ -58,7 +58,8 @@
                                 {% if export_info.status == 'Đã xuất' %}
                                     <span class="real-quantity">{{ product.real_quantity }}</span>
                                 {% else %}
-                                    <input type="number" class="real-quantity" name="real_quantity"
+                                    <input type="number" class="real-quantity"
+                                           name="real_quantity_{{ product.id }}"
                                            value="{{ product.real_quantity }}" min="0"/>
                                 {% endif %}
                             </td>

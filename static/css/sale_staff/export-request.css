@@ -1,10 +1,28 @@
-#title{
+#title {
     text-align: center;
 }
 
 .export-manager {
     padding: 20px;
     font-family: Arial, sans-serif;
+}
+
+.notify-box {
+    position: fixed;
+    top: 80px;
+    right: 30px;
+    z-index: 9999;
+}
+
+.alert {
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    color: white;
+    background-color: #2ecc71;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    transition: opacity 0.6s ease;
 }
 
 #export-search {
@@ -145,7 +163,7 @@
 }
 
 .status.pending {
-  color: #c2bd1f;
+    color: #c2bd1f;
     border: 1px solid #c3c608;
 }
 

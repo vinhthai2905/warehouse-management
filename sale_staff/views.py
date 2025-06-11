@@ -2,6 +2,7 @@ from datetime import datetime
 from urllib.parse import urlencode
 
 from django.http import HttpResponse
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_POST
 
@@ -80,12 +81,13 @@ def export_detail(request):
             else 'Chưa xác định',
         'request_employee': request_employee.id_nhan_vien_yc.ten_nhan_vien,
         'export_employee': export_employee.id_nhan_vien_xuat.ten_nhan_vien if export_employee else 'Chưa xác định',
-        'status': request.GET.get('status')
+        'status': request.GET.get('status'),
     }
     for i, product in enumerate(export_products):
         product: ChiTietYeuCauXuat
 
         export_product_dict.append({
+            'id': product.id_san_pham_id,
             'name': product.id_san_pham.ten_san_pham,
             'quantity': product.so_luong,
             'real_quantity': product.so_luong_thuc,
@@ -108,7 +110,7 @@ def resend_export_request(request):
     resend_export.trang_thai = 'Hoá đơn lỗi'
 
     for product in resend_export_products:
-        product.so_luong_thuc = request.POST.get('real_quantity')
+        product.so_luong_thuc = request.POST.get(f'real_quantity_{product.id_san_pham_id}')
         product.save()
 
     resend_export.save()
@@ -121,7 +123,8 @@ def resend_export_request(request):
         'export_date': resend_export.thoi_gian_xuat or 'None',
     })
 
-    return redirect(f'/product-management/export/details?{query_params}')
+    messages.success(request, f'Gửi yêu cầu duyệt lại hóa đơn {request_id} thành công!')
+    return redirect('export-request')
 
 @require_POST
 def export_confirm(request):
@@ -150,4 +153,5 @@ def export_confirm(request):
     request_record.thoi_gian_xuat = datetime.now()
     request_record.save()
 
+    messages.success(request, f'Đã xuất hóa đơn {request_id} thành công!')
     return redirect('export-request')
