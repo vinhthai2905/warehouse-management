@@ -47,11 +47,14 @@
                         <td>{{ product.name }}</td>
                         <td class="quantity">{{ product.quantity }}</td>
                         <td>
-                            {% if export_info.status != 'Đã xuất' %}
+                            {% if export_info.status == 'Đã xuất' %}
+                                <span class="real-quantity">{{ product.real_quantity }}</span>
+                            {% elif export_info.status == 'Chờ duyệt' %}
+                                <input type="number" class="real-quantity" name="real_quantity"
+                                       value="{{ product.real_quantity }}" min="0" disabled/>
+                            {% else %}
                                 <input type="number" class="real-quantity" name="real_quantity"
                                        value="{{ product.real_quantity }}" min="0"/>
-                            {% else %}
-                                <span class="real-quantity">{{ product.real_quantity }}</span>
                             {% endif %}
                         </td>
                         <td>{{ product.note }}</td>
@@ -67,7 +70,11 @@
             <button type="submit" class="btn btn-back">Quay lại</button>
         </form>
 
-        {% if export_info.status != 'Đã xuất' %}
+        {% if export_info.status == 'Đã xuất' %}
+            <button class="btn btn-confirm" disabled style="cursor: not-allowed; opacity: 0.5;">
+                Đã xác nhận
+            </button>
+        {% elif export_info.status != 'Chờ duyệt' %}
             <form action="{% url 'export-confirm' %}" method="post"
                   onsubmit="return confirm('Bạn có chắc chắn muốn xác nhận đã nhận đủ?');">
                 {% csrf_token %}
@@ -80,10 +87,6 @@
 
             <button type="submit" form="real-quantity-form" class="btn btn-resend" id="resend-request-button">
                 Gửi lại yêu cầu
-            </button>
-        {% else %}
-            <button class="btn btn-confirm" disabled style="cursor: not-allowed; opacity: 0.5;">
-                Đã xác nhận
             </button>
         {% endif %}
     </section>
