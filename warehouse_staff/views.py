@@ -1,4 +1,6 @@
 from datetime import datetime
+
+from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_POST
@@ -100,4 +102,5 @@ def export_review(request):
     request_record.thoi_gian_duyet = datetime.now()
     request_record.save()
 
+    messages.success(request, f'Đã duyệt hóa đơn thành công (ID: {request_id})')
     return redirect('warehouse-staff/export-request')
