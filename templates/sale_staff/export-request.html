@@ -37,7 +37,7 @@
                         <td>{{ e.request_employee }}</td>
                         <td>
                     <span class="status
-                        {% if e.status == 'Chưa duyệt' %}pending
+                        {% if e.status == 'Chờ duyệt' %}pending
                         {% elif e.status == 'Đã duyệt' %}approved
                         {% elif e.status == 'Đã xuất' %}exported
                         {% endif %}">
@@ -69,7 +69,7 @@
                 </thead>
                 <tbody>
                 {% for e in export_request_dict %}
-                    {% if e.status == 'Chưa duyệt' %}
+                    {% if e.status == 'Chờ duyệt' %}
                         <tr>
                             <td>{{ forloop.counter }}</td>
                             <td>{{ e.id }}</td>
