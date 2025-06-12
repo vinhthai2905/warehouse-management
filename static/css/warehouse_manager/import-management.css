@@ -95,8 +95,8 @@
 
 /* badge “Chưa duyệt” */
 .status.pending {
-  color: #D85C35;            /* chữ cam */
-  border: 1px solid #D85C35; /* viền cam */
+   color: #c2bd1f;
+    border: 1px solid #c3c608;
 }
 
 /* badge “Đã duyệt” (nếu có) */

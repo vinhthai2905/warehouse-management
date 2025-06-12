@@ -3,8 +3,14 @@
 }
 
 .export-receipt {
+    display: flex;
+    flex-direction: column;
     padding: 20px;
     font-family: Arial, sans-serif;
+}
+
+.export-receipt .updated-table {
+    margin-top: 25px;
 }
 
 /*receipt-info*/
@@ -26,6 +32,7 @@
 }
 
 /*receipt-products*/
+
 
 .req-table {
     width: 100%;
@@ -57,8 +64,8 @@
 }
 
 .status.pending {
-    color: #D85C35;
-    border: 1px solid #D85C35;
+    color: #c2bd1f;
+    border: 1px solid #c3c608;
 }
 
 .status.approved {
@@ -73,6 +80,14 @@
     border-radius: 4px;
 }
 
+.status.error {
+    color: #ff4d4d;
+    border: 1px solid #ff4d4d;
+    background-color: #ffecec;
+    padding: 6px 12px;
+    border-radius: 20px;
+}
+
 .real-quantity {
     width: 60px !important;
     height: 28px;
@@ -82,6 +97,7 @@
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+
 
 /*button-access*/
 
@@ -135,3 +151,4 @@
     background-color: #28a745;
     color: white;
 }
+

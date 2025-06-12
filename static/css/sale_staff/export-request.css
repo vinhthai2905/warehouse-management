@@ -1,6 +1,75 @@
+#title {
+    text-align: center;
+}
+
 .export-manager {
     padding: 20px;
     font-family: Arial, sans-serif;
+}
+
+.notify-box {
+    position: fixed;
+    top: 80px;
+    right: 30px;
+    z-index: 9999;
+}
+
+.alert {
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    color: white;
+    background-color: #2ecc71;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    transition: opacity 0.6s ease;
+}
+
+#export-search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+}
+
+.search-input-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 50vw;
+    min-width: 300px;
+}
+
+.search-input-wrapper input[type='text'] {
+    width: 100%;
+    padding: 8px 44px 8px 14px;
+    border: 1.5px solid #ccc;
+    border-radius: 25px;
+    font-size: 16px;
+    transition: border-color 0.2s;
+}
+
+.search-btn {
+    position: absolute;
+    right: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.search-btn .icon {
+    font-size: 18px;
+    color: #333;
+}
+
+.search-btn:active .icon,
+.search-btn:focus .icon {
+    color: #0071e3;
 }
 
 .status-tabs {
@@ -76,6 +145,12 @@
     background: #F9F9F9;
 }
 
+.req-table tbody tr:hover {
+    background-color: #e0f0ff; /* màu xanh nhạt khi hover */
+    cursor: pointer; /* đổi con trỏ chuột */
+    transition: background-color 0.2s ease-in-out;
+}
+
 .status {
     display: inline-block;
     font-size: 14px;
@@ -88,13 +163,18 @@
 }
 
 .status.pending {
-    color: #D85C35;
-    border: 1px solid #D85C35;
+    color: #c2bd1f;
+    border: 1px solid #c3c608;
 }
 
 .status.approved {
     color: #2DB94D;
     border: 1px solid #2DB94D;
+}
+
+.status.error {
+    color: #ff4d4d;
+    border: 1px solid #ff4d4d;
 }
 
 .status.exported {
