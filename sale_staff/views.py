@@ -38,6 +38,12 @@ def home(request):
 def product_info(request):
     return render(request, 'sale_staff/product-info.html')
 
+def create_request(request):
+    return render(request, 'sale_staff/create-request.html')
+
+def import_management(request):
+    return render(request, 'sale_staff/import-management.html')
+
 
 def inventory_management(request):
     return render(request, 'sale_staff/inventory-management.html')

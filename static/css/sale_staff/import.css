@@ -1,0 +1,275 @@
+/* =========================
+   Biến màu dùng chung
+   ========================= */
+:root {
+  --color-primary: rgba(14, 89, 152, 0.8);    /* Teal */
+  --color-secondary: #e0f2f1;  /* Light teal */
+  --color-accent: #007bff;     /* Blue */
+  --color-success: #4674a3;    /* Green */
+  --color-white: #ffffff;
+  --color-gray-light: #f8f9fa;
+  --color-gray: #ced4da;
+  --text-color: #333333;
+}
+
+/* =========================
+   Wrapper chính
+   ========================= */
+.import-request {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background: var(--color-secondary);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+  color: var(--text-color);
+}
+
+/* =========================
+   Header + Tabs
+   ========================= */
+.import-header {
+  display: flex;
+  align-items: center;
+}
+
+.import-header h1 {
+  margin: 0;
+  padding: 10px 20px;
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-size: 24px;
+  border-radius: 4px 0 0 4px;
+}
+
+.import-tabs {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.import-tabs li {
+  padding: 10px 20px;
+  background: var(--color-gray-light);
+  color: var(--text-color);
+  cursor: pointer;
+  border-radius: 0 4px 4px 0;
+  margin-left: -1px;
+  user-select: none;
+}
+
+.import-tabs li.active {
+  background: var(--color-white);
+  font-weight: bold;
+}
+
+/* =========================
+   Body chung
+   ========================= */
+.import-body {
+  margin-top: 20px;
+}
+
+/* =========================
+   Thanh tìm kiếm hóa đơn
+   ========================= */
+.search-invoice {
+  display: flex;
+  align-items: center;
+  background: var(--color-white);
+  padding: 15px;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.search-invoice label {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.search-invoice input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid var(--color-gray);
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.btn-search {
+  padding: 8px 16px;
+  border: none;
+  background: var(--color-accent);
+  color: var(--color-white);
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-search:hover {
+  opacity: 0.9;
+}
+
+/* =========================
+   Section “HÀNG ĐỀ XUẤT” và “YÊU CẦU TRẢ HÀNG”
+   ========================= */
+.section-offer,
+.section-return {
+  background: var(--color-white);
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.section-offer h2,
+.section-return h2 {
+  margin: 0 0 15px;
+  padding: 10px;
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-size: 20px;
+  border-radius: 4px;
+}
+/* =========================
+   Metadata hàng xuất / trả (Grid 2 cột)
+   ========================= */
+.section-offer .offer-meta,
+.section-return .return-meta {
+  display: grid;
+  /* 2 cột đều nhau */
+  grid-template-columns: 1fr 1fr;
+  /* khoảng cách giữa cột và giữa dòng */
+  grid-column-gap: 2rem;
+  grid-row-gap: .5rem;
+  margin-bottom: 1.5rem;
+  /* padding trong để không sát lề */
+  padding: 0 1rem;
+}
+
+.section-offer .offer-meta span,
+.section-return .return-meta .meta-item {
+  /* đảm bảo không bị flex từ trước */
+  flex: none;
+  margin: 0;
+  font-size: .9rem;
+  color: var(--text-color);
+}
+
+.section-offer .offer-meta span strong,
+.section-return .return-meta .meta-item span {
+  font-weight: bold;
+}
+
+
+/* =========================
+   Chi tiết lỗi / upload ảnh
+   ========================= */
+.error-detail {
+  margin-bottom: 20px;
+}
+
+.error-detail label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.error-inputs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.error-inputs select {
+  padding: 8px;
+  border: 1px solid var(--color-gray);
+  border-radius: 4px;
+  flex: 1;
+}
+
+.file-upload {
+  width: 40px;
+  height: 40px;
+  border: 1px dashed var(--color-gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.file-upload i {
+  font-size: 18px;
+  color: var(--color-accent);
+}
+
+.btn-add {
+  padding: 8px 12px;
+  border: none;
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-add:hover {
+  opacity: 0.9;
+}
+
+/* =========================
+   Bảng dữ liệu chung
+   ========================= */
+.req-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.req-table th,
+.req-table td {
+  padding: 10px;
+  border: 1px solid var(--color-gray);
+  text-align: center;
+}
+
+.req-table thead {
+  background: var(--color-gray-light);
+}
+
+.req-table tbody tr:nth-child(even) {
+  background: var(--color-gray-light);
+}
+
+/* =========================
+   Nút hành động
+   ========================= */
+.btn-return-request,
+.btn-submit-request {
+  display: block;
+  margin: 0 auto;
+  padding: 10px 20px;
+  border: none;
+  background: var(--color-success);
+  color: var(--color-white);
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-return-request:hover,
+.btn-submit-request:hover {
+  opacity: 0.9;
+}
+
+/* =========================
+   Responsive (nếu cần)
+   ========================= */
+@media (max-width: 768px) {
+  .offer-meta,
+  .return-meta {
+    flex-direction: column;
+  }
+}
+.hidden { display: none; }

@@ -3,6 +3,7 @@
 
 {% block link %}
     <link rel="stylesheet" href="{% static 'css/sale_staff/export-request.css' %}">
+
 {% endblock %}
 
 {% block main-content %}
@@ -26,6 +27,7 @@
 
 
         <div id="all" class="status-panel">
+            <p class="empty-note">Hiện không có yêu cầu nào.</p>
             <table class="req-table">
                 <thead>
                 <tr>
@@ -65,6 +67,7 @@
         </div>
 
         <div id="pending" class="status-panel hidden">
+            <p class="empty-note">Hiện không có yêu cầu chờ duyệt nào.</p>
             <table class="req-table">
                 <thead>
                 <tr>
@@ -95,6 +98,7 @@
         </div>
 
         <div id="approved" class="status-panel hidden">
+            <p class="empty-note">Hiện không có yêu cầu nào mà bạn đã duyệt.</p>
             <table class="req-table">
                 <thead>
                 <tr>
@@ -125,6 +129,7 @@
         </div>
 
         <div id="exported" class="status-panel hidden">
+            <p class="empty-note">Hiện không có yêu cầu nào đã xuất .</p>
             <table class="req-table">
                 <thead>
                 <tr>
@@ -156,7 +161,7 @@
 
     </div>
 
-    <script>
+    {% comment %} <script>
         document.querySelectorAll('.status-tab').forEach(tab => {
             tab.addEventListener('click', () => {
                 document.querySelectorAll('.status-tab').forEach(t => t.classList.remove('active'));
@@ -183,7 +188,45 @@
         window.addEventListener('DOMContentLoaded', () => {
             document.querySelector('.status-tab.active')?.click();
         });
-    </script>
+    </script> {% endcomment %}
+ <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const tabs   = document.querySelectorAll('.status-tab');
+      const panels = document.querySelectorAll('.status-panel');
+
+      function showPanel(id) {
+        panels.forEach(p => {
+          const rows  = p.querySelectorAll('tbody tr');
+          const tbl   = p.querySelector('table.req-table');
+          const note  = p.querySelector('p.empty-note');
+
+          if (p.id === id) {
+            p.classList.remove('hidden');
+            if (rows.length === 0) {
+              tbl  && (tbl.style.display  = 'none');
+              note && (note.style.display = 'block');
+            } else {
+              tbl  && (tbl.style.display  = 'table');
+              note && (note.style.display = 'none');
+            }
+          } else {
+            p.classList.add('hidden');
+          }
+        });
+      }
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          showPanel(tab.dataset.target);
+        });
+      });
+
+      // Khởi động tab "all" ngay khi load
+      showPanel(document.querySelector('.status-tab.active').dataset.target);
+    });
+  </script>
 
     <script>
         window.addEventListener('DOMContentLoaded', () => {

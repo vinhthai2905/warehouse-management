@@ -1,0 +1,121 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'css/sale_staff/create-request.css' %}">
+{% endblock %}
+
+{% block main-content %}
+
+  <div class="cr-header">
+    <button id="btn-create-request" class="btn-create">+ Tạo mới yêu cầu</button>
+  </div>
+
+  <div id="create-form" class="create-form hidden">
+    <!-- Thông tin chung -->
+    <div class="form-header">
+      <div class="form-row">
+        <label>Ngày xuất</label>
+        <input type="date" />
+      </div>
+      <div class="form-row">
+        <label>Thời gian</label>
+        <input type="time" />
+      </div>
+      <div class="form-row">
+        <label>Họ tên khách hàng</label>
+        <input type="text" value="Lê Thị Huyền Trang" />
+      </div>
+      <div class="form-row">
+        <label>Nhân viên</label>
+        <input type="text" value="Nguyễn Văn C" />
+      </div>
+      <div class="form-row">
+        <label>Số điện thoại</label>
+        <input type="text" value="0945634809" />
+      </div>
+    </div>
+
+    <!-- Bộ lọc sản phẩm -->
+    <div class="filter-inline">
+      <select>
+        <option value="">Mã hàng</option>
+      </select>
+      <select>
+        <option value="">Tên sản phẩm</option>
+      </select>
+      <select>
+        <option value="">Màu sắc</option>
+      </select>
+      <input type="number" placeholder="Số lượng" />
+      <button id="btn-add-item" class="btn-add-item">+</button>
+    </div>
+
+    <!-- Bảng các mặt hàng -->
+    <table class="item-table">
+      <thead>
+        <tr>
+          <th>STT</th>
+          <th>Mã hàng</th>
+          <th>Tên sản phẩm</th>
+          <th>Mô tả</th>
+          <th>Số lượng</th>
+          <th>Đơn vị</th>
+          <th>Đơn giá</th>
+          <th>Thành tiền</th>
+          <th>Thao tác</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>SP01</td>
+          <td>Laptop Asus VivoBook</td>
+          <td>4FANKF869</td>
+          <td>1</td>
+          <td>Máy</td>
+          <td>15.300.000 đ</td>
+          <td>15.300.000 đ</td>
+          <td>
+            <button class="btn-edit">✎</button>
+            <button class="btn-delete">🗑</button>
+          </td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>SP02</td>
+          <td>Chuột</td>
+          <td>Chuột bluetooth</td>
+          <td>1</td>
+          <td>Cái</td>
+          <td>300.000 đ</td>
+          <td>300.000 đ</td>
+          <td>
+            <button class="btn-edit">✎</button>
+            <button class="btn-delete">🗑</button>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="7">Tổng</td>
+          <td>2</td>
+          <td>15.600.000 đ</td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <button id="btn-confirm" class="btn-confirm">Gửi yêu cầu</button>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const btn = document.getElementById('btn-create-request');
+      const form = document.getElementById('create-form');
+      btn.addEventListener('click', () => {
+        form.classList.toggle('hidden');
+      });
+    });
+  </script>
+
+{% endblock %}
