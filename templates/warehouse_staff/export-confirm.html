@@ -240,11 +240,21 @@
 
                 const targetPanel = document.getElementById(btn.dataset.target);
                 targetPanel.classList.remove('hidden');
+
                 void targetPanel.offsetWidth;
+
                 targetPanel.style.animation = 'fadeIn 0.4s ease forwards';
             });
         });
+        document.querySelectorAll('.req-table .status').forEach(el => {
+            const t = el.textContent.trim();
+            if (t === 'Chờ duyệt') el.classList.add('pending');
+            else if (t === 'Đã xét') el.classList.add('approved');
+            else if (t === 'Đã xuất') el.classList.add('exported');
+        });
+
     </script>
+
 
     <script>
         window.addEventListener('DOMContentLoaded', () => {

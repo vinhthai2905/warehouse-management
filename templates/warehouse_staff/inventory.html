@@ -1,63 +1,88 @@
 {% extends 'main.html' %}
+{% load static %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'css/warehouse_staff/inventory.css' %}">
+{% endblock link %}
 
 {% block main-content %}
-<div class="export-management">
-    <h2>Yêu Cầu Nhập Hàng</h2>
-    <form>
-        <div class="form-group">
-            <label for="export-date">Ngày xuất:</label>
-            <input type="date" id="export-date" name="export-date">
+    <div class="export-manager">
+        <h2 id="title">Xác Nhận Nhập Hàng</h2>
+
+        <div id="export-search">
+            <div class="search-input-wrapper">
+                <input type="text" id="search-bar-input" placeholder="Tìm kiếm.....">
+                <button type="submit" class="search-btn">
+                    <span class="icon"><i class="fas fa-search"></i></span>
+                </button>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="customer-name">Họ tên khách hàng:</label>
-            <input type="text" id="customer-name" name="customer-name">
+
+        <div class="status-tabs">
+            <span class="status-tab active" data-target="all">Tất cả</span>
+            <span class="status-tab" data-target="received">Đã nhập</span>
+            <span class="status-tab" data-target="pending">Chờ nhập</span>
         </div>
-        <div class="form-group">
-            <label for="phone-number">Số điện thoại:</label>
-            <input type="text" id="phone-number" name="phone-number">
-        </div>
-        <div class="form-group">
-            <label for="staff-name">Nhân viên:</label>
-            <input type="text" id="staff-name" name="staff-name">
-        </div>
-        <h3>Hàng Cần Xuất</h3>
-        <table>
-            <thead>
+
+        <div id="all" class="status-panel">
+            <table class="req-table">
+                <thead>
                 <tr>
                     <th>STT</th>
-                    <th>Mã hàng</th>
-                    <th>Tên sản phẩm</th>
-                    <th>Mô tả</th>
-                    <th>Số lượng</th>
-                    <th>Đơn vị</th>
-                    <th>Đơn giá</th>
-                    <th>Thành tiền</th>
+                    <th>Mã phiếu</th>
+                    <th>Ngày nhập</th>
+                    <th>Nhân viên</th>
+                    <th>Tổng SL</th>
+                    <th>Tổng tiền</th>
+                    <th>Trạng thái</th>
+                    <th>Chi tiết</th>
                 </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>SP01</td>
-                    <td>Laptop Asus Vivobook</td>
-                    <td>Laptop Asus Vivobook 15</td>
-                    <td>1</td>
-                    <td>Máy</td>
-                    <td>13,200,000</td>
-                    <td>13,200,000</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>SP02</td>
-                    <td>Chuột</td>
-                    <td>Chuột Bluetooth</td>
-                    <td>1</td>
-                    <td>Cái</td>
-                    <td>200,000</td>
-                    <td>200,000</td>
-                </tr>
-            </tbody>
-        </table>
-        <button type="submit">Xác nhận</button>
-    </form>
-</div>
+                </thead>
+                <tbody>
+                {% for i in "123456789ABC" %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>PN00{{ forloop.counter }}</td>
+                        <td>13:00 10/06/2025</td>
+                        <td>Lê Thị Nhật Linh</td>
+                        <td>450</td>
+                        <td>6,720,000,000</td>
+                        <td><span
+                                class="status {% if forloop.counter|divisibleby:2 %}approved{% else %}pending{% endif %}">
+            {% if forloop.counter|divisibleby:2 %}Đã nhập{% else %}Chờ nhập{% endif %}</span>
+                        </td>
+                        <td><a class="detail-link" href="#">Xem chi tiết</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div id="received" class="status-panel hidden">
+            <p class="empty-note">Đang hiển thị các phiếu nhập đã xác nhận</p>
+        </div>
+
+        <div id="pending" class="status-panel hidden">
+            <p class="empty-note">Đang hiển thị phiếu chưa nhập</p>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.status-tab').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.status-tab').forEach(t => t.classList.remove('active'));
+                btn.classList.add('active');
+
+                document.querySelectorAll('.status-panel').forEach(p => {
+                    p.classList.add('hidden');
+                    p.style.animation = 'none';
+                });
+
+                const targetPanel = document.getElementById(btn.dataset.target);
+                targetPanel.classList.remove('hidden');
+                void targetPanel.offsetWidth;
+                targetPanel.style.animation = 'fadeIn 0.4s ease forwards';
+            });
+        });
+    </script>
 {% endblock main-content %}
