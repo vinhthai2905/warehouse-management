@@ -11,6 +11,8 @@ urlpatterns = [
     path('export/review', views.export_review, name='warehouse-staff/export-review'),
     path('defective/', views.defective_products, name='warehouse-staff/defective-products'),
     path('location-products/', views.location_products, name='warehouse-staff/location-products'),
+    path('inbound-goods/', views.inbound_goods, name='warehouse-staff/inbound-goods'),
+    path('returned-products/', views.returned_products, name='warehouse-staff/returned-products'),
 
 
 ]

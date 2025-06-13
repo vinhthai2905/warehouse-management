@@ -1,0 +1,118 @@
+/* returned-products.css */
+
+/* Container tổng */
+.returned-container {
+  padding: 20px;
+  background-color: #aedbe1;    /* nền xanh nhạt cho toàn page */
+}
+
+/* ======= Panel chi tiết trả hàng ======= */
+.detail-panel {
+  display: none;                /* ẩn mặc định */
+  background-color: #ffffff;
+  border: 1px solid #5aa2b3;    /* viền xanh đậm */
+  border-radius: 4px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+/* Header trong detail */
+.detail-header {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: auto;
+  column-gap: 20px;
+  row-gap: 8px;
+  margin-bottom: 16px;
+}
+.detail-header div {
+  font-size: 14px;
+  color: #333;
+}
+.detail-header div strong {
+  color: #004d54;
+}
+
+
+/* Bảng chi tiết */
+.detail-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+}
+.detail-table th,
+.detail-table td {
+  border: 1px solid #cfdde1;
+  padding: 8px 10px;
+  font-size: 13px;
+  text-align: center;
+}
+.detail-table thead th {
+  background-color: #e1f0f2;
+  font-weight: 600;
+}
+
+/* Ô nhập ghi chú */
+.note-input {
+  width: 100%;
+  padding: 4px 6px;
+  font-size: 13px;
+}
+
+/* Nút hành động trong detail */
+.detail-actions {
+  text-align: center;
+  margin-top: 14px;
+}
+.btn-confirm,
+.btn-back {
+  padding: 8px 18px;
+  border: none;
+  border-radius: 3px;
+  font-size: 14px;
+  cursor: pointer;
+  margin: 0 6px;
+}
+.btn-confirm {
+  background-color: #4caf50;
+  color: #ffffff;
+}
+.btn-back {
+  background-color: #757575;
+  color: #ffffff;
+}
+
+/* ======= Bảng summary ======= */
+.summary-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #e1f5f8;
+}
+.summary-table th,
+.summary-table td {
+  border: 1px solid #5aa2b3;
+  padding: 10px 12px;
+  text-align: center;
+  font-size: 14px;
+}
+.summary-table thead th {
+  background-color: #7da2a7;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Trạng thái chưa xác nhận */
+.status-pending {
+  color: #d32f2f;
+  font-weight: 500;
+}
+
+/* Link Xem chi tiết */
+.detail-link {
+  color: #1565c0;
+  text-decoration: none;
+  font-weight: 500;
+}
+.detail-link:hover {
+  text-decoration: underline;
+}
