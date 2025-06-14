@@ -23,7 +23,7 @@
         <section id="login-bar">
             {% include 'includes/warehouse_manager/login-bar.html' %}
         </section>
-    {% else %}
+    {% elif user_role == 'Admin' %}
         <section id="login-bar">
             {% include 'includes/warehouse_staff/login-bar.html' %}
         </section>
@@ -39,14 +39,16 @@
         <aside id="side-bar">
             {% include 'includes/warehouse_manager/side-bar.html' %}
         </aside>
-    {% else %}
+    {% elif user_role == 'Admin' %}
         <aside id="side-bar">
-            {% include 'includes/warehouse_staff/side-bar.html' %}
+            {% include 'includes/admin/side-bar.html' %}
         </aside>
     {% endif %}
 
     <section class="main-content">
-        {% block main-content %}{% endblock %}
+        {% block main-content %}
+
+        {% endblock %}
     </section>
 </main>
 
@@ -87,5 +89,6 @@
         });
     });
 </script>
+
 </body>
 </html>
