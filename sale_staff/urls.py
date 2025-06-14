@@ -10,6 +10,8 @@ urlpatterns = [
     path('export/details', views.export_detail, name='export-detail'),
     path('export/details/resend', views.resend_export_request, name='resend-export-request'),
     path('export/confirm', views.export_confirm, name='export-confirm'),
-    path('export-status', views.export_request_status)
+    path('export-status', views.export_request_status),
+    path('create-request', views.create_request, name='create-request'),
+    path('import-management', views.import_management, name='import-management')
 
 ]

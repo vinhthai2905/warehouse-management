@@ -1,0 +1,135 @@
+/* Ẩn form mặc định */
+.hidden {
+  display: none;
+}
+
+/* Nút tạo yêu cầu */
+.btn-create {
+  float: right;
+  background: #2952ff;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Khối form */
+.create-form {
+  margin-top: 50px;
+  background: #e0e0e0;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+/* Header form (date/time/khách hàng) */
+
+/* Bộ lọc inline */
+.filter-inline {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  background: #3ba1a6;
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+.filter-inline select,
+.filter-inline input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Nút thêm mặt hàng */
+.btn-add-item {
+  background: #2952ff;
+  color: #fff;
+  border: none;
+  padding: 0 12px;
+  height: 36px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Bảng items */
+.item-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  margin-bottom: 16px;
+}
+.item-table th,
+.item-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+  font-size: 14px;
+}
+.item-table th {
+  background: #6c7a89;
+  color: #fff;
+}
+.item-table tfoot td {
+  font-weight: bold;
+  text-align: right;
+}
+
+/* Nút edit/delete */
+.btn-edit,
+.btn-delete {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 0 4px;
+}
+
+/* Nút xác nhận */
+.btn-confirm {
+  display: block;
+  margin: 0 auto;
+  padding: 10px 24px;
+  background: #2eaf47;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+/* dành cho phần header form */
+.create-form .form-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;  /* 2 cột đều nhau */
+  column-gap: 24px;                /* khoảng giữa 2 cột */
+  row-gap: 12px;                   /* khoảng giữa các hàng */
+  background: #ddd;                /* màu nền xám nhạt như mockup */
+  padding: 16px 20px;              /* padding trong khu header */
+  border-radius: 4px 4px 0 0;      /* bo 2 góc trên */
+}
+
+/* mỗi ô chứa label + input */
+.create-form .form-header .form-row {
+  display: flex;
+  align-items: center;
+}
+
+/* label cố định chiều rộng */
+.create-form .form-header .form-row label {
+  flex: 0 0 140px;   /* bạn có thể chỉnh số px cho vừa ý */
+  font-weight: 600;
+  color: #333;
+}
+
+/* input chiếm phần còn lại */
+.create-form .form-header .form-row input {
+  flex: 1;
+  padding: 6px 8px;
+  border: 1px solid #999;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* nếu ô cuối cùng (hàng 3, cột 2) không có dữ liệu, bạn có thể để trống hoặc ẩn nó */
+.create-form .form-header .form-row.empty {
+  visibility: hidden;
+}

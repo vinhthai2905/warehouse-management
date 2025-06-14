@@ -1,0 +1,158 @@
+{# templates/warehouse_staff/returned-products.html #}
+{% extends 'main.html' %}
+{% load static %}
+
+{% block link %}
+  <link rel="stylesheet" href="{% static 'css/warehouse_staff/returned-products.css' %}">
+{% endblock %}
+
+{% block main-content %}
+<div class="returned-container">
+
+  {# ======= Detail panel HD01 ======= #}
+  <div id="detail-HD01" class="detail-panel" style="display: none;">
+    <div class="detail-header">
+      <span><strong>Mã hóa đơn:</strong> HD01</span>
+      <span><strong>Ngày trả hàng:</strong> 24/03/2025</span>
+      <span><strong>Tình trạng:</strong> Chưa xác nhận</span>
+      <span><strong>Lý do:</strong> Máy nhanh hỏng</span>
+      <span><strong>Thời gian:</strong> 16:30:45</span>
+    </div>
+    <form method="post">
+      {% csrf_token %}
+      <table class="detail-table">
+        <thead>
+          <tr>
+            <th>STT</th><th>MÃ HÀNG</th><th>TÊN SẢN PHẨM</th><th>LỖI</th>
+            <th>HÌNH ẢNH</th><th>TÌNH TRẠNG SẢN PHẨM</th><th>GHI CHÚ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td><td>SP01</td>
+            <td>Laptop Asus Vivobook E410</td>
+            <td>Máy nhanh hỏng</td>
+            <td><img src="{% static 'images/sploi1.jpg' %}" width="80" alt=""></td>
+            <td>Đã kiểm tra</td>
+            <td><input type="text" name="note_1" class="note-input" /></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="detail-actions">
+        <button type="submit" class="btn-confirm">Xác nhận</button>
+        <button type="button" class="btn-back" onclick="hideDetail('HD01')">Quay lại</button>
+      </div>
+    </form>
+  </div>
+
+  {# ======= Detail panel HD02 ======= #}
+  <div id="detail-HD02" class="detail-panel" style="display: none;">
+    <div class="detail-header">
+      <span><strong>Mã hóa đơn:</strong> HD02</span>
+      <span><strong>Ngày trả hàng:</strong> 25/03/2025</span>
+      <span><strong>Tình trạng:</strong> Chưa xác nhận</span>
+      <span><strong>Lý do:</strong> Nhanh hết pin</span>
+      <span><strong>Thời gian:</strong> 17:10:00</span>
+    </div>
+    <form method="post">
+      {% csrf_token %}
+      <table class="detail-table">
+        <thead>
+          <tr>
+            <th>STT</th><th>MÃ HÀNG</th><th>TÊN SẢN PHẨM</th><th>LỖI</th>
+            <th>HÌNH ẢNH</th><th>TÌNH TRẠNG SẢN PHẨM</th><th>GHI CHÚ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td><td>SP02</td>
+            <td>Dell Vostro 3530</td>
+            <td>Nhanh hết pin</td>
+            <td><img src="{% static 'images/sploi2.jpg' %}" width="80" alt=""></td>
+            <td>Chưa kiểm tra</td>
+            <td><input type="text" name="note_2" class="note-input" /></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="detail-actions">
+        <button type="submit" class="btn-confirm">Xác nhận</button>
+        <button type="button" class="btn-back" onclick="hideDetail('HD02')">Quay lại</button>
+      </div>
+    </form>
+  </div>
+
+  {# ======= Detail panel HD03 ======= #}
+  <div id="detail-HD03" class="detail-panel" style="display: none;">
+    <div class="detail-header">
+      <span><strong>Mã hóa đơn:</strong> HD03</span>
+      <span><strong>Ngày trả hàng:</strong> 25/03/2025</span>
+      <span><strong>Tình trạng:</strong> Chưa xác nhận</span>
+      <span><strong>Lý do:</strong> Màn hình ám vàng</span>
+      <span><strong>Thời gian:</strong> 18:45:30</span>
+    </div>
+    <form method="post">
+      {% csrf_token %}
+      <table class="detail-table">
+        <thead>
+          <tr>
+            <th>STT</th><th>MÃ HÀNG</th><th>TÊN SẢN PHẨM</th><th>LỖI</th>
+            <th>HÌNH ẢNH</th><th>TÌNH TRẠNG SẢN PHẨM</th><th>GHI CHÚ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td><td>SP03</td>
+            <td>HP Envy 13</td>
+            <td>Màn hình ám vàng</td>
+            <td><img src="{% static 'images/sploi3.jpg' %}" width="80" alt=""></td>
+            <td>Chưa kiểm tra</td>
+            <td><input type="text" name="note_3" class="note-input" /></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="detail-actions">
+        <button type="submit" class="btn-confirm">Xác nhận</button>
+        <button type="button" class="btn-back" onclick="hideDetail('HD03')">Quay lại</button>
+      </div>
+    </form>
+  </div>
+
+  {# ======= Summary table ======= #}
+  <table class="summary-table">
+    <thead>
+      <tr>
+        <th>MÃ HÓA ĐƠN</th><th>NGÀY TRẢ</th><th>LÝ DO</th><th>TÌNH TRẠNG</th><th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr id="row-HD01">
+        <td>HD01</td><td>24/03/2025</td><td>Máy nhanh hỏng</td>
+        <td class="status-pending">Chưa xác nhận</td>
+        <td><a href="javascript:void(0)" class="detail-link" onclick="showDetail('HD01')">Xem chi tiết</a></td>
+      </tr>
+      <tr id="row-HD02">
+        <td>HD02</td><td>25/03/2025</td><td>Nhanh hết pin</td>
+        <td class="status-pending">Chưa xác nhận</td>
+        <td><a href="javascript:void(0)" class="detail-link" onclick="showDetail('HD02')">Xem chi tiết</a></td>
+      </tr>
+      <tr id="row-HD03">
+        <td>HD03</td><td>25/03/2025</td><td>Màn hình ám vàng</td>
+        <td class="status-pending">Chưa xác nhận</td>
+        <td><a href="javascript:void(0)" class="detail-link" onclick="showDetail('HD03')">Xem chi tiết</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<script>
+  function showDetail(code) {
+    document.getElementById('row-' + code).style.display = 'none';
+    document.getElementById('detail-' + code).style.display = 'block';
+  }
+  function hideDetail(code) {
+    document.getElementById('detail-' + code).style.display = 'none';
+    document.getElementById('row-' + code).style.display = '';
+  }
+</script>
+{% endblock %}

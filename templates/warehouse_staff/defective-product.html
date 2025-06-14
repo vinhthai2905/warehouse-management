@@ -1,0 +1,108 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block link %}
+  <link rel="stylesheet" href="{% static 'css/warehouse_staff/defective-product.css' %}">
+{% endblock %}
+
+{% block main-content %}
+<div class="defective-product-container">
+  <div class="report-period">THÁNG 6</div>
+  <!-- Trường lọc: Ngày yêu cầu xuất và Lý do -->
+  <div class="filters">
+    <div class="filter-item">
+      <label for="request_date">Ngày yêu cầu xuất</label>
+      <div class="input-icon">
+        <input type="date" id="request_date" name="request_date" value="2024-03-15">
+        <i class="fas fa-calendar-alt"></i>
+      </div>
+    </div>
+    <div class="filter-item">
+      <label for="reason">Lý do</label>
+      <input type="text" id="reason" name="reason" placeholder="Lý do" value="Hàng lỗi kỹ thuật">
+    </div>
+  </div>
+
+  <!-- Tiêu đề bảng -->
+  <h2 class="table-title">HÀNG LỖI CẦN XUẤT</h2>
+
+  <!-- Bảng dữ liệu cố định -->
+  <table class="req-table">
+    <thead>
+      <tr>
+        <th>STT</th>
+        <th>Mã hàng</th>
+        <th>Tên sản phẩm</th>
+        <th>Mô tả</th>
+        <th>Số lượng</th>
+        <th>Đơn vị</th>
+        <th>Lỗi</th>
+        <th>Ngày phát hiện</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>SP01</td>
+        <td>Laptop Asus Vivobook</td>
+        <td>Laptop Asus Vivobook E410 4RAF/Intel® N4020/15.6" FHD/WIN11</td>
+        <td>1</td>
+        <td>Máy</td>
+        <td>Loạn</td>
+        <td>15/03/2024</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>SP02</td>
+        <td>Chuột bluetooth</td>
+        <td>Chuột bluetooth</td>
+        <td>1</td>
+        <td>Cái</td>
+        <td>Không kết nối</td>
+        <td>15/03/2024</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>SP03</td>
+        <td>Máy in Laser</td>
+        <td>Máy in Laser trắng đen Brother HL-2140, kết nối LAN và WiFi</td>
+        <td>1</td>
+        <td>Cái</td>
+        <td>Không kết nối</td>
+        <td>15/03/2024</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>SP04</td>
+        <td>Tai nghe Sony</td>
+        <td>Tai nghe Sony WH-1000XM4, bluetooth, chống ồn</td>
+        <td>1</td>
+        <td>Cái</td>
+        <td>Không kết nối</td>
+        <td>15/03/2024</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>SP05</td>
+        <td>Tai nghe Edifier</td>
+        <td>Tai nghe Edifier ESSD5N, Hifi Audio Wireless</td>
+        <td>1</td>
+        <td>Cái</td>
+        <td>Không kết nối</td>
+        <td>15/03/2024</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="7" class="text-right"><strong>Tổng</strong></td>
+        <td><strong>5</strong></td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <!-- Nút xác nhận -->
+  <div class="actions">
+    <button type="button" class="btn-confirm">Gửi yêu cầu</button>
+  </div>
+</div>
+{% endblock %}

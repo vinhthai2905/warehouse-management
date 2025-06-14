@@ -33,6 +33,18 @@ def inventory(request):
 def pro_location(request):
     return render(request, 'warehouse_staff/pro_location.html')
 
+def defective_products(request):
+    return render(request, 'warehouse_staff/defective-product.html')
+
+def location_products(request):
+    return render(request, 'warehouse_staff/location-product.html')
+
+def inbound_goods(request):
+    return render(request, 'warehouse_staff/inbound-goods.html')
+
+def returned_products(request):
+    return render(request, 'warehouse_staff/returned-products.html')
+
 
 def export_request(request):
     export_request_dict = list()

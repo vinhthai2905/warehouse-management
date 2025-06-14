@@ -228,23 +228,39 @@
     </div>
 
     <script>
-        document.querySelectorAll('.status-tab').forEach(btn => {
-            btn.addEventListener('click', () => {
+        document.querySelectorAll('.status-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
                 document.querySelectorAll('.status-tab').forEach(t => t.classList.remove('active'));
-                btn.classList.add('active');
+                tab.classList.add('active');
 
-                document.querySelectorAll('.status-panel').forEach(p => {
-                    p.classList.add('hidden');
-                    p.style.animation = 'none';
-                });
-
-                const targetPanel = document.getElementById(btn.dataset.target);
+                document.querySelectorAll('.status-panel').forEach(p => p.classList.add('hidden'));
+                const targetPanel = document.getElementById(tab.dataset.target);
                 targetPanel.classList.remove('hidden');
+
+                const rows = targetPanel.querySelectorAll('tbody tr');
+                const table = targetPanel.querySelector('table.req-table');
+                const note = targetPanel.querySelector('p.empty-note');
+
+                if (rows.length === 0) {
+                    if (table) table.style.display = 'none';
+                    if (note) note.style.display = 'block';
+                } else {
+                    if (table) table.style.display = 'table';
+                    if (note) note.style.display = 'none';
+                }
+
+                // Add fade-in animation
+                targetPanel.style.animation = 'none';
                 void targetPanel.offsetWidth;
                 targetPanel.style.animation = 'fadeIn 0.4s ease forwards';
             });
         });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('.status-tab.active')?.click();
+        });
     </script>
+
 
     <script>
         window.addEventListener('DOMContentLoaded', () => {

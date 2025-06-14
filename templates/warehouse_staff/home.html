@@ -1,11 +1,84 @@
-{% extends 'warehouse_staff/../main.html' %}
+{% extends 'main.html' %}
 {% load static %}
 
 {% block link %}
-    <link rel="stylesheet" href="{% static 'css/warehouse_staff/home.css' %}">
-{% endblock link %}
-
+  <link rel="stylesheet" href="{% static 'css/warehouse_staff/home.css' %}">
+{% endblock %}
 {% block main-content %}
-    <p>test</p>
-{% endblock main-content %}
+<div class="notification-container">
 
+  <p class="notification-greeting">
+    Xin chào bạn, sau đây là các thông báo gần đây nhất!!!
+  </p>
+
+  <div class="notification-list">
+    {% comment %}– hard-code 5 item –{% endcomment %}
+
+    <div class="notification-item">
+      <img class="notification-icon" src="{% static 'images/tbao.jpg' %}" alt="Thông báo">
+      <div class="notification-body">
+        <p class="notification-text">
+          Yêu cầu xuất hàng cho Khách hàng: chị Uyên đã được duyệt, hãy vào theo dõi đơn hàng
+        </p>
+        <div class="notification-footer">
+          <a href="#" class="notification-link">Xem chi tiết</a>
+          <span class="notification-date">Ngày 12/6/2025</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="notification-item">
+      <img class="notification-icon" src="{% static 'images/tbao.jpg' %}" alt="Thông báo">
+      <div class="notification-body">
+        <p class="notification-text">
+          Yêu cầu xuất hàng cho Khách hàng: anh Minh đang chờ duyệt, vui lòng kiểm tra
+        </p>
+        <div class="notification-footer">
+          <a href="#" class="notification-link">Xem chi tiết</a>
+          <span class="notification-date">Ngày 11/6/2025</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="notification-item">
+      <img class="notification-icon" src="{% static 'images/tbao.jpg' %}" alt="Thông báo">
+      <div class="notification-body">
+        <p class="notification-text">
+          Đơn hàng KH Thuỷ đã bị hủy, lý do: hết hàng
+        </p>
+        <div class="notification-footer">
+          <a href="#" class="notification-link">Xem chi tiết</a>
+          <span class="notification-date">Ngày 10/6/2025</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="notification-item">
+      <img class="notification-icon" src="{% static 'images/tbao.jpg' %}" alt="Thông báo">
+      <div class="notification-body">
+        <p class="notification-text">
+          Đơn hàng KH An đã giao thành công
+        </p>
+        <div class="notification-footer">
+          <a href="#" class="notification-link">Xem chi tiết</a>
+          <span class="notification-date">Ngày 9/6/2025</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="notification-item">
+      <img class="notification-icon" src="{% static 'images/tbao.jpg' %}" alt="Thông báo">
+      <div class="notification-body">
+        <p class="notification-text">
+          Đơn hàng KH Hải đang trong quá trình đóng gói
+        </p>
+        <div class="notification-footer">
+          <a href="#" class="notification-link">Xem chi tiết</a>
+          <span class="notification-date">Ngày 8/6/2025</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

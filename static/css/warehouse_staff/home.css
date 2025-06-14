@@ -1,83 +1,79 @@
-#product-title {
-    text-align: center;
+/* Bao ngoài */
+.notification-container {
+  max-width: 720px;
+  margin: 20px auto;
+  padding: 24px;
+  background: #f7fcff;
+  border-radius: 12px;
 }
 
-#product-create {
-    position: absolute;
-    top: 1em;
-    right: 1em;
+/* Dòng chào */
+.notification-greeting {
+  font-size: 18px;
+  margin-bottom: 16px;
+  color: #333;
 }
 
-
-#product-search {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 1em;
-    gap: 12px;
+/* Danh sách notifications */
+.notification-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.search-input-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-    width: 50vw;
-    min-width: 50%;
+/* Mỗi item: flex 2 cột (icon + nội dung) */
+.notification-item {
+  display: flex;
+  align-items: flex-start;
+  background: #fff;
+  border: 1px solid #d0e6ef;
+  border-radius: 8px;
+  padding: 12px 16px;
 }
 
-.search-input-wrapper input[type='text'] {
-    width: 100%;
-    padding: 8px 44px 8px 14px;
-    border: 1.5px solid #ccc;
-    border-radius: 25px;
-    font-size: 16px;
-    transition: border-color 0.2s;
+/* Icon bên trái */
+.notification-icon {
+  width: 80px;
+  height: auto;
+  margin-right: 16px;
+  flex-shrink: 0;
 }
 
-.search-input-wrapper input[type='text']:focus {
-    outline: none;
-    border-color: #0071e3;
+/* Phần chữ bên phải */
+.notification-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
-.search-btn {
-    position: absolute;
-    right: 8px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    height: 100%;
+/* Text thông báo */
+.notification-text {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+  line-height: 1.5;
 }
 
-.search-btn .icon {
-    font-size: 18px;
-    color: #333;
+/* Footer chứa link + date, đẩy ra hai đầu */
+.notification-footer {
+  margin-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.search-btn:active .icon,
-.search-btn:focus .icon {
-    color: #0071e3;
+/* Link Xem chi tiết */
+.notification-link {
+  font-size: 13px;
+  color: #1a73e8;
+  text-decoration: none;
+}
+.notification-link:hover {
+  text-decoration: underline;
 }
 
-/*table-content section*/
-
-table {
-    margin-top: 20px;
-    margin-inline: auto;
-    border: 1px solid black;
-    border-collapse: collapse;
+/* Ngày tháng */
+.notification-date {
+  font-size: 12px;
+  color: #888;
 }
-
-th {
-    background-color: #b5deff;
-}
-
-td, th {
-    text-align: center;
-    padding: 0.5em 1em;
-    border-bottom: 1px solid black;
-}
-
-

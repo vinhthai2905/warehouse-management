@@ -1,0 +1,50 @@
+/* css/warehouse_staff/Inbound-goods.css */
+
+/* Container */
+.inbound-container {
+  padding: 20px;
+  background: #e3f2fd;
+}
+
+/* Detail view */
+.detail-view {
+  background: #fff;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid #90caf9;
+  border-radius: 4px;
+}
+.detail-header h3 { margin-top: 0; }
+.detail-table {
+  width: 100%; border-collapse: collapse; margin-top: 10px;
+}
+.detail-table th, .detail-table td {
+  border: 1px solid #bbdefb; padding: 6px; font-size: 13px;
+}
+.detail-actions { text-align: center; margin-top: 12px; }
+.btn-confirm { background: #66bb6a; color: #fff; padding: 6px 14px; }
+.btn-back    { background: #78909c; color: #fff; padding: 6px 14px; }
+
+/* Summary table */
+.summary-table {
+  width: 100%; border-collapse: collapse; margin-top: 20px;
+}
+.summary-table th,
+.summary-table td {
+  border: 1px solid #90caf9;
+  padding: 8px 12px;
+  text-align: center;
+  background-color: #bbdefb;  /* mỗi ô nền xanh nhạt */
+  font-size: 14px;
+}
+.summary-table thead th {
+  background-color: #64b5f6;
+  font-weight: 600;
+}
+
+/* Status và link */
+.status-pending { color: #d32f2f; font-weight: 500; }
+.detail-link {
+  color: #1e88e5; text-decoration: none; font-weight: 500;
+}
+.detail-link:hover { text-decoration: underline; }
