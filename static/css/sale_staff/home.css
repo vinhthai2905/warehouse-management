@@ -1,0 +1,141 @@
+#title {
+    text-align: center;
+}
+
+.export-manager {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.status-tabs {
+    display: flex;
+    position: relative;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.status-tabs::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #E0E0E0;
+}
+
+.status-tab {
+    position: relative;
+    padding: 8px 0;
+    font-size: 14px;
+    color: #555;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.status-tab:hover {
+    color: #297ac1;
+}
+
+.status-tab.active {
+    color: #172a8e;
+    font-weight: bold;
+}
+
+.status-tab.active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 100%;
+    height: 3px;
+    background: #4a90d1;
+}
+
+.status-panel.hidden {
+    display: none;
+}
+
+.req-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.req-table thead {
+    background: #E6F0FF;
+}
+
+.req-table th,
+.req-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+    font-size: 14px;
+}
+
+.req-table tr:nth-child(even) {
+    background: #F9F9F9;
+}
+
+.req-table tbody tr:hover {
+    background-color: #e0f0ff;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.status {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1;
+    padding: 6px 12px;
+    border-radius: 20px;
+    background: #fff;
+    vertical-align: middle;
+}
+
+.status.pending {
+    color: #c2bd1f;
+    border: 1px solid #c3c608;
+}
+
+.status.approved {
+    color: #2DB94D;
+    border: 1px solid #2DB94D;
+}
+
+.status.error {
+    color: #ff4d4d;
+    border: 1px solid #ff4d4d;
+}
+
+.empty-note {
+    padding: 20px;
+    text-align: center;
+    color: #666;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.status-panel {
+    opacity: 0;
+    animation: fadeIn 0.4s ease forwards;
+    transition: opacity 0.3s ease;
+}
+
+.status-panel.hidden {
+    display: none;
+    opacity: 0 !important;
+}

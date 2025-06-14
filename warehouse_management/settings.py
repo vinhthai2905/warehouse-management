@@ -37,8 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    'warehouse.apps.WarehouseConfig'
+    'grappelli',
+    
+    'sale_staff.apps.SaleStaffConfig',
+    'warehouse_staff.apps.WarehouseStaffConfig',
+    'accounts.apps.AccountsConfig',
+    'warehouse_manager.apps.WarehouseManagerConfig',
 ]
 
 STATICFILES_DIRS = [
@@ -69,6 +73,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'sale_staff.context_processors.user_info'
             ],
         },
     },
@@ -82,8 +87,12 @@ WSGI_APPLICATION = 'warehouse_management.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'electronics_warehouse',
+        'USER': 'postgres',
+        'PASSWORD': 'root',
+        'HOST': 'localhost',
+        'PORT': '5433',
     }
 }
 
@@ -112,6 +121,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
+LOGIN_URL = '/login/'
+
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
@@ -123,10 +134,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    BASE_DIR / "static",  # Đường dẫn tới thư mục static
-]
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

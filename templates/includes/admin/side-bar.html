@@ -1,0 +1,18 @@
+{% load static %}
+<a href='{% url 'admin-home' %}' id="navbar-logo" class="logo">
+    Phi Long
+</a>
+
+<ul>
+  <li><a href="{% url 'admin-home' %}"><i class="fas fa-home icon"></i> Trang chủ</a></li>
+  <li class="has-submenu">
+    <div class="submenu-toggle">
+      <i class="fas fa-user-cog icon"></i> Quản lý tài khoản
+      <i class="fas fa-caret-down caret"></i>
+    </div>
+    <ul class="sub-menu">
+      <li><a href="{% url 'admin/employees' %}"><i class="fas fa-users icon"></i> Nhân viên</a></li>
+      <li><a href=""><i class="fas fa-id-card-alt icon"></i> Vai trò</a></li>
+    </ul>
+  </li>
+</ul>

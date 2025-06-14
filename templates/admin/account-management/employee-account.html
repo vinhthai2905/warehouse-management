@@ -1,0 +1,166 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'css/sale_staff/export-request.css' %}">
+{% endblock %}
+
+{% block main-content %}
+    <div class="export-manager">
+
+        <div class="status-tabs">
+            <span class="status-tab active" data-target="all">Tất cả</span>
+            <span class="status-tab" data-target="active">Đang hoạt động</span>
+            <span class="status-tab" data-target="locked">Bị khóa</span>
+        </div>
+
+        <!-- ALL -->
+        <div id="all" class="status-panel">
+            <p class="empty-note">Hiện không có tài khoản nào.</p>
+            <table class="req-table">
+                <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>ID Nhân viên</th>
+                    <th>Tên nhân viên</th>
+                    <th>Chức vụ</th>
+                    <th>Email</th>
+                    <th>Giới tính</th>
+                    <th>Trạng thái</th>
+                    <th>Chi tiết</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for acc in accounts_dict %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ acc.id }}</td>
+                        <td>{{ acc.name }}</td>
+                        <td>{{ acc.role }}</td>
+                        <td>{{ acc.email }}</td>
+                        <td>{{ acc.sex }}</td>
+                        <td>
+            <span class="status {% if acc.status == 'Hoạt động' %}approved{% else %}error{% endif %}">
+              {{ acc.status }}
+            </span>
+                        </td>
+                        <td>
+                            <a href="{% url 'admin/employee-info' %}?id={{ acc.id }}" class="detail-link">Chi tiết</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ACTIVE -->
+        <div id="active" class="status-panel hidden">
+            <p class="empty-note">Hiện không có tài khoản hoạt động.</p>
+            <table class="req-table">
+                <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>ID Nhân viên</th>
+                    <th>Tên nhân viên</th>
+                    <th>Chức vụ</th>
+                    <th>Email</th>
+                    <th>Giới tính</th>
+                    <th>Chi tiết</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for acc in accounts_dict %}
+                    {% if acc.status == 'Hoạt động' %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ acc.id }}</td>
+                            <td>{{ acc.name }}</td>
+                            <td>{{ acc.role }}</td>
+                            <td>{{ acc.email }}</td>
+                            <td>{{ acc.sex }}</td>
+                            <td>
+                                <a href="{% url 'admin/employee-info' %}?id={{ acc.id }}" class="detail-link">Chi
+                                    tiết</a>
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- LOCKED -->
+        <div id="locked" class="status-panel hidden">
+            <p class="empty-note">Hiện không có tài khoản bị khóa.</p>
+            <table class="req-table">
+                <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>ID Nhân viên</th>
+                    <th>Tên nhân viên</th>
+                    <th>Chức vụ</th>
+                    <th>Email</th>
+                    <th>Giới tính</th>
+                    <th>Chi tiết</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for acc in accounts_dict %}
+                    {% if acc.status != 'Hoạt động' %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ acc.id }}</td>
+                            <td>{{ acc.name }}</td>
+                            <td>{{ acc.role }}</td>
+                            <td>{{ acc.email }}</td>
+                            <td>{{ acc.sex }}</td>
+                            <td>
+                                <a href="{% url 'admin/employee-info' %}?id={{ acc.id }}" class="detail-link">Chi
+                                    tiết</a>
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.status-tab');
+            const panels = document.querySelectorAll('.status-panel');
+
+            function showPanel(id) {
+                panels.forEach(p => {
+                    const rows = p.querySelectorAll('tbody tr');
+                    const table = p.querySelector('table.req-table');
+                    const note = p.querySelector('p.empty-note');
+
+                    if (p.id === id) {
+                        p.classList.remove('hidden');
+                        if (rows.length === 0) {
+                            table && (table.style.display = 'none');
+                            note && (note.style.display = 'block');
+                        } else {
+                            table && (table.style.display = 'table');
+                            note && (note.style.display = 'none');
+                        }
+                    } else {
+                        p.classList.add('hidden');
+                    }
+                });
+            }
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    showPanel(tab.dataset.target);
+                });
+            });
+
+            showPanel(document.querySelector('.status-tab.active').dataset.target);
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,112 @@
+.card-container {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.stat-card {
+  flex: 1;
+  min-width: 200px;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  background: #f0f0f0;
+}
+
+.stat-card h3 {
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #333;
+}
+
+.stat-card .value {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.stat-card.total {
+  background: #E6F0FF;
+}
+
+.stat-card.approved {
+  background: #D9FBE6;
+}
+
+.stat-card.exported {
+  background: #C3F4FF;
+}
+
+.stat-card.canceled {
+  background: #FFE1E1;
+}
+
+.panel-title {
+  margin-bottom: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.req-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.req-table thead {
+  background: #E6F0FF;
+}
+
+.req-table th,
+.req-table td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: center;
+  font-size: 14px;
+}
+
+.req-table tr:nth-child(even) {
+  background: #F9F9F9;
+}
+
+.req-table tbody tr:hover {
+  background-color: #e0f0ff;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.status {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1;
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: #fff;
+  vertical-align: middle;
+}
+
+.status.pending {
+  color: #c2bd1f;
+  border: 1px solid #c3c608;
+}
+
+.status.approved {
+  color: #2DB94D;
+  border: 1px solid #2DB94D;
+}
+
+.status.error {
+  color: #ff4d4d;
+  border: 1px solid #ff4d4d;
+}
+
+.status.exported {
+  color: white;
+  background-color: #2ecc71;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+}

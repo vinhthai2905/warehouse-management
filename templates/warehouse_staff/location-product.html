@@ -1,0 +1,199 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block link %}
+  <link rel="stylesheet" href="{% static 'css/warehouse_staff/location-product.css' %}">
+{% endblock %}
+
+{% block main-content %}
+<div class="location-container">
+
+  <!-- Search bar -->
+  <div class="search-bar">
+    <input type="text" placeholder="Nhập tên sản phẩm">
+    <button class="btn-search">Tìm kiếm <i class="fas fa-search"></i></button>
+  </div>
+
+  <!-- Table -->
+  <table class="loc-table">
+    <thead>
+      <tr>
+        <th>Mã hàng</th><th>Tên sản phẩm</th><th>Mô tả</th><th>Vị trí lưu trữ</th><th>Số lượng</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td colspan="5">&nbsp;</td></tr>
+    </tbody>
+  </table>
+
+  <!-- Title -->
+  <h3 class="warehouse-title">
+    SƠ ĐỒ KHO HÀNG CÔNG TY TNHH CÔNG NGHỆ TIN HỌC PHI LONG
+  </h3>
+<div class="legend">
+  <div><span class="legend-box occupied"></span> Có hàng</div>
+  <div><span class="legend-box empty"></span> Trống</div>
+</div>
+  <!-- Floor 1 -->
+  <div class="floor">
+    <div class="room">
+      <h4>Phòng 101</h4>
+      <div class="grid">
+        <div class="cell occupied" data-room="101" data-pos="A1">A1</div>
+        <div class="cell occupied" data-room="101" data-pos="A2">A2</div>
+        <div class="cell occupied" data-room="101" data-pos="A3">A3</div>
+        <div class="cell occupied" data-room="101" data-pos="A4">A4</div>
+        <div class="cell occupied" data-room="101" data-pos="A5">A5</div>
+        <div class="cell occupied" data-room="101" data-pos="A6">A6</div>
+        <div class="cell occupied" data-room="101" data-pos="A7">A7</div>
+        <div class="cell occupied" data-room="101" data-pos="A8">A8</div>
+        <div class="cell occupied" data-room="101" data-pos="A9">A9</div>
+        <div class="cell occupied" data-room="101" data-pos="A10">A10</div>
+      </div>
+    </div>
+    <div class="room">
+      <h4>Phòng 102</h4>
+      <div class="grid">
+        <div class="cell empty" data-room="102" data-pos="B1">B1</div>
+        <div class="cell empty" data-room="102" data-pos="B2">B2</div>
+        <div class="cell empty" data-room="102" data-pos="B3">B3</div>
+        <div class="cell empty" data-room="102" data-pos="B4">B4</div>
+        <div class="cell empty" data-room="102" data-pos="B5">B5</div>
+        <div class="cell empty" data-room="102" data-pos="B6">B6</div>
+        <div class="cell empty" data-room="102" data-pos="B7">B7</div>
+        <div class="cell empty" data-room="102" data-pos="B8">B8</div>
+        <div class="cell empty" data-room="102" data-pos="B9">B9</div>
+        <div class="cell empty" data-room="102" data-pos="B10">B10</div>
+      </div>
+    </div>
+    <div class="room">
+      <h4>Phòng 103</h4>
+      <div class="grid">
+        <div class="cell occupied" data-room="103" data-pos="C1">C1</div>
+        <div class="cell occupied" data-room="103" data-pos="C2">C2</div>
+        <div class="cell occupied" data-room="103" data-pos="C3">C3</div>
+        <div class="cell occupied" data-room="103" data-pos="C4">C4</div>
+        <div class="cell empty"    data-room="103" data-pos="C5">C5</div>
+        <div class="cell empty"    data-room="103" data-pos="C6">C6</div>
+        <div class="cell empty"    data-room="103" data-pos="C7">C7</div>
+        <div class="cell empty"    data-room="103" data-pos="C8">C8</div>
+        <div class="cell empty"    data-room="103" data-pos="C9">C9</div>
+        <div class="cell empty"    data-room="103" data-pos="C10">C10</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floor 2 (ví dụ giống Floor 1) -->
+   <!-- Floor 2 -->
+  <div class="floor">
+    <!-- Phòng 201 -->
+    <div class="room">
+      <h4>Phòng 201</h4>
+      <div class="grid">
+        <div class="cell empty" data-room="201" data-pos="A1">A1</div>
+        <div class="cell empty" data-room="201" data-pos="A2">A2</div>
+        <div class="cell empty" data-room="201" data-pos="A3">A3</div>
+        <div class="cell empty" data-room="201" data-pos="A4">A4</div>
+        <div class="cell empty" data-room="201" data-pos="A5">A5</div>
+        <div class="cell empty" data-room="201" data-pos="A6">A6</div>
+        <div class="cell empty" data-room="201" data-pos="A7">A7</div>
+        <div class="cell empty" data-room="201" data-pos="A8">A8</div>
+        <div class="cell empty" data-room="201" data-pos="A9">A9</div>
+        <div class="cell empty" data-room="201" data-pos="A10">A10</div>
+      </div>
+    </div>
+
+    <!-- Phòng 202 -->
+    <div class="room">
+      <h4>Phòng 202</h4>
+      <div class="grid">
+        <div class="cell empty" data-room="202" data-pos="B1">B1</div>
+        <div class="cell empty" data-room="202" data-pos="B2">B2</div>
+        <div class="cell empty" data-room="202" data-pos="B3">B3</div>
+        <div class="cell empty" data-room="202" data-pos="B4">B4</div>
+        <div class="cell empty" data-room="202" data-pos="B5">B5</div>
+        <div class="cell empty" data-room="202" data-pos="B6">B6</div>
+        <div class="cell empty" data-room="202" data-pos="B7">B7</div>
+        <div class="cell empty" data-room="202" data-pos="B8">B8</div>
+        <div class="cell empty" data-room="202" data-pos="B9">B9</div>
+        <div class="cell empty" data-room="202" data-pos="B10">B10</div>
+      </div>
+    </div>
+
+    <!-- Phòng 203 -->
+    <div class="room">
+      <h4>Phòng 203</h4>
+      <div class="grid">
+        <div class="cell empty" data-room="203" data-pos="C1">C1</div>
+        <div class="cell empty" data-room="203" data-pos="C2">C2</div>
+        <div class="cell empty" data-room="203" data-pos="C3">C3</div>
+        <div class="cell empty" data-room="203" data-pos="C4">C4</div>
+        <div class="cell empty" data-room="203" data-pos="C5">C5</div>
+        <div class="cell empty" data-room="203" data-pos="C6">C6</div>
+        <div class="cell empty" data-room="203" data-pos="C7">C7</div>
+        <div class="cell empty" data-room="203" data-pos="C8">C8</div>
+        <div class="cell empty" data-room="203" data-pos="C9">C9</div>
+        <div class="cell empty" data-room="203" data-pos="C10">C10</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Form thêm sản phẩm -->
+  <div id="addForm" class="modal hidden">
+    <div class="modal-content">
+      <h4>Nhập thông tin sản phẩm</h4>
+      <form>
+        <p>Phòng: <span id="add-room"></span></p>
+        <p>Vị trí: <span id="add-pos"></span></p>
+        <label>Tên SP: <input type="text"></label>
+        <label>Mô tả: <textarea></textarea></label>
+        <label>Số lượng: <input type="number" min="1" value="1"></label>
+        <div class="modal-actions">
+          <button type="button" class="btn-add">Thêm</button>
+          <button type="button" class="btn-close">Đóng</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Form xem/ sửa sản phẩm -->
+  <div id="infoForm" class="modal hidden">
+    <div class="modal-content">
+      <h4>Thông tin sản phẩm</h4>
+      <p>Phòng: <span id="info-room"></span></p>
+      <p>Vị trí: <span id="info-pos"></span></p>
+      <p>Tên SP: <span id="info-name">Laptop Asus Vivobook</span></p>
+      <p>Mô tả: <span id="info-desc">Vivobook E410, 4GB RAM…</span></p>
+      <p>Số lượng: <span id="info-qty">2</span></p>
+      <div class="modal-actions">
+        <button type="button" class="btn-close">Đóng</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  document.querySelectorAll('.cell').forEach(cell => {
+    cell.addEventListener('click', () => {
+      const room = cell.dataset.room;
+      const pos  = cell.dataset.pos;
+      if (cell.classList.contains('empty')) {
+        document.getElementById('add-room').textContent = room;
+        document.getElementById('add-pos').textContent  = pos;
+        document.getElementById('addForm').classList.remove('hidden');
+      } else {
+        document.getElementById('info-room').textContent = room;
+        document.getElementById('info-pos').textContent  = pos;
+        document.getElementById('infoForm').classList.remove('hidden');
+      }
+    });
+  });
+  document.querySelectorAll('.btn-close').forEach(btn =>
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.modal').forEach(m => m.classList.add('hidden'));
+    })
+  );
+</script>
+{% endblock %}

@@ -1,0 +1,147 @@
+/* export-detail.css for warehouse_staff */
+
+#title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.export-receipt {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.info-card {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    margin-inline: auto;
+}
+
+.info-row {
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.req-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.req-table th,
+.req-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+    font-size: 14px;
+}
+
+.req-table td.note-cell {
+    text-align: left;
+    font-style: italic;
+    color: #444;
+    background-color: #fdfdfd;
+    max-width: 300px;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+.note-cell::before {
+    content: '📝 ';
+    opacity: 0.7;
+}
+
+.req-table thead {
+    background: #E6F0FF;
+}
+
+.status {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1;
+    padding: 6px 12px;
+    border-radius: 20px;
+    background: #fff;
+    vertical-align: middle;
+}
+
+.status.pending {
+    color: #c2bd1f;
+    border: 1px solid #c3c608;
+}
+
+.status.approved {
+    color: #2DB94D;
+    border: 1px solid #2DB94D;
+}
+
+.status.exported {
+    color: white;
+    background-color: #2ecc71;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.status.error {
+    color: #ff4d4d;
+    border: 1px solid #ff4d4d;
+    background-color: #ffecec;
+    padding: 6px 12px;
+    border-radius: 20px;
+}
+
+.button-group {
+    margin-top: 2em;
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border: none;
+    min-width: 160px;
+}
+
+.btn:hover {
+    cursor: pointer;
+}
+
+.btn-back {
+    background-color: #f7d700;
+    color: black;
+}
+
+.btn-back:hover {
+    background-color: #ffe300;
+}
+
+.btn-confirm {
+    background-color: #007aff;
+    color: white;
+}
+
+.btn-confirm:hover {
+    background-color: #005ecb;
+}
+
+.btn-resend {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.btn-resend:hover {
+    background-color: #28a745;
+    color: white;
+}

@@ -1,0 +1,193 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'css/sale_staff/export-detail.css' %}">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css'>
+{% endblock link %}
+
+{% block main-content %}
+    <h2 id="title">Chi tiết yêu cầu xuất hàng bán</h2>
+
+    <section class="export-receipt">
+        <!-- Info Card -->
+        <div class="info-card">
+            <div class="info-row"><strong>Thời gian yêu cầu:</strong> {{ export_info.request_date }}</div>
+            <div class="info-row"><strong>Thời gian duyệt:</strong> {{ export_info.review_date }}</div>
+            <div class="info-row"><strong>Thời gian xuất:</strong> {{ export_info.export_date }}</div>
+            <div class="info-row"><strong>Nhân viên yêu cầu:</strong> {{ export_info.request_employee }}</div>
+            <div class="info-row"><strong>Nhân viên xuất hàng:</strong> {{ export_info.export_employee }}</div>
+            <div class="info-row">
+                <strong>Trạng thái:</strong>
+                <span class="status
+                    {% if export_info.status == 'Chờ duyệt' %}pending
+                    {% elif export_info.status == 'Đã duyệt' %}approved
+                    {% elif export_info.status == 'Hoá đơn lỗi' %}error
+                    {% elif export_info.status == 'Đã xuất' %}exported
+                    {% endif %}">
+                    {{ export_info.status }}
+                </span>
+            </div>
+        </div>
+
+        <!-- Table Section -->
+        <div id="real-table">
+            <form id="real-quantity-form" method="post"
+                  action="{% url 'resend-export-request' %}?request_id={{ request.GET.request_id }}">
+                {% csrf_token %}
+                <input type="hidden" name="request_id" value="{{ request.GET.request_id }}">
+                <table class="req-table">
+                    <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Tên mặt hàng</th>
+                        <th>Số lượng</th>
+                        {% if export_info.status != 'Chờ duyệt' %}
+                            <th>Số lượng thực</th>
+                        {% endif %}
+                        <th>Ghi chú</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for product in export_product_dict %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ product.name }}</td>
+                            <td class="quantity">{{ product.quantity }}</td>
+                            {% if export_info.status != 'Chờ duyệt' %}
+                                <td>
+                                    {% if export_info.status == 'Đã xuất' %}
+                                        <span class="real-quantity">{{ product.real_quantity }}</span>
+                                    {% else %}
+                                        <input type="number" class="real-quantity"
+                                               name="real_quantity_{{ product.id }}"
+                                               value="{{ product.real_quantity }}" min="0"/>
+                                    {% endif %}
+                                </td>
+                            {% endif %}
+                            <td class="note-cell">{{ product.note }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </form>
+
+        </div>
+
+        <!--Updated Table Section -->
+        {% if export_info.status == 'Đã duyệt' and updated_products %}
+            <div class="updated-table">
+                <h3 id="update-table-title">Danh sách sản phẩm được cập nhật</h3>
+
+                <table class="req-table">
+                    <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Tên mặt hàng</th>
+                        <th>Số lượng cập nhật</th>
+                        <th>Ghi chú</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for product in updated_products %}
+                        {% if 'lack_quantity' in product.keys %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ product.name }}</td>
+                                <td>{{ product.lack_quantity }}</td>
+                                <td>Bổ sung {{ product.lack_quantity }} sản phẩm</td>
+                            </tr>
+                        {% elif 'redundant_quantity' in product.keys %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ product.name }}</td>
+                                <td>{{ product.redundant_quantity }}</td>
+                                <td>Thừa {{ product.redundant_quantity }} sản phẩm</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+
+    </section>
+
+    <section class="button-group">
+        <form action="{% url 'export-request' %}" method="get">
+            <button type="submit" class="btn btn-back">Quay lại</button>
+        </form>
+
+        {% if export_info.status == 'Đã xuất' %}
+            <button class="btn btn-confirm" disabled style="cursor: not-allowed; opacity: 0.5;">
+                Đã xác nhận
+            </button>
+        {% elif export_info.status != 'Chờ duyệt' %}
+            <form action="{% url 'export-confirm' %}" method="post"
+                  onsubmit="return confirm('Bạn có chắc chắn muốn xác nhận đã nhận đủ?');">
+                {% csrf_token %}
+                <input type="hidden" name="request_id" value="{{ request.GET.request_id }}">
+                <input type="hidden" id="confirmed_at" name="confirmed_at">
+                <input type="hidden" id="export_employee" name="export_employee"
+                       value="{{ request.session.user_id }}">
+                <button type="submit" class="btn btn-confirm">Xác nhận đã nhận đủ</button>
+            </form>
+
+            <button type="submit" form="real-quantity-form" class="btn btn-resend" id="resend-request-button">
+                Gửi lại yêu cầu
+            </button>
+        {% endif %}
+    </section>
+
+    <script>
+        function confirmProceed() {
+            const proceed = confirm('Bạn có chắc chắn muốn xác nhận đã nhận đủ?');
+            if (proceed) {
+                const now = new Date().toISOString();
+                document.getElementById('confirmed_at').value = now;
+                return true; // allow form submit
+            } else {
+                console.log('User cancelled confirmation.');
+                return false; // prevent form submit
+            }
+        }
+    </script>
+
+    <script>
+        function checkMismatch() {
+            const quantities = document.querySelectorAll('.quantity');
+            const realQuantities = document.querySelectorAll('.real-quantity');
+            const resendButton = document.getElementById('resend-request-button');
+
+            if (!resendButton || quantities.length !== realQuantities.length) return;
+
+            let mismatchFound = false;
+
+            for (let i = 0; i < quantities.length; i++) {
+                const expected = parseInt(quantities[i].innerText.trim(), 10);
+                const actual = parseInt(realQuantities[i].value.trim(), 10);
+
+                if (expected !== actual) {
+                    mismatchFound = true;
+                    break;
+                }
+            }
+
+            resendButton.disabled = !mismatchFound;
+            resendButton.style.cursor = mismatchFound ? 'pointer' : 'not-allowed';
+            resendButton.style.opacity = mismatchFound ? '1' : '0.5';
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            checkMismatch();
+
+            document.querySelectorAll('.real-quantity').forEach(input => {
+                input.addEventListener('input', checkMismatch);
+            });
+        });
+    </script>
+
+
+
+{% endblock main-content %}
+

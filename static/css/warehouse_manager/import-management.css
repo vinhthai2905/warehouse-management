@@ -1,0 +1,122 @@
+.import-manager {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* === TABS CONTAINER === */
+.status-tabs {
+  display: flex;
+  position: relative;
+  gap: 30px;
+  margin-bottom: 20px;
+}
+
+/* Đường ngang xám full-width dưới tất cả tabs */
+.status-tabs::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #E0E0E0;
+}
+
+/* === MỖI TAB === */
+.status-tab {
+  position: relative;
+  padding: 8px 0;           /* chỉ khoảng cách dọc */
+  font-size: 14px;
+  color: #555;
+  background: none;         /* bỏ background trắng */
+  border: none;             /* bỏ viền */
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+/* hover đổi màu chữ */
+.status-tab:hover {
+  color: #297ac1;
+}
+
+/* TAB ĐANG CHỌN (ACTIVE): chữ xanh + gạch chân xanh */
+.status-tab.active {
+  color: #172a8e;
+    font-weight: bold;        /* chữ đậm */
+}
+
+.status-tab.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;   /* đẩy lên chồng lên đường xám */
+  width: 100%;
+  height: 3px;    /* độ dày gạch chân active */
+  background: #4a90d1;
+}
+
+/* === PANEL ẨN / HIỆN === */
+.status-panel.hidden {
+  display: none;
+}
+
+/* === BẢNG CHUNG === */
+.req-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+.req-table thead {
+  background: #E6F0FF;
+}
+.req-table th,
+.req-table td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: center;
+  font-size: 14px;
+}
+.req-table tr:nth-child(even) {
+  background: #F9F9F9;
+}
+
+/* === BADGE TRẠNG THÁI === */
+/* chung cho mọi badge */
+.status {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1;            /* để padding dọc chính xác */
+  padding: 6px 12px;         /* tăng padding dọc & ngang */
+  border-radius: 20px;       /* pill shape */
+  background: #fff;          /* nền trắng */
+  vertical-align: middle;    /* canh giữa trong <td> */
+}
+
+/* badge “Chưa duyệt” */
+.status.pending {
+   color: #c2bd1f;
+    border: 1px solid #c3c608;
+}
+
+/* badge “Đã duyệt” (nếu có) */
+.status.approved {
+  color: #2DB94D;
+  border: 1px solid #2DB94D;
+}
+
+/* === LINK CHI TIẾT === */
+.detail-link {
+  color: #3C7BE4;
+  text-decoration: none;
+}
+.detail-link:hover {
+  text-decoration: underline;
+}
+
+/* === THÔNG BÁO EMPTY === */
+.empty-note {
+  padding: 20px;
+  text-align: center;
+  color: #666;
+}

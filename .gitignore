@@ -185,3 +185,5 @@ fabric.properties
 .idea
 
 .vscode
+
+postgres_data

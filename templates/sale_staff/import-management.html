@@ -1,0 +1,158 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block link %}
+  <link rel="stylesheet" href="{% static 'css/sale_staff/import.css' %}">
+{% endblock %}
+
+{% block main-content %}
+<div class="import-request">
+
+  <!-- Nội dung tab -->
+  <div class="import-body">
+
+    <!-- Tìm kiếm hóa đơn -->
+    <div class="search-invoice">
+      <label for="invoice_id">Tìm kiếm hóa đơn</label>
+      <input type="text" id="invoice_id" name="invoice_id" placeholder="0945634809" />
+      <button type="button" class="btn-search">Tìm kiếm</button>
+    </div>
+
+    <!-- HÀNG ĐỀ XUẤT -->
+
+        <section id="offerSection" class="section-offer hidden">
+      <h2>HÀNG ĐÃ XUẤT</h2>
+      <div class="offer-meta">
+        <span>Ngày xuất: <strong>05/04/2024</strong></span>
+        <span>Thời gian: <strong>9:45:37</strong></span>
+        <span>Họ tên khách hàng: <strong>Lê Thị Huyền Trang</strong></span>
+        <span>SĐT: <strong>0945634809</strong></span>
+        <span>Nhân viên bán: <strong>Nguyễn Văn C</strong></span>
+        <span>Mã hóa đơn: <strong>HD01</strong></span>
+      </div>
+      <table class="req-table">
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Mã hàng</th>
+            <th>Tên sản phẩm</th>
+            <th>Mã SP</th>
+            <th>Số lượng</th>
+            <th>Đơn vị</th>
+            <th>Đơn giá</th>
+            <th>Thành tiền</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>SP01</td>
+            <td>Laptop Asus Vivobook</td>
+            <td>NB01</td>
+            <td>1</td>
+            <td>Máy</td>
+            <td>13.500.000₫</td>
+            <td>13.500.000₫</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>SP02</td>
+            <td>Chuột bluetooth</td>
+            <td>CHT02</td>
+            <td>1</td>
+            <td>Cái</td>
+            <td>300.000₫</td>
+            <td>300.000₫</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="7" class="text-right">Tổng</td>
+            <td><strong>15.800.000₫</strong></td>
+
+          </tr>
+        </tfoot>
+      </table>
+      <button type="button" class="btn-return-request">Y/C Trả hàng</button>
+    </section>
+
+    <!-- YÊU CẦU TRẢ HÀNG -->
+
+         <section id="returnSection" class="section-return hidden">
+      <h2>YÊU CẦU TRẢ HÀNG</h2>
+      <div class="return-meta">
+        <div class="meta-item">
+          <label>Ngày trả</label>
+          <span>06/04/2024</span>
+        </div>
+        <div class="meta-item">
+          <label>Thời gian</label>
+          <span>16:30:45</span>
+        </div>
+        <div class="meta-item">
+          <label for="reason">Lý do</label>
+          <input type="text" id="reason" name="reason" placeholder="Máy nhanh nóng" />
+        </div>
+      </div>
+
+      <div class="error-detail">
+        <label>Chi tiết lỗi:</label>
+        <div class="error-inputs">
+          <select name="product_error">
+            <option value="">-- Chọn sản phẩm lỗi --</option>
+            <option value="SP01">Laptop Asus Vivobook</option>
+            <option value="SP02">Chuột bluetooth</option>
+          </select>
+          <div class="file-upload" title="Click vào biểu tượng để upload ảnh sản phẩm">
+            <i class="icon-upload"></i>
+          </div>
+          <button type="button" class="btn-add">+</button>
+        </div>
+      </div>
+
+      <table class="req-table error-table">
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Mã hàng</th>
+            <th>Tên sản phẩm</th>
+            <th>Lỗi</th>
+            <th>Hình ảnh</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>SP01</td>
+            <td>Laptop Asus Vivobook</td>
+            <td>Sọc màn</td>
+            <td><img src="{% static 'images/sploi.jpg' %}" alt="Ảnh lỗi" /></td>
+
+          </tr>
+        </tbody>
+      </table>
+
+      <button type="button" class="btn-submit-request">GỬI YÊU CẦU</button>
+    </section>
+
+  </div>
+</div>
+
+<script>
+  // Sau khi click "Tìm kiếm" thì chỉ show offerSection
+  document.querySelector('.btn-search').addEventListener('click', () => {
+    document.getElementById('offerSection').classList.remove('hidden');
+    // luôn reset returnSection để ẩn lại khi search mới
+    document.getElementById('returnSection').classList.add('hidden');
+  });
+
+  // Khi click "Y/C Trả hàng" thì show returnSection
+  document.querySelector('.btn-return-request').addEventListener('click', () => {
+    document.getElementById('returnSection').classList.remove('hidden');
+    // scroll xuống form trả hàng nếu muốn
+    document.getElementById('returnSection').scrollIntoView({ behavior: 'smooth' });
+  });
+</script>
+
+{% endblock %}

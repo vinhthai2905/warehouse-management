@@ -1,0 +1,146 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block link %}
+  <link rel="stylesheet" href="{% static 'css/sale_staff/product-info.css' %}">
+{% endblock %}
+
+{% block main-content %}
+<div class="search-filter-inline">
+  <!-- Dropdown danh mục -->
+  <select class="sf-select">
+    <option value="">Tất cả danh mục</option>
+  </select>
+
+  <!-- Input tìm kiếm + nút -->
+  <div class="sf-search">
+    <input
+      type="text"
+      class="sf-input"
+      placeholder="Nhập tên sản phẩm, mã sản phẩm, từ khóa..."
+    />
+    <button type="submit" class="sf-btn">
+      <i class="fas fa-search"></i>
+    </button>
+  </div>
+</div>
+
+
+<div class="best-sellers">
+  <!-- Header -->
+  <div class="bs-header">
+    <h3>SẢN PHẨM BÁN CHẠY</h3>
+    <a href="#" class="bs-view-all">xem tất cả »</a>
+  </div>
+
+  <!-- Slider -->
+  <div class="bs-slider">
+    <button class="bs-nav bs-prev">&lsaquo;</button>
+    <div class="bs-wrapper">
+      
+      <!-- Card 1 -->
+      <div class="bs-card">
+        <a href="#">
+          <img src="{% static 'images/logourl.png' %}" alt="JBL Charge 6">
+          <div class="bs-discount">-2%</div>
+          <div class="bs-brand">
+            <img src="{% static 'images/img1.png' %}" alt="JBL">
+          </div>
+          <div class="bs-tags">
+            <span class="bs-tag hot">Bán chạy</span>
+          </div>
+          <h4 class="bs-title">LOA DI ĐỘNG JBL CHARGE 6 MÀU TÍM (30W, PIN 28H,…)</h4>
+          <p class="bs-price">4.360.000 đ</p>
+        </a>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="bs-card">
+        <a href="#">
+          <img src="{% static 'images/img2.jpg' %}" alt="Asus Expertbook">
+          <div class="bs-discount">-2%</div>
+          <div class="bs-brand">
+            <img src="{% static 'images/logoasua.png' %}" alt="Asus">
+          </div>
+          <div class="bs-tags">
+            <span class="bs-tag hot">Bán chạy</span>
+            <span class="bs-tag promo">Khuyến mại</span>
+          </div>
+          <h4 class="bs-title">LAPTOP ASUS EXPERTBOOK P1403CVA-I5SE16-63WS…</h4>
+          <p class="bs-old">16.990.000 đ</p>
+          <p class="bs-price">16.590.000 đ</p>
+          <p class="bs-promo-info">5 Khuyến mãi: …</p>
+        </a>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="bs-card">
+        <a href="#">
+          <img src="{% static 'images/img3.png' %}" alt="Brother HL-B2100D">
+          <div class="bs-discount">-1%</div>
+          <div class="bs-brand">
+            <img src="{% static 'images/logobrother.png' %}" alt="Brother">
+          </div>
+          <div class="bs-tags">
+            <span class="bs-tag promo">Khuyến mại</span>
+          </div>
+          <h4 class="bs-title">MÁY IN LASER TRẮNG ĐEN BROTHER HL-B2100D, IN…</h4>
+          <p class="bs-old">3.700.000 đ</p>
+          <p class="bs-price">3.650.000 đ</p>
+          <p class="bs-promo-info">3 Khuyến mãi: …</p>
+        </a>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="bs-card">
+        <a href="#">
+          <img src="{% static 'images/img4.png' %}" alt="Dell Inspiron">
+          <div class="bs-discount">-10%</div>
+          <div class="bs-brand">
+            <img src="{% static 'images/logodell.png' %}" alt="Dell">
+          </div>
+          <div class="bs-tags">
+            <span class="bs-tag hot">Bán chạy</span>
+            <span class="bs-tag promo">Khuyến mại</span>
+          </div>
+          <h4 class="bs-title">LAPTOP DELL INSPIRON 3520-I5U085W11BLU (INTEL…)</h4>
+          <p class="bs-old">16.090.000 đ</p>
+          <p class="bs-price">14.490.000 đ</p>
+          <p class="bs-promo-info">8 Khuyến mãi: …</p>
+        </a>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="bs-card">
+        <a href="#">
+          <img src="{% static 'images/img5.png' %}" alt="PhiLong Nexus">
+          <div class="bs-discount">-9%</div>
+          <div class="bs-brand">
+            <img src="{% static 'images/logophilong.png' %}" alt="PhiLong">
+          </div>
+          <div class="bs-tags">
+            <span class="bs-tag hot">Bán chạy</span>
+            <span class="bs-tag promo">Khuyến mại</span>
+          </div>
+          <h4 class="bs-title">PC PHI LONG GAMING NEXUS WHITE (I5 14400F,…)</h4>
+          <p class="bs-old">22.990.000 đ</p>
+          <p class="bs-price">20.990.000 đ</p>
+          <p class="bs-promo-info">1 Khuyến mãi: …</p>
+        </a>
+      </div>
+
+    </div>
+    <button class="bs-nav bs-next">&rsaquo;</button>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const wrapper = document.querySelector('.bs-wrapper');
+  document.querySelector('.bs-prev').onclick = () =>
+    wrapper.scrollBy({ left: -240, behavior: 'smooth' });
+  document.querySelector('.bs-next').onclick = () =>
+    wrapper.scrollBy({ left: 240, behavior: 'smooth' });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,126 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'css/sale_staff/export-request.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+{% endblock link %}
+
+{% block main-content %}
+    <div class="export-manager">
+        <div class="status-tabs">
+            <span class="status-tab active" data-target="all">Tất cả</span>
+            <span class="status-tab" data-target="low-stock">Sắp hết hàng</span>
+            <span class="status-tab" data-target="out-of-stock">Hết hàng</span>
+        </div>
+
+        <div id="all" class="status-panel">
+            <table class="req-table">
+                <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Mã sản phẩm</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Số lượng</th>
+                    <th>Đơn vị tính</th>
+                    <th>Trạng thái</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for product in product_dict %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ product.id }}</td>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.quantity }}</td>
+                        <td>{{ product.unit }}</td>
+                        <td>
+                            <span class="status {% if product.status == 'Hết hàng' %}error{% elif product.quantity < 10 %}pending{% else %}approved{% endif %}">
+                                {{ product.status }}
+                            </span>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div id="low-stock" class="status-panel hidden">
+            {% for product in product_dict %}
+                {% if product.quantity < 10 and product.status != 'Hết hàng' %}
+                    {% if forloop.first %}
+                        <table class="req-table">
+                        <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã sản phẩm</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Số lượng</th>
+                            <th>Đơn vị tính</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                    {% endif %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ product.id }}</td>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.quantity }}</td>
+                        <td>{{ product.unit }}</td>
+                        <td><span class="status pending">Sắp hết</span></td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            {% if not product_dict|dictsort:'quantity'|length %}
+                <p class="empty-note">Không có sản phẩm nào sắp hết.</p>
+            {% else %}</tbody></table>{% endif %}
+        </div>
+
+        <div id="out-of-stock" class="status-panel hidden">
+            {% with empty_products=product_dict|dictsort:'quantity' %}
+                {% if empty_products|length == 0 %}
+                    <p class="empty-note">Không có sản phẩm nào hết hàng.</p>
+                {% else %}
+                    <table class="req-table">
+                        <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã sản phẩm</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Số lượng</th>
+                            <th>Đơn vị tính</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for product in product_dict %}
+                            {% if product.status == 'Hết hàng' %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ product.id }}</td>
+                                    <td>{{ product.name }}</td>
+                                    <td>{{ product.quantity }}</td>
+                                    <td>{{ product.unit }}</td>
+                                    <td><span class="status error">Hết hàng</span></td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.status-tab').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.status-tab').forEach(t => t.classList.remove('active'));
+                btn.classList.add('active');
+                document.querySelectorAll('.status-panel').forEach(p => p.classList.add('hidden'));
+                document.getElementById(btn.dataset.target).classList.remove('hidden');
+            });
+        });
+    </script>
+{% endblock main-content %}

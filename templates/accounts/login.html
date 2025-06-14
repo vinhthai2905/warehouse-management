@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Electronics Warehouse</title>
+    <link rel="stylesheet" href="{% static 'css/accounts/login.css' %}">
+</head>
+<body>
+    <div class="login-box">
+        <h2>PHI LONG</h2>
+        <p>Enter your login credentials</p>
+        {% if error %}
+            <p style="color: red;">{{ error }}</p>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="email" placeholder="Enter your Username" required>
+            <input type="password" name="password" placeholder="Enter your Password" required>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>

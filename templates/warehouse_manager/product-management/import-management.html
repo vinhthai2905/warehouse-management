@@ -1,0 +1,196 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'css/warehouse_manager/import-management.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+{% endblock %}
+
+{% block main-content %}
+    <div class="import-manager">
+
+        <!-- status tabs -->
+        <div class="status-tabs">
+            <span class="status-tab active" data-target="all">Tất cả (10)</span>
+            <span class="status-tab" data-target="pending">Chưa duyệt (4)</span>
+            <span class="status-tab" data-target="approved">Đã duyệt (15)</span>
+        </div>
+
+        <!-- panel: All -->
+        <div id="all" class="status-panel">
+            <table class="req-table">
+                <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Ngày yêu cầu nhập</th>
+                    <th>Tên phiếu yêu cầu</th>
+                    <th>Người yêu cầu</th>
+                    <th>Số lượng yêu cầu</th>
+                    <th>Trạng thái</th>
+                    <th>Chi tiết yêu cầu</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>28/03/2025</td>
+                    <td>Yêu cầu nhập hàng</td>
+                    <td>Nguyễn Văn A</td>
+                    <td>400 mặt hàng</td>
+                    <td>
+                        <span class="status pending">Chưa duyệt</span>
+                    </td>
+
+                    <td><a href="#" class="detail-link">Xem chi tiết</a></td>
+                </tr>
+                <tr>
+                <tr>
+                    <td>2</td>
+                    <td>21/03/2025</td>
+                    <td>Yêu cầu trả hàng</td>
+                    <td>Trần Thị B</td>
+                    <td>15 sản phẩm</td>
+                    <td><span class="status approved">Đã duyệt</span></td>
+                    <td><a href="#" class="detail-link">Xem chi tiết</a></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>22/03/2025</td>
+                    <td>Yêu cầu điều chuyển</td>
+                    <td>Lê Thị C</td>
+                    <td>200 bộ phận</td>
+                    <td><span class="status pending">Chưa duyệt</span></td>
+                    <td><a href="#" class="detail-link">Xem chi tiết</a></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>23/03/2025</td>
+                    <td>Yêu cầu bảo trì</td>
+                    <td>Phạm Văn D</td>
+                    <td>5 thiết bị</td>
+                    <td><span class="status approved">Đã duyệt</span></td>
+                    <td><a href="#" class="detail-link">Xem chi tiết</a></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>24/03/2025</td>
+                    <td>Yêu cầu xuất kho</td>
+                    <td>Hoàng Thị E</td>
+                    <td>50 mặt hàng</td>
+                    <td><span class="status pending">Chưa duyệt</span></td>
+                    <td><a href="#" class="detail-link">Xem chi tiết</a></td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>25/03/2025</td>
+                    <td>Yêu cầu nhập linh kiện</td>
+                    <td>Đỗ Minh F</td>
+                    <td>300 linh kiện</td>
+                    <td><span class="status approved">Đã duyệt</span></td>
+                    <td><a href="#" class="detail-link">Xem chi tiết</a></td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>26/03/2025</td>
+                    <td>Yêu cầu trả hàng</td>
+                    <td>Vũ Thị G</td>
+                    <td>20 sản phẩm</td>
+                    <td><span class="status pending">Chưa duyệt</span></td>
+                    <td><a href="#" class="detail-link">Xem chi tiết</a></td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>27/03/2025</td>
+                    <td>Yêu cầu điều chuyển</td>
+                    <td>Bùi Văn H</td>
+                    <td>100 bộ phận</td>
+                    <td><span class="status pending">Chưa duyệt</span></td>
+                    <td><a href="#" class="detail-link">Xem chi tiết</a></td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>28/03/2025</td>
+                    <td>Yêu cầu bảo trì</td>
+                    <td>Đặng Thị I</td>
+                    <td>8 thiết bị</td>
+                    <td><span class="status approved">Đã duyệt</span></td>
+                    <td><a href="#" class="detail-link">Xem chi tiết</a></td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>29/03/2025</td>
+                    <td>Yêu cầu xuất kho</td>
+                    <td>Phan Văn K</td>
+                    <td>75 mặt hàng</td>
+                    <td><span class="status pending">Chưa duyệt</span></td>
+                    <td><a href="#" class="detail-link">Xem chi tiết</a></td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>30/03/2025</td>
+                    <td>Yêu cầu nhập hàng</td>
+                    <td>Nguyễn Thị L</td>
+                    <td>180 linh kiện</td>
+                    <td><span class="status pending">Chưa duyệt</span></td>
+                    <td><a href="#" class="detail-link">Xem chi tiết</a></td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>31/03/2025</td>
+                    <td>Yêu cầu trả hàng</td>
+                    <td>Trịnh Văn M</td>
+                    <td>12 sản phẩm</td>
+                    <td><span class="status approved">Đã duyệt</span></td>
+                    <td><a href="#" class="detail-link">Xem chi tiết</a></td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td>01/04/2025</td>
+                    <td>Yêu cầu điều chuyển</td>
+                    <td>Lý Thị N</td>
+                    <td>250 bộ phận</td>
+                    <td><span class="status pending">Chưa duyệt</span></td>
+                    <td><a href="#" class="detail-link">Xem chi tiết</a></td>
+                </tr>
+                <tr>
+                    <td>14</td>
+                    <td>02/04/2025</td>
+                    <td>Yêu cầu bảo trì</td>
+                    <td>Tạ Văn O</td>
+                    <td>3 thiết bị</td>
+                    <td><span class="status approved">Đã duyệt</span></td>
+                    <td><a href="#" class="detail-link">Xem chi tiết</a></td>
+                </tr>
+
+                <!-- copy thêm dòng sample tương tự… -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- panel: Pending -->
+        <div id="pending" class="status-panel hidden">
+            <!-- tương tự bảng bên trên, chỉ show những phiếu Chưa duyệt -->
+            <p class="empty-note">Hiện không có phiếu nào chờ duyệt.</p>
+        </div>
+
+        <!-- panel: Approved -->
+        <div id="approved" class="status-panel hidden">
+            <!-- tương tự bảng, chỉ show những phiếu Đã duyệt -->
+            <p class="empty-note">Hiện không có phiếu đã duyệt.</p>
+        </div>
+    </div>
+
+    <script>
+        // tab-switching
+        document.querySelectorAll('.status-tab').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // active tab
+                document.querySelectorAll('.status-tab').forEach(t => t.classList.remove('active'));
+                btn.classList.add('active');
+                // show panel
+                document.querySelectorAll('.status-panel').forEach(p => p.classList.add('hidden'));
+                document.getElementById(btn.dataset.target).classList.remove('hidden');
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,154 @@
+#title {
+    text-align: center;
+}
+
+.export-receipt {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.export-receipt .updated-table {
+    margin-top: 25px;
+}
+
+/*receipt-info*/
+
+.info-card {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    margin-inline: auto;
+}
+
+.info-row {
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+/*receipt-products*/
+
+
+.req-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.req-table th,
+.req-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+    font-size: 14px;
+}
+
+.req-table thead {
+    background: #E6F0FF;
+}
+
+.status {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1;
+    padding: 6px 12px;
+    border-radius: 20px;
+    background: #fff;
+    vertical-align: middle;
+}
+
+.status.pending {
+    color: #c2bd1f;
+    border: 1px solid #c3c608;
+}
+
+.status.approved {
+    color: #2DB94D;
+    border: 1px solid #2DB94D;
+}
+
+.status.exported {
+    color: white;
+    background-color: #2ecc71;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.status.error {
+    color: #ff4d4d;
+    border: 1px solid #ff4d4d;
+    background-color: #ffecec;
+    padding: 6px 12px;
+    border-radius: 20px;
+}
+
+.real-quantity {
+    width: 60px !important;
+    height: 28px;
+    font-size: 14px;
+    padding: 4px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+
+/*button-access*/
+
+.button-group {
+    margin-top: 2em;
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border: none;
+    min-width: 160px;
+}
+
+.btn:hover {
+    cursor: pointer;
+}
+
+/* Individual Button Styles */
+.btn-back {
+    background-color: #f7d700;
+    color: black;
+}
+
+.btn-back:hover {
+    background-color: #ffe300;
+}
+
+.btn-confirm {
+    background-color: #007aff;
+    color: white;
+}
+
+.btn-confirm:hover {
+    background-color: #005ecb;
+}
+
+.btn-resend {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.btn-resend:hover {
+    background-color: #28a745;
+    color: white;
+}
+

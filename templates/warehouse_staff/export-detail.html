@@ -1,0 +1,84 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'css/warehouse_staff/export-detail.css' %}">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css'>
+{% endblock link %}
+
+{% block main-content %}
+    <h2 id="title">Chi tiết yêu cầu xuất hàng bán</h2>
+
+    <div class="export-receipt">
+        <!-- Info Card -->
+        <div class="info-card">
+            <div class="info-row"><strong>Mã đơn hàng:</strong> {{ export_info.request_id }}</div>
+            <div class="info-row"><strong>Thời gian yêu
+                cầu:</strong> {{ export_info.request_date|date:"F j, Y, h:i:s A" }}
+            </div>
+            <div class="info-row"><strong>Thời gian duyệt:</strong>
+                {% if export_info.review_date %}
+                    {{ export_info.review_date|date:"F j, Y, h:i:s A" }}
+                {% else %}
+                    Chưa xác định
+                {% endif %}
+            </div>
+            <div class="info-row"><strong>Nhân viên yêu cầu:</strong> {{ export_info.request_employee }}</div>
+            <div class="info-row"><strong>Nhân viên duyệt:</strong> {{ export_info.review_employee }}</div>
+            <div class="info-row">
+                <strong>Trạng thái:</strong>
+                <span class="status
+                    {% if export_info.status == 'Chờ duyệt' %}pending
+                    {% elif export_info.status == 'Đã duyệt' %}approved
+                    {% elif export_info.status == 'Hoá đơn lỗi' %}error
+                    {% elif export_info.status == 'Đã xuất' %}exported
+                    {% endif %}">
+                    {{ export_info.status }}
+                </span>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <table class="req-table">
+            <thead>
+            <tr>
+                <th>STT</th>
+                <th>Tên mặt hàng</th>
+                <th>Số lượng</th>
+                <th>Số lượng thực</th>
+                <th>Ghi chú</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for product in export_product_dict %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.quantity }}</td>
+                    <td>{{ product.real_quantity }}</td>
+                    <td>{{ product.note }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Button Group -->
+    <section class="button-group">
+        <form action="{% url 'warehouse-staff/export-request' %}" method="get">
+            <button type="submit" class="btn btn-back">Quay lại</button>
+        </form>
+        {% if export_info.status == 'Chờ duyệt' or export_info.status == 'Hoá đơn lỗi' %}
+            <form action="{% url 'warehouse-staff/export-review' %}" method="post"
+                  onsubmit="return confirm('Bạn có chắc chắn muốn duyệt hoá đơn này?');">
+                {% csrf_token %}
+                <input type="hidden" name="request_id" value="{{ request.GET.request_id }}">
+                <input type="hidden" id="confirmed_at" name="confirmed_at">
+                <button type="submit" class="btn btn-confirm">Duyệt hoá đơn</button>
+            </form>
+        {% endif %}
+    </section>
+
+
+
+{% endblock main-content %}

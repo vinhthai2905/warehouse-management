@@ -1,0 +1,277 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'css/sale_staff/export-request.css' %}">
+{% endblock link %}
+
+{% block main-content %}
+    {% if messages %}
+        <div class="notify-box">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="export-manager">
+        <h2 id="title">Lịch sử yêu cầu xuất hàng bán</h2>
+
+        <div id="export-search">
+            <div class="search-input-wrapper">
+                <input type="text" id="search-bar-input" placeholder="Tìm kiếm.....">
+                <button type="submit" class="search-btn">
+                    <span class="icon"><i class="fas fa-search"></i></span>
+                </button>
+            </div>
+        </div>
+
+        <div class="status-tabs">
+            <span class="status-tab active" data-target="all">Tất cả</span>
+            <span class="status-tab" data-target="pending">Chờ duyệt</span>
+            <span class="status-tab" data-target="approved">Đã duyệt</span>
+            <span class="status-tab" data-target="rejected">Hoá đơn lỗi</span>
+        </div>
+
+        <!-- Panel: All -->
+        <div id="all" class="status-panel">
+            {% if export_request_dict %}
+                <table class="req-table">
+                    <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Mã yêu cầu</th>
+                        <th>Thời gian yêu cầu</th>
+                        <th>Nhân viên yêu cầu</th>
+                        <th>Loại xuất</th>
+                        <th>Trạng thái</th>
+                        <th>Thời gian duyệt</th>
+                        <th>Chi tiết</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for e_request in export_request_dict %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ e_request.id }}</td>
+                            <td>{{ e_request.request_date|date:'H:i d/m/Y' }}</td>
+                            <td>{{ e_request.request_employee }}</td>
+                            <td>{{ e_request.type }}</td>
+                            <td>
+                        <span class="status
+                            {% if e_request.status == 'Chờ duyệt' %}pending
+                            {% elif e_request.status == 'Đã duyệt' %}approved
+                            {% elif e_request.status == 'Hoá đơn lỗi' %}error
+                            {% endif %}">
+                            {{ e_request.status }}
+                        </span>
+                            </td>
+                            <td>
+                                {% if e_request.review_date %}
+                                    {{ e_request.review_date|date:'H:i d/m/Y' }}
+                                {% else %}Chưa xác định{% endif %}
+                            </td>
+                            <td>
+                                <a class="detail-link"
+                                   href="{% url 'warehouse-staff/export-detail' %}?request_id={{ e_request.id }}&status={{ e_request.status|urlencode }}&date={{ e_request.request_date|urlencode }}">
+                                    Xem chi tiết
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p class="empty-note">Không có hoá đơn nào.</p>
+            {% endif %}
+        </div>
+
+        <!-- Panel: Pending -->
+        <div id="pending" class="status-panel hidden">
+            {% with pending_requests=export_request_dict|dictsort:"id" %}
+                {% if pending_requests|length == 0 %}
+                    <p class="empty-note">Không có hoá đơn nào chờ duyệt.</p>
+                {% else %}
+                    <table class="req-table">
+                        <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã yêu cầu</th>
+                            <th>Thời gian yêu cầu</th>
+                            <th>Nhân viên yêu cầu</th>
+                            <th>Loại xuất</th>
+                            <th>Trạng thái</th>
+                            <th>Thời gian duyệt</th>
+                            <th>Chi tiết</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for e_request in pending_requests %}
+                            {% if e_request.status == 'Chờ duyệt' %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ e_request.id }}</td>
+                                    <td>{{ e_request.request_date|date:'H:i d/m/Y' }}</td>
+                                    <td>{{ e_request.request_employee }}</td>
+                                    <td>{{ e_request.type }}</td>
+                                    <td><span class="status pending">{{ e_request.status }}</span></td>
+                                    <td>{% if e_request.review_date %}
+                                        {{ e_request.review_date|date:'H:i d/m/Y' }}{% else %}Chưa xác
+                                        định{% endif %}</td>
+                                    <td>
+                                        <a class="detail-link"
+                                           href="{% url 'warehouse-staff/export-detail' %}?request_id={{ e_request.id }}&status={{ e_request.status|urlencode }}&date={{ e_request.request_date|urlencode }}">
+                                            Xem chi tiết
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+            {% endwith %}
+        </div>
+
+        <!-- panel: Approved -->
+        <div id="approved" class="status-panel hidden">
+            {% with approved_requests=export_request_dict|dictsort:"id" %}
+                {% if approved_requests|length == 0 %}
+                    <p class="empty-note">Hiện không có phiếu đã duyệt.</p>
+                {% else %}
+                    <table class="req-table">
+                        <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã yêu cầu</th>
+                            <th>Thời gian yêu cầu</th>
+                            <th>Nhân viên yêu cầu</th>
+                            <th>Loại xuất</th>
+                            <th>Trạng thái</th>
+                            <th>Thời gian duyệt</th>
+                            <th>Chi tiết</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for e_request in export_request_dict %}
+                            {% if e_request.status == 'Đã duyệt' %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ e_request.id }}</td>
+                                    <td>{{ e_request.request_date|date:'H:i d/m/Y' }}</td>
+                                    <td>{{ e_request.request_employee }}</td>
+                                    <td>{{ e_request.type }}</td>
+                                    <td><span class="status approved">{{ e_request.status }}</span></td>
+                                    <td>{% if e_request.review_date %}
+                                        {{ e_request.review_date|date:'H:i d/m/Y' }}{% else %}Chưa xác
+                                        định{% endif %}</td>
+                                    <td>
+                                        <a class="detail-link"
+                                           href="{% url 'warehouse-staff/export-detail' %}?request_id={{ e_request.id }}&status={{ e_request.status|urlencode }}&date={{ e_request.request_date|urlencode }}">
+                                            Xem chi tiết
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+            {% endwith %}
+        </div>
+
+        <div id="rejected" class="status-panel hidden">
+            {% with rejected_requests=export_request_dict|dictsort:"id" %}
+                {% if rejected_requests|length == 0 %}
+                    <p class="empty-note">Không có hoá đơn lỗi.</p>
+                {% else %}
+                    <table class="req-table">
+                        <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã yêu cầu</th>
+                            <th>Thời gian yêu cầu</th>
+                            <th>Nhân viên yêu cầu</th>
+                            <th>Loại xuất</th>
+                            <th>Trạng thái</th>
+                            <th>Thời gian duyệt</th>
+                            <th>Chi tiết</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for e_request in rejected_requests %}
+                            {% if e_request.status == 'Hoá đơn lỗi' %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ e_request.id }}</td>
+                                    <td>{{ e_request.request_date|date:'H:i d/m/Y' }}</td>
+                                    <td>{{ e_request.request_employee }}</td>
+                                    <td>{{ e_request.type }}</td>
+                                    <td><span class="status error">{{ e_request.status }}</span></td>
+                                    <td>{% if e_request.review_date %}
+                                        {{ e_request.review_date|date:'H:i d/m/Y' }}{% else %}Chưa xác
+                                        định{% endif %}</td>
+                                    <td>
+                                        <a class="detail-link"
+                                           href="{% url 'warehouse-staff/export-detail' %}?request_id={{ e_request.id }}&status={{ e_request.status|urlencode }}&date={{ e_request.request_date|urlencode }}">
+                                            Xem chi tiết
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.status-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.status-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                document.querySelectorAll('.status-panel').forEach(p => p.classList.add('hidden'));
+                const targetPanel = document.getElementById(tab.dataset.target);
+                targetPanel.classList.remove('hidden');
+
+                const rows = targetPanel.querySelectorAll('tbody tr');
+                const table = targetPanel.querySelector('table.req-table');
+                const note = targetPanel.querySelector('p.empty-note');
+
+                if (rows.length === 0) {
+                    if (table) table.style.display = 'none';
+                    if (note) note.style.display = 'block';
+                } else {
+                    if (table) table.style.display = 'table';
+                    if (note) note.style.display = 'none';
+                }
+
+                // Add fade-in animation
+                targetPanel.style.animation = 'none';
+                void targetPanel.offsetWidth;
+                targetPanel.style.animation = 'fadeIn 0.4s ease forwards';
+            });
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('.status-tab.active')?.click();
+        });
+    </script>
+
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const alertBox = document.querySelector('.notify-box .alert');
+            if (alertBox) {
+                setTimeout(() => {
+                    alertBox.style.opacity = '0';
+                    alertBox.style.transition = 'opacity 0.6s ease';
+                    setTimeout(() => alertBox.remove(), 600);
+                }, 3000);
+            }
+        });
+    </script>
+{% endblock main-content %}
