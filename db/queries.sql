@@ -23,7 +23,7 @@ VALUES
 -- 3. Insert into ds_yeu_cau_xuat_kho with id_nhan_vien_yc
 INSERT INTO ds_yeu_cau_xuat_kho (
     id_yeu_cau_xuat, id_nhan_vien_yc, id_nhan_vien_duyet,
-    thoi_gian, thoi_gian_duyet, thoi_gian_xuat,
+    thoi_gian, thoi_gian_duyet, thoi_gian_xuat,e
     ghi_chu, trang_thai, loai
 ) VALUES
 ('YC001', 'NV001', NULL, '2025-06-04 08:00:00', NULL, NULL, 'Xuất sản phẩm cho đơn hàng A', 'Chờ duyệt', 'Hàng để bán'),

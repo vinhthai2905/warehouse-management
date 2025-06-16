@@ -1,0 +1,184 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'css/sale_staff/export-request.css' %}">
+    <style>
+        .detail-link {
+            color: #007bff;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .detail-link:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+    </style>
+{% endblock %}
+
+{% block main-content %}
+    <h2 style="text-align:center; margin-bottom: 20px;">Danh sách yêu cầu xuất sản phẩm</h2>
+
+    <div class="status-tabs" style="text-align:center; margin-bottom: 20px;">
+        <span class="status-tab active" data-target="all">Tất cả</span>
+        <span class="status-tab" data-target="pending">Chờ duyệt</span>
+        <span class="status-tab" data-target="approved">Đã duyệt</span>
+        <span class="status-tab" data-target="exported">Đã xuất</span>
+    </div>
+
+    <!-- TẤT CẢ -->
+    <div id="all" class="status-panel active">
+        <table class="req-table">
+            <thead>
+            <tr>
+                <th>STT</th>
+                <th>Mã SP</th>
+                <th>Tên sản phẩm</th>
+                <th>Số lượng</th>
+                <th>Trạng thái</th>
+                <th>Chi tiết</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>SP001</td>
+                <td>Ổ cứng SSD 512GB</td>
+                <td>10</td>
+                <td><span class="status pending">Chờ duyệt</span></td>
+                <td><a href="#" class="detail-link">Xem chi tiết</a>
+                </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>SP002</td>
+                <td>Chuột Logitech M331</td>
+                <td>5</td>
+                <td><span class="status approved">Đã duyệt</span></td>
+                <td><a href="#" class="detail-link">Xem chi tiết</a>
+                </td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>SP003</td>
+                <td>Bàn phím cơ Akko 3068</td>
+                <td>8</td>
+                <td><span class="status exported">Đã xuất</span></td>
+                <td><a href="#" class="detail-link">Xem chi tiết</a>
+                </td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>SP004</td>
+                <td>Màn hình Dell 24 inch</td>
+                <td>2</td>
+                <td><span class="status approved">Đã duyệt</span></td>
+                <td><a href="#" class="detail-link">Xem chi tiết</a>
+                </td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>SP005</td>
+                <td>Máy in HP LaserJet</td>
+                <td>1</td>
+                <td><span class="status pending">Chờ duyệt</span></td>
+                <td><a href="#" class="detail-link">Xem chi tiết</a>
+                </td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>SP006</td>
+                <td>Bộ phát wifi TP-Link</td>
+                <td>7</td>
+                <td><span class="status exported">Đã xuất</span></td>
+                <td><a href="#" class="detail-link">Xem chi tiết</a>
+                </td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>SP007</td>
+                <td>Tai nghe Sony WH-CH520</td>
+                <td>6</td>
+                <td><span class="status approved">Đã duyệt</span></td>
+                <td><a href="#" class="detail-link">Xem chi tiết</a>
+                </td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>SP008</td>
+                <td>Laptop Lenovo ThinkPad</td>
+                <td>3</td>
+                <td><span class="status exported">Đã xuất</span></td>
+                <td><a href="#" class="detail-link">Xem chi tiết</a>
+                </td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>SP009</td>
+                <td>Bàn nâng chỉnh điện</td>
+                <td>4</td>
+                <td><span class="status pending">Chờ duyệt</span></td>
+                <td><a href="#" class="detail-link">Xem chi tiết</a>
+                </td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>SP010</td>
+                <td>Ổ cắm điện đa năng</td>
+                <td>15</td>
+                <td><span class="status exported">Đã xuất</span></td>
+                <td><a href="#" class="detail-link">Xem chi tiết</a>
+                </td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>SP011</td>
+                <td>Camera giám sát IP</td>
+                <td>2</td>
+                <td><span class="status approved">Đã duyệt</span></td>
+                <td><a href="#" class="detail-link">Xem chi tiết</a>
+                </td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td>SP012</td>
+                <td>Máy chiếu Epson</td>
+                <td>1</td>
+                <td><span class="status pending">Chờ duyệt</span></td>
+                <td><a href="#" class="detail-link">Xem chi tiết</a>
+                </td>
+            </tr>
+            <tr>
+                <td>13</td>
+                <td>SP013</td>
+                <td>Router Asus RT-AX55</td>
+                <td>5</td>
+                <td><span class="status exported">Đã xuất</span></td>
+                <td><a href="#" class="detail-link">Xem chi tiết</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.status-tab');
+            const panels = document.querySelectorAll('.status-panel');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    panels.forEach(p => p.classList.remove('active'));
+
+                    tab.classList.add('active');
+                    document.getElementById(tab.dataset.target).classList.add('active');
+                });
+            });
+        });
+    </script>
+
+{% endblock %}

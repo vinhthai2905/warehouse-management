@@ -43,9 +43,11 @@
             <thead>
             <tr>
                 <th>STT</th>
-                <th>Tên mặt hàng</th>
-                <th>Số lượng</th>
-                <th>Số lượng thực</th>
+                <th>Tên sản phẩm</th>
+                <th>Số lượng yêu cầu</th>
+                {% if export_info.status == "Hoá đơn lỗi" %}
+                    <th>Số lượng thực</th>
+                {% endif %}
                 <th>Ghi chú</th>
             </tr>
             </thead>
@@ -55,8 +57,12 @@
                     <td>{{ forloop.counter }}</td>
                     <td>{{ product.name }}</td>
                     <td>{{ product.quantity }}</td>
-                    <td>{{ product.real_quantity }}</td>
-                    <td>{{ product.note }}</td>
+                    {% if export_info.status == "Hoá đơn lỗi" %}
+                        <td>{{ product.real_quantity }}</td>
+                        <td>{{ product.note_error }}</td>
+                    {% else %}
+                        <td colspan="2">{{ product.note }}</td>
+                    {% endif %}
                 </tr>
             {% endfor %}
             </tbody>

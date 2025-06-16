@@ -34,3 +34,5 @@ def products_detail(request):
 def import_management(request):
     return render(request, 'warehouse_manager/product-management/import-management.html')
 
+def export_request(request):
+    return render(request, 'warehouse_manager/export-request.html')

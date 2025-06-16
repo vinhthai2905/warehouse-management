@@ -1,7 +1,6 @@
 from datetime import datetime
 from urllib.parse import urlencode
 
-from django.http import HttpResponse
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_POST
@@ -38,8 +37,10 @@ def home(request):
 def product_info(request):
     return render(request, 'sale_staff/product-info.html')
 
+
 def create_request(request):
     return render(request, 'sale_staff/create-request.html')
+
 
 def import_management(request):
     return render(request, 'sale_staff/import-management.html')
