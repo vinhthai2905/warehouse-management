@@ -23,7 +23,7 @@
         <section id="login-bar">
             {% include 'includes/warehouse_manager/login-bar.html' %}
         </section>
-    {% elif user_role == 'admin' %}
+    {% elif user_role == 'admin' or user_role == 'Admin' %}
         <section id="login-bar">
             {% include 'includes/warehouse_staff/login-bar.html' %}
         </section>
@@ -43,7 +43,7 @@
         <aside id="side-bar">
             {% include 'includes/warehouse_manager/side-bar.html' %}
         </aside>
-    {% elif user_role == 'admin' %}
+    {% elif user_role == 'admin' or user_role == 'Admin' %}
         <aside id="side-bar">
             {% include 'includes/admin/side-bar.html' %}
         </aside>

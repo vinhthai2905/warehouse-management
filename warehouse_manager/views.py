@@ -23,6 +23,9 @@ def product_management(request):
 def categories_management(request):
     return render(request, 'warehouse_manager/product-management/category.html')
 
+def create_category(request):
+    return render(request, 'warehouse_manager/create-category.html')
+
 def products_management(request):
     return render(request, 'warehouse_manager/product-management/product.html')
 
