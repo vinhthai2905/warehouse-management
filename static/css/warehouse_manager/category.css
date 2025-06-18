@@ -2,25 +2,22 @@
     padding: 30px;
     font-family: Arial, sans-serif;
 }
+
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: relative;
     margin-bottom: 20px;
 }
 
 .title {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
     font-size: 28px;
     font-weight: bold;
-    margin: 0 auto;
+    margin: 0;
 }
 
 .add-button-wrapper {
-    margin-left: auto;
+    flex-shrink: 0;
 }
 
 .add-button {
@@ -31,6 +28,13 @@
     font-size: 14px;
     border-radius: 5px;
     cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.add-button:hover {
+    background-color: #1d6ae5;
 }
 
 .search-bar {
@@ -71,8 +75,9 @@
     padding: 10px;
     border: 1px solid #ccc;
 }
+
 .category-table tbody tr:hover {
-    background-color: #e0f0ff; /* màu xanh nhạt khi hover */
-    cursor: pointer; /* đổi con trỏ chuột */
+    background-color: #e0f0ff;
+    cursor: pointer;
     transition: background-color 0.2s ease-in-out;
 }

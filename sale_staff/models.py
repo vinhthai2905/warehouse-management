@@ -1,6 +1,5 @@
 from django.db import models
-from django.db.models import ForeignKey, CASCADE
-from django.views.decorators.http import condition
+from django.db.models import  CASCADE
 from accounts.models import TaiKhoan
 
 
@@ -9,7 +8,6 @@ from accounts.models import TaiKhoan
 class SanPham(models.Model):
     id_san_pham = models.CharField(
         primary_key=True,
-        max_length=5,
         db_column='id_san_pham'
     )
     id_danh_muc = models.TextField(db_column='id_danh_muc')
@@ -31,7 +29,6 @@ class SanPham(models.Model):
 
 class HangXuatKho(models.Model):
     id_yeu_cau_xuat = models.CharField(
-        max_length=5,
         db_column='id_yeu_cau_xuat'
     )
     id_nhan_vien_xuat = models.ForeignKey(
@@ -62,7 +59,6 @@ class HangXuatKho(models.Model):
 class DSYeuCauXuatKho(models.Model):
     id_yeu_cau_xuat = models.CharField(
         primary_key=True,
-        max_length=5,
         db_column='id_yeu_cau_xuat'
     )
 
@@ -81,12 +77,7 @@ class DSYeuCauXuatKho(models.Model):
         null=True,
         on_delete=CASCADE
     )
-    # id_nhan_vien_xuat = models.ForeignKey(
-    #     TaiKhoan,
-    #     to_field='id_nhan_vien',
-    #     db_column='id_nhan_vien_xuat',
-    #     on_delete=CASCADE
-    # )
+
     thoi_gian = models.DateTimeField(db_column='thoi_gian')
     thoi_gian_xuat = models.DateTimeField(null=True)
     thoi_gian_duyet = models.DateTimeField(null=True)
@@ -111,7 +102,6 @@ class DSYeuCauXuatKho(models.Model):
 
 class ChiTietYeuCauXuat(models.Model):
     id_yeu_cau_xuat = models.CharField(
-        max_length=5,
         db_column='id_yeu_cau_xuat'
     )
     id_san_pham = models.ForeignKey(

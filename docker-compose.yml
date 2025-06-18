@@ -16,5 +16,5 @@ services:
     ports:
       - '5000:80'
     environment:
-      - PGADMIN_DEFAULT_EMAIL=vinhthai2905@aol.com
-      - PGADMIN_DEFAULT_PASSWORD=buiVinhthai2952003
+      - PGADMIN_DEFAULT_EMAIL=huyentrang@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=12345
