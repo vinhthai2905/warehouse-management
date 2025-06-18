@@ -228,36 +228,50 @@
     </div>
 
     <script>
-        document.querySelectorAll('.status-tab').forEach(tab => {
-            tab.addEventListener('click', () => {
-                document.querySelectorAll('.status-tab').forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.status-tab');
+            const panels = document.querySelectorAll('.status-panel');
 
-                document.querySelectorAll('.status-panel').forEach(p => p.classList.add('hidden'));
-                const targetPanel = document.getElementById(tab.dataset.target);
-                targetPanel.classList.remove('hidden');
+            function showPanel(id) {
+                panels.forEach(panel => {
+                    const rows = panel.querySelectorAll('tbody tr');
+                    const table = panel.querySelector('table.req-table');
+                    const note = panel.querySelector('p.empty-note');
 
-                const rows = targetPanel.querySelectorAll('tbody tr');
-                const table = targetPanel.querySelector('table.req-table');
-                const note = targetPanel.querySelector('p.empty-note');
+                    if (panel.id === id) {
+                        panel.classList.remove('hidden');
 
-                if (rows.length === 0) {
-                    if (table) table.style.display = 'none';
-                    if (note) note.style.display = 'block';
-                } else {
-                    if (table) table.style.display = 'table';
-                    if (note) note.style.display = 'none';
-                }
+                        if (rows.length === 0) {
+                            if (table) table.style.display = 'none';
+                            if (note) note.style.display = 'block';
+                        } else {
+                            if (table) table.style.display = 'table';
+                            if (note) note.style.display = 'none';
+                        }
 
-                // Add fade-in animation
-                targetPanel.style.animation = 'none';
-                void targetPanel.offsetWidth;
-                targetPanel.style.animation = 'fadeIn 0.4s ease forwards';
+                        // Animation
+                        panel.style.animation = 'none';
+                        void panel.offsetWidth;
+                        panel.style.animation = 'fadeIn 0.3s ease-in-out forwards';
+                    } else {
+                        panel.classList.add('hidden');
+                    }
+                });
+            }
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    showPanel(tab.dataset.target);
+                });
             });
-        });
 
-        window.addEventListener('DOMContentLoaded', () => {
-            document.querySelector('.status-tab.active')?.click();
+            // Show default active tab
+            const activeTab = document.querySelector('.status-tab.active');
+            if (activeTab) {
+                showPanel(activeTab.dataset.target);
+            }
         });
     </script>
 

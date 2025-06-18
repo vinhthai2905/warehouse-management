@@ -19,7 +19,7 @@ def log_in(request):
                 return redirect('warehouse-staff-home')
             if user.chuc_vu == 'Warehouse Manager':
                 return redirect('warehouse-manager-home')
-            if user.chuc_vu == 'Admin':
+            if user.chuc_vu == 'admin' or user.chuc_vu == 'Admin':
                 return redirect('admin-home')
 
         except TaiKhoan.DoesNotExist:

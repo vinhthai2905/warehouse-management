@@ -1,0 +1,30 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'css/warehouse_manager/create-category.css' %}">
+{% endblock %}
+
+{% block main-content %}
+    <div class="category-form-container">
+        <h2 class="form-title">Thêm danh mục mới</h2>
+        <form method="post" class="category-form">
+            {% csrf_token %}
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="ma_danh_muc">Mã danh mục:</label>
+                    <input type="text" id="ma_danh_muc" name="ma_danh_muc" placeholder="VD: 009">
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="ten_danh_muc">Tên danh mục:</label>
+                    <input type="text" id="ten_danh_muc" name="ten_danh_muc" placeholder="VD: Mainboard">
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn green">Thêm mới</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

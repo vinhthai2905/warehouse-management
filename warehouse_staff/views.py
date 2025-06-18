@@ -96,7 +96,8 @@ def export_detail(request):
             'name': export_product.id_san_pham.ten_san_pham,
             'quantity': export_product.so_luong,
             'real_quantity': export_product.so_luong_thuc,
-            'note': note
+            'note': export_product.ghi_chu,
+            'note_error': note
         })
 
     return render(request, 'warehouse_staff/export-detail.html', context={
